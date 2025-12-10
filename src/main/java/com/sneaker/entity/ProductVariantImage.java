@@ -1,5 +1,6 @@
 package com.sneaker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,7 @@ public class ProductVariantImage {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "variantId", nullable = false)
+    @JsonIgnore
     private ProductVariant variant;
     
     @Column(nullable = false)

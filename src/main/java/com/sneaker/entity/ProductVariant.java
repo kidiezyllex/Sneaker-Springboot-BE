@@ -1,5 +1,7 @@
 package com.sneaker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ProductVariant {
     
     @Id
@@ -27,6 +30,7 @@ public class ProductVariant {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productId", nullable = false)
+    @JsonIgnore
     private Product product;
     
     @ManyToOne(fetch = FetchType.LAZY)
@@ -47,6 +51,7 @@ public class ProductVariant {
     private List<ProductVariantImage> images;
     
     @OneToMany(mappedBy = "variant", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<OrderItem> orderItems;
     
     @CreatedDate

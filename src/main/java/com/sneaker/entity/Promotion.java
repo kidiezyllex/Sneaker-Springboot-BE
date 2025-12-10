@@ -1,5 +1,6 @@
 package com.sneaker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,6 +40,7 @@ public class Promotion {
         joinColumns = @JoinColumn(name = "promotionId"),
         inverseJoinColumns = @JoinColumn(name = "productId")
     )
+    @JsonIgnore
     private List<Product> products;
     
     @Column(nullable = false)

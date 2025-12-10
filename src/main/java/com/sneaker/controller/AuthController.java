@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -103,6 +105,14 @@ public class AuthController {
     public ResponseEntity<ApiResponse<AccountAddress>> setDefaultAddress(@PathVariable Integer addressId) {
         AccountAddress address = accountService.setDefaultAddress(addressId);
         return ResponseEntity.ok(ApiResponse.success("Đặt địa chỉ mặc định thành công", address));
+    }
+    
+    // TEMPORARY: Generate password hashes for insert_data.sql
+    @GetMapping("/temp/generate-hashes")
+    @Operation(summary = "Generate password hashes", description = "Temporary endpoint to generate BCrypt hashes")
+    public ResponseEntity<ApiResponse<Object>> generateHashes() {
+        Map<String, String> hashes = authService.generatePasswordHashes();
+        return ResponseEntity.ok(ApiResponse.success("Password hashes generated", hashes));
     }
 }
 

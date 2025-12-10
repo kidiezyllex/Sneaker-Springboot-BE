@@ -91,5 +91,14 @@ public class AuthService {
         
         return new AuthResponse(newToken, newRefreshToken, AuthResponse.AccountInfo.from(account));
     }
+    
+    // TEMPORARY: Generate password hashes
+    public java.util.Map<String, String> generatePasswordHashes() {
+        java.util.Map<String, String> hashes = new java.util.HashMap<>();
+        hashes.put("Admin123!", passwordEncoder.encode("Admin123!"));
+        hashes.put("Customer123!", passwordEncoder.encode("Customer123!"));
+        hashes.put("Staff123!", passwordEncoder.encode("Staff123!"));
+        return hashes;
+    }
 }
 

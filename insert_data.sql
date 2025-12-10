@@ -1,44 +1,24 @@
--- ============================================
--- SQL Script to Insert Sample Data
--- Database: sneakerDB
--- ============================================
---
--- IMPORTANT: Password Hashing
--- The passwords in this script are hashed using BCrypt.
--- To generate new BCrypt hashes for the passwords:
--- 1. Run: mvn compile exec:java -Dexec.mainClass="com.sneaker.util.PasswordHashGenerator"
--- 2. Or use the PasswordHashGenerator.java utility class
---
--- Default passwords:
--- - admin123@gmail.com / Admin123!
--- - customer123@gmail.com / Customer123!
--- - staff123@gmail.com / Staff123!
---
--- Note: The BCrypt hashes in this file are examples. 
--- For production, always generate fresh hashes!
--- ============================================
-
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ============================================
 -- 1. ACCOUNTS (15+ rows)
 -- ============================================
 INSERT INTO accounts (code, full_name, phone_number, email, password, birthday, gender, avatar, role, citizen_id, status, created_at, updated_at) VALUES
-('ACC001', 'Nguyễn Văn Anh', '0901234567', 'nguyenvananh@gmail.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '1990-01-15 00:00:00', 1, NULL, 'ADMIN', '001234567890', 'ACTIVE', NOW(), NOW()),
-('ACC002', 'Trần Thị Bình', '0901234568', 'tranthibinh@gmail.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1995-05-20 00:00:00', 0, NULL, 'CUSTOMER', '001234567891', 'ACTIVE', NOW(), NOW()),
-('ACC003', 'Lê Văn Cường', '0901234569', 'levancuong@gmail.com', '$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', '1992-08-10 00:00:00', 1, NULL, 'STAFF', '001234567892', 'ACTIVE', NOW(), NOW()),
-('ACC004', 'Phạm Quốc Dũng', '0901111111', 'phamquocdung@gmail.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1993-03-12 00:00:00', 1, NULL, 'CUSTOMER', '001111111111', 'ACTIVE', NOW(), NOW()),
-('ACC005', 'Hoàng Thị Giang', '0902222222', 'hoangthigiang@gmail.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1994-07-25 00:00:00', 0, NULL, 'CUSTOMER', '002222222222', 'ACTIVE', NOW(), NOW()),
-('ACC006', 'Vũ Văn Hùng', '0903333333', 'vuvanhung@gmail.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1991-11-08 00:00:00', 1, NULL, 'CUSTOMER', '003333333333', 'ACTIVE', NOW(), NOW()),
-('ACC007', 'Đặng Thị Linh', '0904444444', 'dangthilinh@gmail.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1996-02-14 00:00:00', 0, NULL, 'CUSTOMER', '004444444444', 'ACTIVE', NOW(), NOW()),
-('ACC008', 'Bùi Văn Minh', '0905555555', 'buivanminh@gmail.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1990-09-30 00:00:00', 1, NULL, 'CUSTOMER', '005555555555', 'ACTIVE', NOW(), NOW()),
-('ACC009', 'Ngô Thị Ngọc', '0906666666', 'ngothingoc@gmail.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1997-04-18 00:00:00', 0, NULL, 'CUSTOMER', '006666666666', 'ACTIVE', NOW(), NOW()),
-('ACC010', 'Đỗ Văn Phong', '0907777777', 'dovanphong@gmail.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1992-12-05 00:00:00', 1, NULL, 'CUSTOMER', '007777777777', 'ACTIVE', NOW(), NOW()),
-('ACC011', 'Hà Thị Quỳnh', '0908888888', 'hathiquynh@gmail.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1995-06-22 00:00:00', 0, NULL, 'CUSTOMER', '008888888888', 'ACTIVE', NOW(), NOW()),
-('ACC012', 'Lý Văn Sơn', '0909999999', 'lyvanson@gmail.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1993-10-15 00:00:00', 1, NULL, 'CUSTOMER', '009999999999', 'ACTIVE', NOW(), NOW()),
-('ACC013', 'Mai Thị Thảo', '0910000000', 'maithithao@gmail.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1994-01-28 00:00:00', 0, NULL, 'CUSTOMER', '010000000000', 'ACTIVE', NOW(), NOW()),
-('ACC014', 'Trịnh Văn Tùng', '0911111111', 'trinhvantung@gmail.com', '$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', '1991-05-10 00:00:00', 1, NULL, 'STAFF', '011111111111', 'ACTIVE', NOW(), NOW()),
-('ACC015', 'Phan Văn Khánh', '0912222222', 'phanvankhanh@gmail.com', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', '1988-03-20 00:00:00', 1, NULL, 'ADMIN', '012222222222', 'ACTIVE', NOW(), NOW());
+('ACC001', 'Nguyễn Văn Anh', '0901234567', 'nguyenvananh@gmail.com', '$2a$10$l1NcsDjlCaBIsVX4SNg1FeKfUvqWKejOkX3JGYLIYKfF1Li80GZDW', '1990-01-15 00:00:00', 1, NULL, 'ADMIN', '001234567890', 'ACTIVE', NOW(), NOW()),
+('ACC002', 'Trần Thị Bình', '0901234568', 'tranthibinh@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1995-05-20 00:00:00', 0, NULL, 'CUSTOMER', '001234567891', 'ACTIVE', NOW(), NOW()),
+('ACC003', 'Lê Văn Cường', '0901234569', 'levancuong@gmail.com', '$2a$10$rx51w6Fzu07iiMqEif2K3u5rzhO05TvaOusM31.Iq6.pajDkgDd7i', '1992-08-10 00:00:00', 1, NULL, 'STAFF', '001234567892', 'ACTIVE', NOW(), NOW()),
+('ACC004', 'Phạm Quốc Dũng', '0901111111', 'phamquocdung@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1993-03-12 00:00:00', 1, NULL, 'CUSTOMER', '001111111111', 'ACTIVE', NOW(), NOW()),
+('ACC005', 'Hoàng Thị Giang', '0902222222', 'hoangthigiang@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1994-07-25 00:00:00', 0, NULL, 'CUSTOMER', '002222222222', 'ACTIVE', NOW(), NOW()),
+('ACC006', 'Vũ Văn Hùng', '0903333333', 'vuvanhung@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1991-11-08 00:00:00', 1, NULL, 'CUSTOMER', '003333333333', 'ACTIVE', NOW(), NOW()),
+('ACC007', 'Đặng Thị Linh', '0904444444', 'dangthilinh@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1996-02-14 00:00:00', 0, NULL, 'CUSTOMER', '004444444444', 'ACTIVE', NOW(), NOW()),
+('ACC008', 'Bùi Văn Minh', '0905555555', 'buivanminh@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1990-09-30 00:00:00', 1, NULL, 'CUSTOMER', '005555555555', 'ACTIVE', NOW(), NOW()),
+('ACC009', 'Ngô Thị Ngọc', '0906666666', 'ngothingoc@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1997-04-18 00:00:00', 0, NULL, 'CUSTOMER', '006666666666', 'ACTIVE', NOW(), NOW()),
+('ACC010', 'Đỗ Văn Phong', '0907777777', 'dovanphong@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1992-12-05 00:00:00', 1, NULL, 'CUSTOMER', '007777777777', 'ACTIVE', NOW(), NOW()),
+('ACC011', 'Hà Thị Quỳnh', '0908888888', 'hathiquynh@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1995-06-22 00:00:00', 0, NULL, 'CUSTOMER', '008888888888', 'ACTIVE', NOW(), NOW()),
+('ACC012', 'Lý Văn Sơn', '0909999999', 'lyvanson@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1993-10-15 00:00:00', 1, NULL, 'CUSTOMER', '009999999999', 'ACTIVE', NOW(), NOW()),
+('ACC013', 'Mai Thị Thảo', '0910000000', 'maithithao@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1994-01-28 00:00:00', 0, NULL, 'CUSTOMER', '010000000000', 'ACTIVE', NOW(), NOW()),
+('ACC014', 'Trịnh Văn Tùng', '0911111111', 'trinhvantung@gmail.com', '$2a$10$rx51w6Fzu07iiMqEif2K3u5rzhO05TvaOusM31.Iq6.pajDkgDd7i', '1991-05-10 00:00:00', 1, NULL, 'STAFF', '011111111111', 'ACTIVE', NOW(), NOW()),
+('ACC015', 'Phan Văn Khánh', '0912222222', 'phanvankhanh@gmail.com', '$2a$10$l1NcsDjlCaBIsVX4SNg1FeKfUvqWKejOkX3JGYLIYKfF1Li80GZDW', '1988-03-20 00:00:00', 1, NULL, 'ADMIN', '012222222222', 'ACTIVE', NOW(), NOW());
 
 -- ============================================
 -- 2. BRANDS (12+ rows)

@@ -1,5 +1,7 @@
 package com.sneaker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product {
     
     @Id
@@ -61,6 +64,7 @@ public class Product {
         joinColumns = @JoinColumn(name = "productId"),
         inverseJoinColumns = @JoinColumn(name = "promotionId")
     )
+    @JsonIgnore
     private List<Promotion> promotions;
     
     @CreatedDate

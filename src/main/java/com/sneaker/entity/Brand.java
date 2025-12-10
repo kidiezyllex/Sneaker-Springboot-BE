@@ -1,5 +1,7 @@
 package com.sneaker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Brand {
     
     @Id
@@ -31,6 +34,7 @@ public class Brand {
     private Status status = Status.ACTIVE;
     
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Product> products;
     
     @CreatedDate

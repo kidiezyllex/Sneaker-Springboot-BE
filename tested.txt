@@ -1,0 +1,5 @@
+Các chức năng đã Test
+1. Đăng nhập [DONE]
+Các role khách đều có password: Customer123! --> Ví dụ: tranthibinh@gmail.com
+Các role khách đều có password: Admin123! --> Ví dụ: phanvankhanh@gmail.com
+Các role khách đều có password: Staff123!
