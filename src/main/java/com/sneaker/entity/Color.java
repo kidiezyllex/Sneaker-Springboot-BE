@@ -31,7 +31,7 @@ public class Color {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Status status = Status.HOAT_DONG;
+    private Status status = Status.ACTIVE;
     
     @OneToMany(mappedBy = "color", cascade = CascadeType.ALL)
     private List<ProductVariant> variants;
@@ -45,7 +45,7 @@ public class Color {
     private LocalDateTime updatedAt;
     
     public enum Status {
-        HOAT_DONG, INACTIVE
+        ACTIVE, INACTIVE
     }
 }
 

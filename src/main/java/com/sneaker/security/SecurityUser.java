@@ -38,7 +38,7 @@ public class SecurityUser implements UserDetails {
     
     @Override
     public boolean isAccountNonLocked() {
-        return account.getStatus() == Account.AccountStatus.HOAT_DONG;
+        return account.getStatus() == Account.AccountStatus.ACTIVE;
     }
     
     @Override
@@ -48,7 +48,7 @@ public class SecurityUser implements UserDetails {
     
     @Override
     public boolean isEnabled() {
-        return account.getStatus() == Account.AccountStatus.HOAT_DONG;
+        return account.getStatus() == Account.AccountStatus.ACTIVE;
     }
     
     public Integer getId() {

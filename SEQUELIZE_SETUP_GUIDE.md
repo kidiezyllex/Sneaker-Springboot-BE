@@ -79,7 +79,7 @@ const db = require('./src/sequelize-models/index.cjs');
 // Tạo brand mới
 const brand = await db.Brand.create({
   name: 'Nike',
-  status: 'HOAT_DONG'
+  status: 'ACTIVE'
 });
 
 // Query với associations

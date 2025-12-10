@@ -53,7 +53,7 @@ public class AccountService {
         account.setPhoneNumber(request.getPhoneNumber());
         account.setPassword(passwordEncoder.encode(request.getPassword()));
         account.setRole(Account.Role.CUSTOMER);
-        account.setStatus(Account.AccountStatus.HOAT_DONG);
+        account.setStatus(Account.AccountStatus.ACTIVE);
         account.setCode(codeGenerator.generateAccountCode(Account.Role.CUSTOMER));
         
         return accountRepository.save(account);

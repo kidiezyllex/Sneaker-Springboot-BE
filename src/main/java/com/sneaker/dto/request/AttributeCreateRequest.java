@@ -8,6 +8,6 @@ public class AttributeCreateRequest {
     @NotBlank(message = "Tên không được để trống")
     private String name;
     
-    private String status = "HOAT_DONG";
+    private String status = "ACTIVE";
 }
 

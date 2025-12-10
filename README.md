@@ -73,7 +73,7 @@
   - `size` (string, optional): Lọc theo kích cỡ
   - `minPrice` (number, optional): Giá thấp nhất
   - `maxPrice` (number, optional): Giá cao nhất
-  - `status` (string, optional): Trạng thái (HOAT_DONG/INACTIVE)
+  - `status` (string, optional): Trạng thái (ACTIVE/INACTIVE)
   - `page` (number, optional): Số trang
   - `limit` (number, optional): Số lượng sản phẩm mỗi trang
 - **Response**:
@@ -1868,7 +1868,7 @@ Các API quản lý thuộc tính sản phẩm bao gồm các thuộc tính như
 - **Route**: `/api/attributes/brands`
 - **Method**: GET
 - **Request Params**:
-  - `status` (string, optional): Lọc theo trạng thái (HOAT_DONG/INACTIVE)
+  - `status` (string, optional): Lọc theo trạng thái (ACTIVE/INACTIVE)
 - **Response**:
   ```json
   {
@@ -1979,7 +1979,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
 - **Route**: `/api/attributes/colors`
 - **Method**: GET
 - **Request Params**:
-  - `status` (string, optional): Lọc theo trạng thái (HOAT_DONG/INACTIVE)
+  - `status` (string, optional): Lọc theo trạng thái (ACTIVE/INACTIVE)
 
 #### 9.4.2. Tạo màu sắc mới
 - **Route**: `/api/attributes/colors`
@@ -2019,7 +2019,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
 - **Route**: `/api/attributes/sizes`
 - **Method**: GET
 - **Request Params**:
-  - `status` (string, optional): Lọc theo trạng thái (HOAT_DONG/INACTIVE)
+  - `status` (string, optional): Lọc theo trạng thái (ACTIVE/INACTIVE)
 
 #### 9.5.2. Tạo kích thước mới
 - **Route**: `/api/attributes/sizes`

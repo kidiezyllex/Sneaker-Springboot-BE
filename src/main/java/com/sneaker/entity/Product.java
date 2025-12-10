@@ -50,7 +50,7 @@ public class Product {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Status status = Status.HOAT_DONG;
+    private Status status = Status.ACTIVE;
     
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductVariant> variants;
@@ -72,7 +72,7 @@ public class Product {
     private LocalDateTime updatedAt;
     
     public enum Status {
-        HOAT_DONG, INACTIVE
+        ACTIVE, INACTIVE
     }
 }
 

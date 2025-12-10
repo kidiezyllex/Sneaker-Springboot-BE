@@ -28,7 +28,7 @@ public class Material {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Status status = Status.HOAT_DONG;
+    private Status status = Status.ACTIVE;
     
     @OneToMany(mappedBy = "material", cascade = CascadeType.ALL)
     private List<Product> products;
@@ -42,7 +42,7 @@ public class Material {
     private LocalDateTime updatedAt;
     
     public enum Status {
-        HOAT_DONG, INACTIVE
+        ACTIVE, INACTIVE
     }
 }
 

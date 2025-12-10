@@ -11,6 +11,6 @@ public class ColorCreateRequest {
     @NotBlank(message = "Mã màu không được để trống")
     private String code;
     
-    private String status = "HOAT_DONG";
+    private String status = "ACTIVE";
 }
 

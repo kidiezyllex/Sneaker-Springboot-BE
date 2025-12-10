@@ -50,7 +50,7 @@ public class Account {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private AccountStatus status = AccountStatus.HOAT_DONG;
+    private AccountStatus status = AccountStatus.ACTIVE;
     
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AccountAddress> addresses;
@@ -74,7 +74,7 @@ public class Account {
     }
     
     public enum AccountStatus {
-        HOAT_DONG, INACTIVE
+        ACTIVE, INACTIVE
     }
 }
 

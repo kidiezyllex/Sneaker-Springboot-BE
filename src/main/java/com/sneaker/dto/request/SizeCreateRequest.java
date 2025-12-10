@@ -8,6 +8,6 @@ public class SizeCreateRequest {
     @NotNull(message = "Giá trị kích thước không được để trống")
     private Integer value;
     
-    private String status = "HOAT_DONG";
+    private String status = "ACTIVE";
 }
 

@@ -67,7 +67,7 @@ public class VoucherService {
         voucher.setEndDate(request.getEndDate());
         voucher.setMinOrderValue(request.getMinOrderValue() != null ? request.getMinOrderValue() : BigDecimal.ZERO);
         voucher.setMaxDiscount(request.getMaxDiscount());
-        voucher.setStatus(request.getStatus() != null ? request.getStatus() : Voucher.Status.HOAT_DONG);
+        voucher.setStatus(request.getStatus() != null ? request.getStatus() : Voucher.Status.ACTIVE);
         
         return voucherRepository.save(voucher);
     }
@@ -118,7 +118,7 @@ public class VoucherService {
                 .orElseThrow(() -> new RuntimeException("Mã voucher không tồn tại"));
         
         // Check status
-        if (voucher.getStatus() != Voucher.Status.HOAT_DONG) {
+        if (voucher.getStatus() != Voucher.Status.ACTIVE) {
             throw new RuntimeException("Voucher không còn hoạt động");
         }
         

@@ -81,7 +81,7 @@ public class AccountController {
             @Valid @RequestBody AccountStatusUpdateRequest request) {
         Account account = accountService.updateAccountStatus(id, request);
         return ResponseEntity.ok(ApiResponse.success(
-                request.getStatus().equals("HOAT_DONG") ? "Kích hoạt tài khoản thành công" : 
+                request.getStatus().equals("ACTIVE") ? "Kích hoạt tài khoản thành công" : 
                 "Vô hiệu hóa tài khoản thành công", account));
     }
     

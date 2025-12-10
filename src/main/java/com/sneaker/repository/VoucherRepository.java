@@ -17,7 +17,7 @@ public interface VoucherRepository extends JpaRepository<Voucher, Integer> {
     boolean existsByCode(String code);
     
     @Query("SELECT v FROM Voucher v WHERE " +
-           "v.status = 'HOAT_DONG' AND " +
+           "v.status = 'ACTIVE' AND " +
            "v.startDate <= :now AND " +
            "v.endDate >= :now AND " +
            "v.usedCount < v.quantity")

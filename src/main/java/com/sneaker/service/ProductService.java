@@ -51,11 +51,11 @@ public class ProductService {
     
     public Map<String, Object> getProductFilters() {
         Map<String, Object> filters = new HashMap<>();
-        filters.put("colors", colorRepository.findByStatus(Color.Status.HOAT_DONG));
-        filters.put("sizes", sizeRepository.findByStatus(Size.Status.HOAT_DONG));
-        filters.put("brands", brandRepository.findByStatus(Brand.Status.HOAT_DONG));
-        filters.put("categories", categoryRepository.findByStatus(Category.Status.HOAT_DONG));
-        filters.put("materials", materialRepository.findByStatus(Material.Status.HOAT_DONG));
+        filters.put("colors", colorRepository.findByStatus(Color.Status.ACTIVE));
+        filters.put("sizes", sizeRepository.findByStatus(Size.Status.ACTIVE));
+        filters.put("brands", brandRepository.findByStatus(Brand.Status.ACTIVE));
+        filters.put("categories", categoryRepository.findByStatus(Category.Status.ACTIVE));
+        filters.put("materials", materialRepository.findByStatus(Material.Status.ACTIVE));
         
         // Get price range
         List<ProductVariant> allVariants = productVariantRepository.findAll();
@@ -104,7 +104,7 @@ public class ProductService {
         product.setBrand(brand);
         product.setCategory(category);
         product.setMaterial(material);
-        product.setStatus(Product.Status.HOAT_DONG);
+        product.setStatus(Product.Status.ACTIVE);
         product.setCode(codeGenerator.generateProductCode());
         
         product = productRepository.save(product);

@@ -28,7 +28,7 @@ public class Size {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Status status = Status.HOAT_DONG;
+    private Status status = Status.ACTIVE;
     
     @OneToMany(mappedBy = "size", cascade = CascadeType.ALL)
     private List<ProductVariant> variants;
@@ -42,7 +42,7 @@ public class Size {
     private LocalDateTime updatedAt;
     
     public enum Status {
-        HOAT_DONG, INACTIVE
+        ACTIVE, INACTIVE
     }
 }
 
