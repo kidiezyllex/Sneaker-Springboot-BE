@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +30,6 @@ public class ProductService {
                                        Integer material, Integer color, Integer size,
                                        BigDecimal minPrice, BigDecimal maxPrice,
                                        Product.Status status, Pageable pageable) {
-        // Convert to brandId, categoryId, materialId for repository
         return productRepository.findWithFilters(name, brand, category, material, status, pageable);
     }
     
@@ -39,13 +37,10 @@ public class ProductService {
                                        Integer material, Integer color, Integer size,
                                        BigDecimal minPrice, BigDecimal maxPrice,
                                        Product.Status status, Pageable pageable) {
-        // Search by keyword in name or description
         Page<Product> products = productRepository.searchWithFilters(
             keyword, brand, category, material, status, pageable
         );
         
-        // Note: Color, size, price filtering should be done at database level using Specification
-        // For now, we return the products and let the controller handle additional filtering if needed
         return products;
     }
     
@@ -238,8 +233,10 @@ public class ProductService {
     
     @Transactional
     public Product updateProductImages(Integer id, Integer variantId, List<String> images) {
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+        // Verify product exists
+        if (!productRepository.existsById(id)) {
+            throw new RuntimeException("Product not found");
+        }
         
         ProductVariant variant = productVariantRepository.findById(variantId)
                 .orElseThrow(() -> new RuntimeException("Variant not found"));
@@ -248,18 +245,34 @@ public class ProductService {
             throw new RuntimeException("Variant does not belong to this product");
         }
         
-        // Delete existing images
-        productVariantImageRepository.deleteAll(variant.getImages());
-        
-        // Add new images
-        for (String imageUrl : images) {
-            ProductVariantImage image = new ProductVariantImage();
-            image.setVariant(variant);
-            image.setImageUrl(imageUrl);
-            productVariantImageRepository.save(image);
+        // Validate: Mỗi biến thể chỉ được phép có 1 ảnh duy nhất
+        if (images == null || images.isEmpty()) {
+            throw new RuntimeException("Danh sách ảnh không được để trống");
         }
         
-        return productRepository.findById(id).orElse(product);
+        if (images.size() > 1) {
+            throw new RuntimeException("Mỗi biến thể chỉ được phép có 1 ảnh duy nhất. Bạn đã cung cấp " + images.size() + " ảnh.");
+        }
+        
+        // Delete existing images by variantId (sử dụng query để đảm bảo xóa tất cả)
+        productVariantImageRepository.deleteByVariantId(variantId);
+        productVariantImageRepository.flush(); // Flush để đảm bảo xóa được commit trước khi thêm mới
+        
+        // Add only the first image (since we validated it's the only one)
+        String imageUrl = images.get(0);
+        if (imageUrl == null || imageUrl.trim().isEmpty()) {
+            throw new RuntimeException("URL ảnh không được để trống");
+        }
+        
+        ProductVariantImage image = new ProductVariantImage();
+        image.setVariant(variant);
+        image.setImageUrl(imageUrl.trim());
+        productVariantImageRepository.saveAndFlush(image);
+        
+        // Refresh product để load lại dữ liệu mới nhất
+        productRepository.flush();
+        return productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found after update"));
     }
     
     @Transactional

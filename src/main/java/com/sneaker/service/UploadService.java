@@ -4,7 +4,6 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.sneaker.security.SecurityUser;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,22 +16,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UploadService {
     
-    @Value("${cloudinary.cloud-name}")
-    private String cloudName;
-    
-    @Value("${cloudinary.api-key}")
-    private String apiKey;
-    
-    @Value("${cloudinary.api-secret}")
-    private String apiSecret;
-    
-    private Cloudinary getCloudinary() {
-        return new Cloudinary(ObjectUtils.asMap(
-            "cloud_name", cloudName,
-            "api_key", apiKey,
-            "api_secret", apiSecret
-        ));
-    }
+    private final Cloudinary cloudinary;
     
     public Map<String, Object> uploadImage(MultipartFile file) throws IOException {
         if (file == null || file.isEmpty()) {
@@ -54,9 +38,8 @@ public class UploadService {
         
         String folderPath = "sneaker/" + accountId + "/images";
         
-        Cloudinary cloudinary = getCloudinary();
-        
-        Map<String, Object> uploadResult = cloudinary.uploader().upload(
+        @SuppressWarnings("unchecked")
+        Map<String, Object> uploadResult = (Map<String, Object>) cloudinary.uploader().upload(
             file.getBytes(),
             ObjectUtils.asMap(
                 "resource_type", "image",

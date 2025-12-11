@@ -5,3 +5,7 @@ Các chức năng đã Test
 Các role khách đều có password: Customer123! --> Ví dụ: tranthibinh@gmail.com
 Các role khách đều có password: Admin123! --> Ví dụ: phanvankhanh@gmail.com
 Các role khách đều có password: Staff123!
+
+
+2. Cập nhật biến thể cho hỉnh ảnh, upload ảnh, dán link ảnh [DONE]
+3. Render products list [DONE]

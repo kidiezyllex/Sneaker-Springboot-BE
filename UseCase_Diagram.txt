@@ -64,7 +64,6 @@ QUAN HỆ KẾ THỪA:
     - Tạo đơn hàng POS
     - Xem danh sách đơn hàng
     - Xem chi tiết đơn hàng
-    - Cập nhật trạng thái đơn hàng
     - Cập nhật đơn hàng
 
 3.3. QUẢN LÝ TRẢ HÀNG
@@ -73,19 +72,14 @@ QUAN HỆ KẾ THỪA:
     - Tìm kiếm đơn trả hàng
     - Xem chi tiết đơn trả hàng
     - Cập nhật đơn trả hàng
-    - Cập nhật trạng thái đơn trả hàng
     - Xóa đơn trả hàng
     - Xem thống kê đơn trả hàng
 
 3.4. QUẢN LÝ THANH TOÁN
-    - Tạo thanh toán
     - Xem danh sách thanh toán
-    - Xem chi tiết thanh toán
-    - Cập nhật trạng thái thanh toán
-    - Xóa thanh toán
-    - Xem thanh toán theo đơn hàng
-    - Tạo thanh toán COD
-
+    - Xem chi tiết thanh toán, hoá đơn
+    - Xóa thanh toán, hoá đơn
+    - Xem thống kê thanh toán, hoá đơn
 
 ================================================================================
 4. USE CASE QUẢN TRỊ VIÊN (ADMIN)
@@ -101,23 +95,17 @@ QUAN HỆ KẾ THỪA:
     - Tạo sản phẩm mới
     - Cập nhật sản phẩm
     - Xóa sản phẩm
-    - Cập nhật trạng thái sản phẩm
-    - Cập nhật tồn kho
-    - Cập nhật hình ảnh sản phẩm
+    - Xem danh sách sản phẩm
 
 4.4. QUẢN LÝ VOUCHER
     - Tạo phiếu giảm giá
     - Xem danh sách voucher
-    - Xem chi tiết voucher
     - Cập nhật voucher
     - Xóa voucher
-    - Tăng số lượt sử dụng voucher
-    - Gửi thông báo về voucher
 
 4.5. QUẢN LÝ KHUYẾN MÃI
     - Tạo chương trình khuyến mãi
     - Xem danh sách khuyến mãi
-    - Xem chi tiết khuyến mãi
     - Cập nhật khuyến mãi
     - Xóa khuyến mãi
 
@@ -126,7 +114,6 @@ QUAN HỆ KẾ THỪA:
     - Xem chi tiết tài khoản
     - Tạo tài khoản
     - Cập nhật tài khoản
-    - Cập nhật trạng thái tài khoản
     - Xóa tài khoản
 
 4.7. QUẢN LÝ THUỘC TÍNH SẢN PHẨM
@@ -166,19 +153,13 @@ QUAN HỆ KẾ THỪA:
         - Xóa kích thước
 
 4.8. THỐNG KÊ VÀ BÁO CÁO
-    - Xem danh sách thống kê
     - Xem chi tiết thống kê
     - Xem báo cáo doanh thu
     - Xem báo cáo sản phẩm bán chạy
     - Tạo thống kê ngày
-    - Xem thống kê phân tích
-    - Xem thống kê dashboard
 
 4.9. QUẢN LÝ CHATBOT
-    4.9.1. Quản lý Cấu hình Chatbot
-        - Xem tất cả cấu hình chatbot
-        - Xem cấu hình theo key
-        - Cập nhật cấu hình chatbot (system prompt, temperature, etc.)
+    4.9.1. Cấu hình Chatbot Prompt
     
     4.9.2. Quản lý Dữ liệu Huấn luyện
         - Tạo dữ liệu huấn luyện (FAQ)
@@ -187,9 +168,7 @@ QUAN HỆ KẾ THỪA:
         - Cập nhật dữ liệu huấn luyện
         - Xóa dữ liệu huấn luyện
     
-    4.9.3. Thống kê Chatbot
-        - Xem thống kê chatbot
-
+    4.9.3. Xem thống kê chatbot
 
 ================================================================================
 5. EXTEND USE CASE (USE CASE MỞ RỘNG)
