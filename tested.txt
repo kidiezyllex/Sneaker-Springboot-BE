@@ -1,3 +1,5 @@
+npx update-browserslist-db@latest
+
 Các chức năng đã Test
 1. Đăng nhập [DONE]
 Các role khách đều có password: Customer123! --> Ví dụ: tranthibinh@gmail.com

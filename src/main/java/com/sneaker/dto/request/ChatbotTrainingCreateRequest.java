@@ -1,0 +1,18 @@
+package com.sneaker.dto.request;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
+@Data
+public class ChatbotTrainingCreateRequest {
+    @NotBlank(message = "Question is required")
+    private String question;
+    
+    @NotBlank(message = "Answer is required")
+    private String answer;
+    
+    private String category;
+    
+    private Integer priority = 0;
+}
+

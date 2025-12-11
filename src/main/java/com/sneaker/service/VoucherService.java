@@ -3,11 +3,7 @@ package com.sneaker.service;
 import com.sneaker.dto.request.VoucherCreateRequest;
 import com.sneaker.dto.request.VoucherUpdateRequest;
 import com.sneaker.dto.request.VoucherValidateRequest;
-import com.sneaker.entity.Account;
-import com.sneaker.entity.Notification;
 import com.sneaker.entity.Voucher;
-import com.sneaker.repository.AccountRepository;
-import com.sneaker.repository.NotificationRepository;
 import com.sneaker.repository.VoucherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -29,8 +24,6 @@ import java.util.stream.Collectors;
 public class VoucherService {
     
     private final VoucherRepository voucherRepository;
-    private final AccountRepository accountRepository;
-    private final NotificationRepository notificationRepository;
     
     @Transactional
     public Voucher createVoucher(VoucherCreateRequest request) {
@@ -183,28 +176,13 @@ public class VoucherService {
         Voucher voucher = voucherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy phiếu giảm giá"));
         
-        // Get all customer accounts
-        List<Account> customers = accountRepository.findAll().stream()
-                .filter(account -> account.getRole() == Account.Role.CUSTOMER)
-                .collect(Collectors.toList());
-        
-        // Create notifications
-        List<Notification> notifications = new ArrayList<>();
-        for (Account customer : customers) {
-            Notification notification = new Notification();
-            notification.setAccount(customer);
-            notification.setTitle(title != null ? title : "Voucher mới: " + voucher.getName());
-            notification.setMessage(message != null ? message : "Sử dụng mã " + voucher.getCode() + " để được giảm giá!");
-            notification.setType(Notification.NotificationType.VOUCHER);
-            notification.setIsRead(false);
-            notifications.add(notification);
-        }
-        
-        notificationRepository.saveAll(notifications);
+        // Note: Notification feature has been removed
+        // This method now only returns voucher information
         
         return Map.of(
             "voucherCode", voucher.getCode(),
-            "notificationsSent", customers.size()
+            "voucherName", voucher.getName(),
+            "message", "Voucher notification feature has been removed"
         );
     }
     

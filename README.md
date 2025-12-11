@@ -9,6 +9,9 @@
 7. [Thống kê và Báo cáo](#7-thống-kê-và-báo-cáo)
 8. [Xác thực và Phân quyền](#8-xác-thực-và-phân-quyền)
 9. [Quản lý Thuộc tính Sản phẩm](#9-quản-lý-thuộc-tính-sản-phẩm)
+10. [Upload File](#10-upload-file)
+11. [Chatbot/AI Chat](#11-chatbotai-chat)
+12. [Quản lý Thanh toán](#12-quản-lý-thanh-toán)
 
 ## Giới thiệu chung
 
@@ -1783,6 +1786,45 @@
   }
   ```
 
+### 7.6. Lấy thống kê phân tích
+- **Route**: `/api/statistics/analytics`
+- **Method**: GET
+- **Access**: Admin only
+- **Request Params**:
+  - `period` (number, optional, default: 30): Số ngày để phân tích
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "totalRevenue": "number",
+      "totalOrders": "number",
+      "totalCustomers": "number",
+      "averageOrderValue": "number",
+      "growthRate": "number"
+    }
+  }
+  ```
+
+### 7.7. Lấy thống kê dashboard
+- **Route**: `/api/statistics/dashboard`
+- **Method**: GET
+- **Access**: Admin only
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "totalRevenue": "number",
+      "totalOrders": "number",
+      "totalCustomers": "number",
+      "pendingOrders": "number",
+      "todayRevenue": "number",
+      "todayOrders": "number"
+    }
+  }
+  ```
+
 ## 8. Xác thực và Phân quyền
 
 ### 8.1. Đăng nhập
@@ -1820,9 +1862,36 @@
   }
   ```
 
-### 8.3. Lấy thông tin người dùng từ token
-- **Route**: `/api/auth/me`
+### 8.3. Đăng ký tài khoản
+- **Route**: `/api/auth/register`
+- **Method**: POST
+- **Payload**:
+  ```json
+  {
+    "fullName": "string",
+    "email": "string",
+    "password": "string",
+    "phoneNumber": "string"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "_id": "string",
+      "fullName": "string",
+      "email": "string",
+      "role": "string",
+      "token": "string"
+    }
+  }
+  ```
+
+### 8.4. Lấy thông tin người dùng hiện tại
+- **Route**: `/api/auth/profile`
 - **Method**: GET
+- **Access**: Private (User needs to be authenticated)
 - **Response**:
   ```json
   {
@@ -1838,7 +1907,112 @@
   }
   ```
 
-### 8.4. Làm mới token
+### 8.5. Cập nhật hồ sơ
+- **Route**: `/api/auth/update-profile`
+- **Method**: PUT
+- **Access**: Private (User needs to be authenticated)
+- **Payload**:
+  ```json
+  {
+    "fullName": "string",
+    "phoneNumber": "string",
+    "gender": "Nam | Nữ | Khác",
+    "birthday": "date",
+    "avatar": "string"
+  }
+  ```
+- **Response**: (Tương tự response lấy thông tin người dùng)
+
+### 8.6. Đổi mật khẩu
+- **Route**: `/api/auth/change-password`
+- **Method**: PUT
+- **Access**: Private (User needs to be authenticated)
+- **Payload**:
+  ```json
+  {
+    "currentPassword": "string",
+    "newPassword": "string",
+    "confirmPassword": "string"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "message": "Thay đổi mật khẩu thành công"
+  }
+  ```
+
+### 8.7. Thêm địa chỉ
+- **Route**: `/api/auth/address`
+- **Method**: POST
+- **Access**: Private (User needs to be authenticated)
+- **Payload**:
+  ```json
+  {
+    "name": "string",
+    "phoneNumber": "string",
+    "provinceId": "number",
+    "districtId": "number",
+    "wardId": "number",
+    "specificAddress": "string",
+    "type": "Nhà riêng | Văn phòng",
+    "isDefault": "boolean"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "_id": "string",
+      "name": "string",
+      "phoneNumber": "string",
+      "provinceId": "number",
+      "districtId": "number",
+      "wardId": "number",
+      "specificAddress": "string",
+      "type": "string",
+      "isDefault": "boolean"
+    }
+  }
+  ```
+
+### 8.8. Cập nhật địa chỉ
+- **Route**: `/api/auth/address/{addressId}`
+- **Method**: PUT
+- **Access**: Private (User needs to be authenticated)
+- **Payload**: (Tương tự payload thêm địa chỉ)
+- **Response**: (Tương tự response thêm địa chỉ)
+
+### 8.9. Xóa địa chỉ
+- **Route**: `/api/auth/address/{addressId}`
+- **Method**: DELETE
+- **Access**: Private (User needs to be authenticated)
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "message": "Xóa địa chỉ thành công"
+  }
+  ```
+
+### 8.10. Đặt địa chỉ mặc định
+- **Route**: `/api/auth/address/{addressId}/default`
+- **Method**: PUT
+- **Access**: Private (User needs to be authenticated)
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "_id": "string",
+      "isDefault": true
+    }
+  }
+  ```
+
+### 8.11. Làm mới token
 - **Route**: `/api/auth/refresh-token`
 - **Method**: POST
 - **Payload**:
@@ -2050,4 +2224,433 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
 #### 9.5.5. Xóa kích thước
 - **Route**: `/api/attributes/sizes/:id`
 - **Method**: DELETE
+
+## 10. Upload File
+
+### 10.1. Upload hình ảnh
+- **Route**: `/api/upload/image`
+- **Method**: POST
+- **Access**: Private (User needs to be authenticated)
+- **Content-Type**: `multipart/form-data`
+- **Request Params**:
+  - `file` (file, required): File hình ảnh cần upload
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "url": "string",
+      "publicId": "string",
+      "secureUrl": "string"
+    }
+  }
+  ```
+- **Note**: Hệ thống sử dụng Cloudinary để lưu trữ hình ảnh
+
+## 11. Chatbot/AI Chat
+
+### 11.1. Chat với AI
+- **Route**: `/api/chatbot/chat`
+- **Method**: POST
+- **Access**: Private (User needs to be authenticated)
+- **Payload**:
+  ```json
+  {
+    "message": "string",
+    "sessionId": "string"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "response": "string"
+    }
+  }
+  ```
+- **Note**: Hệ thống sử dụng Google Gemini AI để xử lý chat. Chat history được tự động lưu lại.
+
+### 11.2. Quản lý Cấu hình Chatbot (Admin)
+
+#### 11.2.1. Lấy tất cả cấu hình
+- **Route**: `/api/chatbot/config`
+- **Method**: GET
+- **Access**: Admin only
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "configs": [
+        {
+          "id": "number",
+          "configKey": "system_prompt",
+          "configValue": "string",
+          "description": "string",
+          "createdAt": "date",
+          "updatedAt": "date"
+        }
+      ]
+    }
+  }
+  ```
+
+#### 11.2.2. Lấy cấu hình theo key
+- **Route**: `/api/chatbot/config/{configKey}`
+- **Method**: GET
+- **Access**: Admin only
+- **Path Parameters**:
+  - `configKey` (string, required): Key của cấu hình (system_prompt, temperature, max_output_tokens, top_k, top_p)
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "id": "number",
+      "configKey": "string",
+      "configValue": "string",
+      "description": "string"
+    }
+  }
+  ```
+
+#### 11.2.3. Cập nhật cấu hình
+- **Route**: `/api/chatbot/config/{configKey}`
+- **Method**: PUT
+- **Access**: Admin only
+- **Payload**:
+  ```json
+  {
+    "configValue": "string",
+    "description": "string"
+  }
+  ```
+- **Response**: (Tương tự response lấy cấu hình)
+
+### 11.3. Quản lý Dữ liệu Huấn luyện (Admin)
+
+#### 11.3.1. Tạo dữ liệu huấn luyện (FAQ)
+- **Route**: `/api/chatbot/training`
+- **Method**: POST
+- **Access**: Admin only
+- **Payload**:
+  ```json
+  {
+    "question": "string",
+    "answer": "string",
+    "category": "string",
+    "priority": "number"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "id": "number",
+      "question": "string",
+      "answer": "string",
+      "category": "string",
+      "priority": "number",
+      "status": "ACTIVE",
+      "createdAt": "date",
+      "updatedAt": "date"
+    }
+  }
+  ```
+
+#### 11.3.2. Lấy danh sách dữ liệu huấn luyện
+- **Route**: `/api/chatbot/training`
+- **Method**: GET
+- **Access**: Admin only
+- **Request Params**:
+  - `status` (string, optional): Lọc theo trạng thái (ACTIVE/INACTIVE)
+  - `category` (string, optional): Lọc theo danh mục
+  - `page` (number, optional, default: 1): Số trang
+  - `limit` (number, optional, default: 10): Số lượng mỗi trang
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "content": [...],
+      "totalElements": "number",
+      "totalPages": "number",
+      "currentPage": "number"
+    }
+  }
+  ```
+
+#### 11.3.3. Lấy chi tiết dữ liệu huấn luyện
+- **Route**: `/api/chatbot/training/{id}`
+- **Method**: GET
+- **Access**: Admin only
+- **Response**: (Tương tự response tạo dữ liệu huấn luyện)
+
+#### 11.3.4. Cập nhật dữ liệu huấn luyện
+- **Route**: `/api/chatbot/training/{id}`
+- **Method**: PUT
+- **Access**: Admin only
+- **Payload**:
+  ```json
+  {
+    "question": "string",
+    "answer": "string",
+    "category": "string",
+    "priority": "number",
+    "status": "ACTIVE | INACTIVE"
+  }
+  ```
+- **Response**: (Tương tự response lấy chi tiết)
+
+#### 11.3.5. Xóa dữ liệu huấn luyện
+- **Route**: `/api/chatbot/training/{id}`
+- **Method**: DELETE
+- **Access**: Admin only
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "message": "Xóa dữ liệu huấn luyện thành công"
+  }
+  ```
+
+### 11.4. Lịch sử Chat
+
+#### 11.4.1. Lấy lịch sử chat của người dùng
+- **Route**: `/api/chatbot/history`
+- **Method**: GET
+- **Access**: Private (User needs to be authenticated)
+- **Request Params**:
+  - `page` (number, optional, default: 1): Số trang
+  - `limit` (number, optional, default: 10): Số lượng mỗi trang
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "content": [
+        {
+          "id": "number",
+          "userMessage": "string",
+          "botResponse": "string",
+          "sessionId": "string",
+          "rating": "number",
+          "feedback": "string",
+          "createdAt": "date"
+        }
+      ],
+      "totalElements": "number",
+      "totalPages": "number",
+      "currentPage": "number"
+    }
+  }
+  ```
+
+#### 11.4.2. Lấy lịch sử chat theo session
+- **Route**: `/api/chatbot/history/session/{sessionId}`
+- **Method**: GET
+- **Access**: Private (User needs to be authenticated)
+- **Request Params**:
+  - `page` (number, optional, default: 1): Số trang
+  - `limit` (number, optional, default: 10): Số lượng mỗi trang
+- **Response**: (Tương tự response lấy lịch sử chat)
+
+#### 11.4.3. Đánh giá câu trả lời
+- **Route**: `/api/chatbot/history/{id}/rate`
+- **Method**: POST
+- **Access**: Private (User needs to be authenticated)
+- **Payload**:
+  ```json
+  {
+    "rating": "number",
+    "feedback": "string"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "id": "number",
+      "rating": "number",
+      "feedback": "string",
+      "updatedAt": "date"
+    }
+  }
+  ```
+
+### 11.5. Thống kê Chatbot (Admin)
+
+#### 11.5.1. Lấy thống kê chatbot
+- **Route**: `/api/chatbot/statistics`
+- **Method**: GET
+- **Access**: Admin only
+- **Request Params**:
+  - `startDate` (date, optional): Từ ngày (mặc định: 30 ngày trước)
+  - `endDate` (date, optional): Đến ngày (mặc định: hiện tại)
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "totalChats": "number",
+      "averageRating": "number",
+      "startDate": "date",
+      "endDate": "date"
+    }
+  }
+  ```
+
+## 12. Quản lý Thanh toán
+
+### 12.1. Tạo thanh toán (Admin/Staff)
+- **Route**: `/api/payments`
+- **Method**: POST
+- **Access**: Admin/Staff only
+- **Payload**:
+  ```json
+  {
+    "orderId": "number",
+    "amount": "number",
+    "method": "CASH | BANK_TRANSFER | COD | MIXED",
+    "status": "PENDING | COMPLETED | FAILED | REFUNDED",
+    "note": "string"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "_id": "string",
+      "orderId": "number",
+      "amount": "number",
+      "method": "string",
+      "status": "string",
+      "note": "string",
+      "createdAt": "date",
+      "updatedAt": "date"
+    }
+  }
+  ```
+
+### 12.2. Lấy danh sách thanh toán (Admin/Staff)
+- **Route**: `/api/payments`
+- **Method**: GET
+- **Access**: Admin/Staff only
+- **Request Params**:
+  - `orderId` (number, optional): Lọc theo ID đơn hàng
+  - `status` (string, optional): Lọc theo trạng thái (PENDING/COMPLETED/FAILED/REFUNDED)
+  - `method` (string, optional): Lọc theo phương thức (CASH/BANK_TRANSFER/COD/MIXED)
+  - `fromDate` (date, optional): Lọc từ ngày
+  - `toDate` (date, optional): Lọc đến ngày
+  - `page` (number, optional, default: 1): Số trang
+  - `limit` (number, optional, default: 10): Số lượng mỗi trang
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "content": [...],
+      "totalElements": "number",
+      "totalPages": "number",
+      "currentPage": "number"
+    }
+  }
+  ```
+
+### 12.3. Lấy chi tiết thanh toán (Admin/Staff)
+- **Route**: `/api/payments/:id`
+- **Method**: GET
+- **Access**: Admin/Staff only
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "_id": "string",
+      "orderId": "number",
+      "amount": "number",
+      "method": "string",
+      "status": "string",
+      "note": "string",
+      "createdAt": "date",
+      "updatedAt": "date"
+    }
+  }
+  ```
+
+### 12.4. Cập nhật trạng thái thanh toán (Admin/Staff)
+- **Route**: `/api/payments/:id`
+- **Method**: PUT
+- **Access**: Admin/Staff only
+- **Payload**:
+  ```json
+  {
+    "status": "PENDING | COMPLETED | FAILED | REFUNDED",
+    "note": "string"
+  }
+  ```
+- **Response**: (Tương tự response lấy chi tiết thanh toán)
+
+### 12.5. Xóa thanh toán (Admin/Staff)
+- **Route**: `/api/payments/:id`
+- **Method**: DELETE
+- **Access**: Admin/Staff only
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "message": "Xóa thanh toán thành công"
+  }
+  ```
+
+### 12.6. Lấy thanh toán theo đơn hàng (Admin/Staff)
+- **Route**: `/api/payments/orders/:orderId/payments`
+- **Method**: GET
+- **Access**: Admin/Staff only
+- **Request Params**:
+  - `page` (number, optional, default: 1): Số trang
+  - `limit` (number, optional, default: 10): Số lượng mỗi trang
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "content": [...],
+      "totalElements": "number",
+      "totalPages": "number",
+      "currentPage": "number"
+    }
+  }
+  ```
+
+### 12.7. Tạo thanh toán COD (Admin/Staff)
+- **Route**: `/api/payments/cod`
+- **Method**: POST
+- **Access**: Admin/Staff only
+- **Payload**:
+  ```json
+  {
+    "orderId": "number",
+    "amount": "number",
+    "note": "string"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "_id": "string",
+      "orderId": "number",
+      "amount": "number",
+      "method": "COD",
+      "status": "PENDING",
+      "createdAt": "date"
+    }
+  }
+  ```
 
