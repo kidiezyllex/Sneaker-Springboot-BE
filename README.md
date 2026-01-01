@@ -22,6 +22,7 @@
 ## 1. Quản lý Sản phẩm
 
 ### 1.1. Tạo sản phẩm mới
+
 - **Route**: `/api/products`
 - **Method**: POST
 - **Payload**:
@@ -47,7 +48,8 @@
 - **Response**:
   ```json
   {
-    "success": true,
+    "statusCode": 201,
+    "message": "Tạo sản phẩm thành công",
     "data": {
       "_id": "string",
       "name": "string",
@@ -60,11 +62,16 @@
       "status": "ACTIVE",
       "createdAt": "date",
       "updatedAt": "date"
+    },
+    "meta": {
+      "timestamp": "2026-01-01T07:00:00.000Z",
+      "apiVersion": "v1.2"
     }
   }
   ```
 
 ### 1.2. Lấy danh sách sản phẩm
+
 - **Route**: `/api/products`
 - **Method**: GET
 - **Request Params**:
@@ -82,10 +89,8 @@
 - **Response**:
   ```json
   {
-    "success": true,
-    "count": "number",
-    "totalPages": "number",
-    "currentPage": "number",
+    "statusCode": 200,
+    "message": "Lấy danh sách sản phẩm thành công",
     "data": [
       {
         "_id": "string",
@@ -96,17 +101,30 @@
         "variants": [...],
         "status": "string"
       }
-    ]
+    ],
+    "pagination": {
+      "total": 100,
+      "count": 10,
+      "perPage": 10,
+      "currentPage": 1,
+      "totalPages": 10
+    },
+    "meta": {
+      "timestamp": "2026-01-01T07:00:00.000Z",
+      "apiVersion": "v1.2"
+    }
   }
   ```
 
 ### 1.3. Lấy các bộ lọc sản phẩm
+
 - **Route**: `/api/products/filters`
 - **Method**: GET
 - **Response**:
   ```json
   {
-    "success": true,
+    "statusCode": 200,
+    "message": "Lấy bộ lọc thành công",
     "data": {
       "colors": [...],
       "sizes": [...],
@@ -117,11 +135,16 @@
         "min": "number",
         "max": "number"
       }
+    },
+    "meta": {
+      "timestamp": "2026-01-01T07:00:00.000Z",
+      "apiVersion": "v1.2"
     }
   }
   ```
 
 ### 1.4. Tìm kiếm sản phẩm
+
 - **Route**: `/api/products/search`
 - **Method**: GET
 - **Request Params**:
@@ -130,12 +153,14 @@
 - **Response**: (Tương tự response lấy danh sách sản phẩm)
 
 ### 1.5. Lấy chi tiết sản phẩm
+
 - **Route**: `/api/products/:id`
 - **Method**: GET
 - **Response**:
   ```json
   {
-    "success": true,
+    "statusCode": 200,
+    "message": "Lấy thông tin sản phẩm thành công",
     "data": {
       "_id": "string",
       "name": "string",
@@ -148,18 +173,24 @@
       "status": "string",
       "createdAt": "date",
       "updatedAt": "date"
+    },
+    "meta": {
+      "timestamp": "2026-01-01T07:00:00.000Z",
+      "apiVersion": "v1.2"
     }
   }
   ```
 
 ### 1.6. Cập nhật sản phẩm
+
 - **Route**: `/api/products/:id`
 - **Method**: PUT
 - **Payload**: (Tương tự như tạo sản phẩm, các trường có thể cập nhật một phần)
-- **Response**: 
+- **Response**:
   ```json
   {
-    "success": true,
+    "statusCode": 200,
+    "message": "Cập nhật sản phẩm thành công",
     "data": {
       "_id": "string",
       "name": "string",
@@ -171,22 +202,33 @@
       "variants": [...],
       "status": "string",
       "updatedAt": "date"
+    },
+    "meta": {
+      "timestamp": "2026-01-01T07:00:00.000Z",
+      "apiVersion": "v1.2"
     }
   }
   ```
 
 ### 1.7. Xóa sản phẩm
+
 - **Route**: `/api/products/:id`
 - **Method**: DELETE
 - **Response**:
   ```json
   {
-    "success": true,
-    "message": "Xóa sản phẩm thành công"
+    "statusCode": 200,
+    "message": "Xóa sản phẩm thành công",
+    "data": null,
+    "meta": {
+      "timestamp": "2026-01-01T07:00:00.000Z",
+      "apiVersion": "v1.2"
+    }
   }
   ```
 
 ### 1.8. Cập nhật trạng thái sản phẩm
+
 - **Route**: `/api/products/:id/status`
 - **Method**: PATCH
 - **Payload**:
@@ -198,16 +240,22 @@
 - **Response**:
   ```json
   {
-    "success": true,
+    "statusCode": 200,
+    "message": "Cập nhật trạng thái sản phẩm thành công",
     "data": {
       "_id": "string",
       "status": "string",
       "updatedAt": "date"
+    },
+    "meta": {
+      "timestamp": "2026-01-01T07:00:00.000Z",
+      "apiVersion": "v1.2"
     }
   }
   ```
 
 ### 1.9. Cập nhật tồn kho
+
 - **Route**: `/api/products/:id/stock`
 - **Method**: PATCH
 - **Payload**:
@@ -224,16 +272,22 @@
 - **Response**:
   ```json
   {
-    "success": true,
+    "statusCode": 200,
+    "message": "Cập nhật tồn kho thành công",
     "data": {
       "_id": "string",
       "variants": [...],
       "updatedAt": "date"
+    },
+    "meta": {
+      "timestamp": "2026-01-01T07:00:00.000Z",
+      "apiVersion": "v1.2"
     }
   }
   ```
 
 ### 1.10. Cập nhật hình ảnh
+
 - **Route**: `/api/products/:id/images`
 - **Method**: PATCH
 - **Payload**:
@@ -246,11 +300,16 @@
 - **Response**:
   ```json
   {
-    "success": true,
+    "statusCode": 200,
+    "message": "Cập nhật hình ảnh sản phẩm thành công",
     "data": {
       "_id": "string",
       "variants": [...],
       "updatedAt": "date"
+    },
+    "meta": {
+      "timestamp": "2026-01-01T07:00:00.000Z",
+      "apiVersion": "v1.2"
     }
   }
   ```
@@ -258,6 +317,7 @@
 ## 2. Quản lý Voucher
 
 ### 2.1. Tạo phiếu giảm giá
+
 - **Route**: `/api/vouchers`
 - **Method**: POST
 - **Payload**:
@@ -299,6 +359,7 @@
   ```
 
 ### 2.2. Lấy danh sách voucher
+
 - **Route**: `/api/vouchers`
 - **Method**: GET
 - **Request Params**:
@@ -334,6 +395,7 @@
   ```
 
 ### 2.3. Lấy chi tiết voucher
+
 - **Route**: `/api/vouchers/:id`
 - **Method**: GET
 - **Response**:
@@ -360,6 +422,7 @@
   ```
 
 ### 2.4. Cập nhật voucher
+
 - **Route**: `/api/vouchers/:id`
 - **Method**: PUT
 - **Payload**: (Các trường có thể cập nhật một phần)
@@ -377,6 +440,7 @@
 - **Response**: (Tương tự response lấy chi tiết voucher)
 
 ### 2.5. Xóa voucher
+
 - **Route**: `/api/vouchers/:id`
 - **Method**: DELETE
 - **Response**:
@@ -388,6 +452,7 @@
   ```
 
 ### 2.6. Kiểm tra voucher hợp lệ
+
 - **Route**: `/api/vouchers/validate`
 - **Method**: POST
 - **Payload**:
@@ -413,6 +478,7 @@
   ```
 
 ### 2.7. Tăng số lượt sử dụng
+
 - **Route**: `/api/vouchers/:id/increment-usage`
 - **Method**: PUT
 - **Response**:
@@ -428,6 +494,7 @@
   ```
 
 ### 2.8. Gửi thông báo về voucher
+
 - **Route**: `/api/vouchers/:id/notify`
 - **Method**: POST
 - **Response**:
@@ -439,6 +506,7 @@
   ```
 
 ### 2.9. Lấy danh sách voucher có sẵn cho người dùng
+
 - **Route**: `/api/vouchers/user/:userId`
 - **Method**: GET
 - **Access**: Private (User needs to be authenticated)
@@ -483,6 +551,7 @@
 ## 3. Quản lý Khuyến mãi (Promotion)
 
 ### 3.1. Tạo chương trình khuyến mãi
+
 - **Route**: `/api/promotions`
 - **Method**: POST
 - **Payload**:
@@ -516,6 +585,7 @@
   ```
 
 ### 3.2. Lấy danh sách khuyến mãi
+
 - **Route**: `/api/promotions`
 - **Method**: GET
 - **Request Params**:
@@ -547,6 +617,7 @@
   ```
 
 ### 3.3. Lấy chi tiết khuyến mãi
+
 - **Route**: `/api/promotions/:id`
 - **Method**: GET
 - **Response**:
@@ -576,6 +647,7 @@
   ```
 
 ### 3.4. Cập nhật khuyến mãi
+
 - **Route**: `/api/promotions/:id`
 - **Method**: PUT
 - **Payload**: (Các trường có thể cập nhật một phần)
@@ -593,6 +665,7 @@
 - **Response**: (Tương tự response lấy chi tiết khuyến mãi)
 
 ### 3.5. Xóa khuyến mãi
+
 - **Route**: `/api/promotions/:id`
 - **Method**: DELETE
 - **Response**:
@@ -604,6 +677,7 @@
   ```
 
 ### 3.6. Lấy khuyến mãi của sản phẩm
+
 - **Route**: `/api/promotions/product/:productId`
 - **Method**: GET
 - **Response**:
@@ -621,11 +695,12 @@
       }
     ]
   }
-  ``` 
+  ```
 
 ## 4. Quản lý Đơn hàng
 
 ### 4.1. Tạo đơn hàng
+
 - **Route**: `/api/orders`
 - **Method**: POST
 - **Payload**:
@@ -682,6 +757,7 @@
   ```
 
 ### 4.2. Lấy danh sách đơn hàng (Admin)
+
 - **Route**: `/api/orders`
 - **Method**: GET
 - **Request Params**:
@@ -715,6 +791,7 @@
   ```
 
 ### 4.3. Lấy đơn hàng của người dùng
+
 - **Route**: `/api/orders/my-orders`
 - **Method**: GET
 - **Request Params**:
@@ -742,6 +819,7 @@
   ```
 
 ### 4.4. Lấy chi tiết đơn hàng
+
 - **Route**: `/api/orders/:id`
 - **Method**: GET
 - **Response**:
@@ -783,6 +861,7 @@
   ```
 
 ### 4.5. Cập nhật đơn hàng
+
 - **Route**: `/api/orders/:id`
 - **Method**: PUT
 - **Payload**:
@@ -796,6 +875,7 @@
 - **Response**: (Tương tự response lấy chi tiết đơn hàng)
 
 ### 4.6. Hủy đơn hàng
+
 - **Route**: `/api/orders/:id/cancel`
 - **Method**: PATCH
 - **Response**:
@@ -818,6 +898,7 @@
   ```
 
 ### 4.7. Cập nhật trạng thái đơn hàng
+
 - **Route**: `/api/orders/:id/status`
 - **Method**: PATCH
 - **Payload**:
@@ -827,6 +908,7 @@
   }
   ```
 - **Response**:
+
   ```json
   {
     "success": true,
@@ -905,6 +987,7 @@
 ### 5.1. API cho Admin/Staff
 
 #### 5.1.1. Tạo đơn trả hàng (Admin)
+
 - **Route**: `/api/returns`
 - **Method**: POST
 - **Access**: Admin/Staff only
@@ -949,6 +1032,7 @@
   ```
 
 #### 5.1.2. Lấy danh sách đơn trả hàng (Admin)
+
 - **Route**: `/api/returns`
 - **Method**: GET
 - **Access**: Admin/Staff only
@@ -997,6 +1081,7 @@
   ```
 
 #### 5.1.3. Tìm kiếm đơn trả hàng (Admin)
+
 - **Route**: `/api/returns/search`
 - **Method**: GET
 - **Access**: Admin/Staff only
@@ -1023,6 +1108,7 @@
   ```
 
 #### 5.1.4. Lấy thống kê đơn trả hàng (Admin)
+
 - **Route**: `/api/returns/stats`
 - **Method**: GET
 - **Access**: Admin/Staff only
@@ -1045,6 +1131,7 @@
   ```
 
 #### 5.1.5. Lấy chi tiết đơn trả hàng (Admin)
+
 - **Route**: `/api/returns/:id`
 - **Method**: GET
 - **Access**: Admin/Staff only
@@ -1094,6 +1181,7 @@
   ```
 
 #### 5.1.6. Cập nhật đơn trả hàng (Admin)
+
 - **Route**: `/api/returns/:id`
 - **Method**: PUT
 - **Access**: Admin/Staff only
@@ -1131,6 +1219,7 @@
   ```
 
 #### 5.1.7. Cập nhật trạng thái đơn trả hàng (Admin)
+
 - **Route**: `/api/returns/:id/status`
 - **Method**: PUT
 - **Access**: Admin/Staff only
@@ -1155,6 +1244,7 @@
 - **Note**: Khi trạng thái chuyển thành `DA_HOAN_TIEN`, hệ thống sẽ tự động cộng lại số lượng tồn kho cho các sản phẩm được trả.
 
 #### 5.1.8. Xóa đơn trả hàng (Admin)
+
 - **Route**: `/api/returns/:id`
 - **Method**: DELETE
 - **Access**: Admin/Staff only
@@ -1170,6 +1260,7 @@
 ### 5.2. API cho Khách hàng
 
 #### 5.2.1. Xem đơn hàng có thể trả
+
 - **Route**: `/api/returns/returnable-orders`
 - **Method**: GET
 - **Access**: Customer only
@@ -1216,6 +1307,7 @@
   ```
 
 #### 5.2.2. Tạo yêu cầu trả hàng
+
 - **Route**: `/api/returns/request`
 - **Method**: POST
 - **Access**: Customer only
@@ -1261,6 +1353,7 @@
   - Số lượng trả không được vượt quá số lượng trong đơn hàng gốc
 
 #### 5.2.3. Xem danh sách đơn trả hàng của mình
+
 - **Route**: `/api/returns/my`
 - **Method**: GET
 - **Access**: Customer only
@@ -1312,6 +1405,7 @@
   ```
 
 #### 5.2.4. Xem chi tiết đơn trả hàng của mình
+
 - **Route**: `/api/returns/my/:id`
 - **Method**: GET
 - **Access**: Customer only
@@ -1348,6 +1442,7 @@
   ```
 
 #### 5.2.5. Hủy yêu cầu trả hàng
+
 - **Route**: `/api/returns/my/:id/cancel`
 - **Method**: PUT
 - **Access**: Customer only
@@ -1362,18 +1457,18 @@
 
 ### 5.3. Trạng thái đơn trả hàng
 
-| Trạng thái | Mô tả |
-|------------|-------|
-| `CHO_XU_LY` | Đơn trả hàng đang chờ xử lý |
+| Trạng thái     | Mô tả                            |
+| -------------- | -------------------------------- |
+| `CHO_XU_LY`    | Đơn trả hàng đang chờ xử lý      |
 | `DA_HOAN_TIEN` | Đã hoàn tiền và cộng lại tồn kho |
-| `DA_HUY` | Đơn trả hàng đã bị hủy |
+| `DA_HUY`       | Đơn trả hàng đã bị hủy           |
 
 ### 5.4. Quy tắc trả hàng
 
 1. **Thời hạn trả hàng**: 7 ngày kể từ khi đơn hàng hoàn thành
 2. **Điều kiện đơn hàng**: Chỉ được trả hàng cho đơn hàng ở trạng thái `HOAN_THANH`
 3. **Số lượng**: Số lượng trả không được vượt quá số lượng trong đơn hàng gốc
-4. **Quyền hạn**: 
+4. **Quyền hạn**:
    - Khách hàng chỉ có thể tạo yêu cầu và hủy yêu cầu (khi còn CHO_XU_LY)
    - Admin/Staff có thể tạo, xem, cập nhật, xóa và thay đổi trạng thái đơn trả hàng
 5. **Tự động cộng tồn kho**: Khi trạng thái chuyển thành `DA_HOAN_TIEN`, hệ thống tự động cộng lại số lượng tồn kho
@@ -1381,6 +1476,7 @@
 ## 6. Quản lý Tài khoản
 
 ### 6.1. Lấy danh sách tài khoản (Admin)
+
 - **Route**: `/api/accounts`
 - **Method**: GET
 - **Request Params**:
@@ -1412,6 +1508,7 @@
   ```
 
 ### 6.2. Lấy chi tiết tài khoản (Admin)
+
 - **Route**: `/api/accounts/:id`
 - **Method**: GET
 - **Response**:
@@ -1432,7 +1529,7 @@
       "addresses": [
         {
           "_id": "string",
-          "name": "string", 
+          "name": "string",
           "phoneNumber": "string",
           "provinceId": "number",
           "districtId": "number",
@@ -1449,6 +1546,7 @@
   ```
 
 ### 6.3. Tạo tài khoản (Đăng ký)
+
 - **Route**: `/api/accounts/register`
 - **Method**: POST
 - **Payload**:
@@ -1480,6 +1578,7 @@
   ```
 
 ### 6.4. Cập nhật tài khoản (Admin)
+
 - **Route**: `/api/accounts/:id`
 - **Method**: PUT
 - **Payload**:
@@ -1498,6 +1597,7 @@
 - **Response**: (Tương tự response lấy chi tiết tài khoản)
 
 ### 6.5. Cập nhật trạng thái tài khoản
+
 - **Route**: `/api/accounts/:id/status`
 - **Method**: PUT
 - **Payload**:
@@ -1519,6 +1619,7 @@
   ```
 
 ### 6.6. Xóa tài khoản
+
 - **Route**: `/api/accounts/:id`
 - **Method**: DELETE
 - **Response**:
@@ -1530,6 +1631,7 @@
   ```
 
 ### 6.7. Xem hồ sơ cá nhân
+
 - **Route**: `/api/accounts/profile`
 - **Method**: GET
 - **Response**:
@@ -1553,6 +1655,7 @@
   ```
 
 ### 6.8. Cập nhật hồ sơ cá nhân
+
 - **Route**: `/api/accounts/profile`
 - **Method**: PUT
 - **Payload**:
@@ -1568,6 +1671,7 @@
 - **Response**: (Tương tự response xem hồ sơ cá nhân)
 
 ### 6.9. Đổi mật khẩu
+
 - **Route**: `/api/accounts/profile/password`
 - **Method**: PUT
 - **Payload**:
@@ -1587,6 +1691,7 @@
   ```
 
 ### 6.10. Thêm địa chỉ mới
+
 - **Route**: `/api/accounts/profile/addresses`
 - **Method**: POST
 - **Payload**:
@@ -1615,12 +1720,14 @@
   ```
 
 ### 6.11. Cập nhật địa chỉ
+
 - **Route**: `/api/accounts/profile/addresses/:addressId`
 - **Method**: PUT
 - **Payload**: (Tương tự payload thêm địa chỉ mới)
 - **Response**: (Tương tự response thêm địa chỉ mới)
 
 ### 6.12. Xóa địa chỉ
+
 - **Route**: `/api/accounts/profile/addresses/:addressId`
 - **Method**: DELETE
 - **Response**:
@@ -1638,6 +1745,7 @@
 ## 7. Thống kê và Báo cáo
 
 ### 7.1. Lấy danh sách thống kê
+
 - **Route**: `/api/statistics`
 - **Method**: GET
 - **Request Params**:
@@ -1667,6 +1775,7 @@
   ```
 
 ### 7.2. Lấy chi tiết thống kê
+
 - **Route**: `/api/statistics/:id`
 - **Method**: GET
 - **Response**:
@@ -1705,6 +1814,7 @@
   ```
 
 ### 7.3. Báo cáo doanh thu
+
 - **Route**: `/api/statistics/revenue`
 - **Method**: GET
 - **Request Params**:
@@ -1733,6 +1843,7 @@
   ```
 
 ### 7.4. Báo cáo sản phẩm bán chạy
+
 - **Route**: `/api/statistics/top-products`
 - **Method**: GET
 - **Request Params**:
@@ -1759,6 +1870,7 @@
   ```
 
 ### 7.5. Tạo thống kê ngày
+
 - **Route**: `/api/statistics/generate-daily`
 - **Method**: POST
 - **Payload**:
@@ -1787,6 +1899,7 @@
   ```
 
 ### 7.6. Lấy thống kê phân tích
+
 - **Route**: `/api/statistics/analytics`
 - **Method**: GET
 - **Access**: Admin only
@@ -1807,6 +1920,7 @@
   ```
 
 ### 7.7. Lấy thống kê dashboard
+
 - **Route**: `/api/statistics/dashboard`
 - **Method**: GET
 - **Access**: Admin only
@@ -1828,6 +1942,7 @@
 ## 8. Xác thực và Phân quyền
 
 ### 8.1. Đăng nhập
+
 - **Route**: `/api/auth/login`
 - **Method**: POST
 - **Payload**:
@@ -1852,6 +1967,7 @@
   ```
 
 ### 8.2. Đăng xuất
+
 - **Route**: `/api/auth/logout`
 - **Method**: POST
 - **Response**:
@@ -1863,6 +1979,7 @@
   ```
 
 ### 8.3. Đăng ký tài khoản
+
 - **Route**: `/api/auth/register`
 - **Method**: POST
 - **Payload**:
@@ -1889,6 +2006,7 @@
   ```
 
 ### 8.4. Lấy thông tin người dùng hiện tại
+
 - **Route**: `/api/auth/profile`
 - **Method**: GET
 - **Access**: Private (User needs to be authenticated)
@@ -1908,6 +2026,7 @@
   ```
 
 ### 8.5. Cập nhật hồ sơ
+
 - **Route**: `/api/auth/update-profile`
 - **Method**: PUT
 - **Access**: Private (User needs to be authenticated)
@@ -1924,6 +2043,7 @@
 - **Response**: (Tương tự response lấy thông tin người dùng)
 
 ### 8.6. Đổi mật khẩu
+
 - **Route**: `/api/auth/change-password`
 - **Method**: PUT
 - **Access**: Private (User needs to be authenticated)
@@ -1944,6 +2064,7 @@
   ```
 
 ### 8.7. Thêm địa chỉ
+
 - **Route**: `/api/auth/address`
 - **Method**: POST
 - **Access**: Private (User needs to be authenticated)
@@ -1979,6 +2100,7 @@
   ```
 
 ### 8.8. Cập nhật địa chỉ
+
 - **Route**: `/api/auth/address/{addressId}`
 - **Method**: PUT
 - **Access**: Private (User needs to be authenticated)
@@ -1986,6 +2108,7 @@
 - **Response**: (Tương tự response thêm địa chỉ)
 
 ### 8.9. Xóa địa chỉ
+
 - **Route**: `/api/auth/address/{addressId}`
 - **Method**: DELETE
 - **Access**: Private (User needs to be authenticated)
@@ -1998,6 +2121,7 @@
   ```
 
 ### 8.10. Đặt địa chỉ mặc định
+
 - **Route**: `/api/auth/address/{addressId}/default`
 - **Method**: PUT
 - **Access**: Private (User needs to be authenticated)
@@ -2013,6 +2137,7 @@
   ```
 
 ### 8.11. Làm mới token
+
 - **Route**: `/api/auth/refresh-token`
 - **Method**: POST
 - **Payload**:
@@ -2039,6 +2164,7 @@ Các API quản lý thuộc tính sản phẩm bao gồm các thuộc tính như
 ### 9.1. Quản lý Thương hiệu (Brand)
 
 #### 9.1.1. Lấy danh sách thương hiệu
+
 - **Route**: `/api/attributes/brands`
 - **Method**: GET
 - **Request Params**:
@@ -2061,6 +2187,7 @@ Các API quản lý thuộc tính sản phẩm bao gồm các thuộc tính như
   ```
 
 #### 9.1.2. Tạo thương hiệu mới
+
 - **Route**: `/api/attributes/brands`
 - **Method**: POST
 - **Payload**:
@@ -2086,6 +2213,7 @@ Các API quản lý thuộc tính sản phẩm bao gồm các thuộc tính như
   ```
 
 #### 9.1.3. Lấy chi tiết thương hiệu
+
 - **Route**: `/api/attributes/brands/:id`
 - **Method**: GET
 - **Response**:
@@ -2104,6 +2232,7 @@ Các API quản lý thuộc tính sản phẩm bao gồm các thuộc tính như
   ```
 
 #### 9.1.4. Cập nhật thương hiệu
+
 - **Route**: `/api/attributes/brands/:id`
 - **Method**: PUT
 - **Payload**:
@@ -2129,6 +2258,7 @@ Các API quản lý thuộc tính sản phẩm bao gồm các thuộc tính như
   ```
 
 #### 9.1.5. Xóa thương hiệu
+
 - **Route**: `/api/attributes/brands/:id`
 - **Method**: DELETE
 - **Response**:
@@ -2150,12 +2280,14 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
 ### 9.4. Quản lý Màu sắc (Color)
 
 #### 9.4.1. Lấy danh sách màu sắc
+
 - **Route**: `/api/attributes/colors`
 - **Method**: GET
 - **Request Params**:
   - `status` (string, optional): Lọc theo trạng thái (ACTIVE/INACTIVE)
 
 #### 9.4.2. Tạo màu sắc mới
+
 - **Route**: `/api/attributes/colors`
 - **Method**: POST
 - **Payload**:
@@ -2168,10 +2300,12 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
   ```
 
 #### 9.4.3. Lấy chi tiết màu sắc
+
 - **Route**: `/api/attributes/colors/:id`
 - **Method**: GET
 
 #### 9.4.4. Cập nhật màu sắc
+
 - **Route**: `/api/attributes/colors/:id`
 - **Method**: PUT
 - **Payload**:
@@ -2184,18 +2318,21 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
   ```
 
 #### 9.4.5. Xóa màu sắc
+
 - **Route**: `/api/attributes/colors/:id`
 - **Method**: DELETE
 
 ### 9.5. Quản lý Kích thước (Size)
 
 #### 9.5.1. Lấy danh sách kích thước
+
 - **Route**: `/api/attributes/sizes`
 - **Method**: GET
 - **Request Params**:
   - `status` (string, optional): Lọc theo trạng thái (ACTIVE/INACTIVE)
 
 #### 9.5.2. Tạo kích thước mới
+
 - **Route**: `/api/attributes/sizes`
 - **Method**: POST
 - **Payload**:
@@ -2207,10 +2344,12 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
   ```
 
 #### 9.5.3. Lấy chi tiết kích thước
+
 - **Route**: `/api/attributes/sizes/:id`
 - **Method**: GET
 
 #### 9.5.4. Cập nhật kích thước
+
 - **Route**: `/api/attributes/sizes/:id`
 - **Method**: PUT
 - **Payload**:
@@ -2222,12 +2361,14 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
   ```
 
 #### 9.5.5. Xóa kích thước
+
 - **Route**: `/api/attributes/sizes/:id`
 - **Method**: DELETE
 
 ## 10. Upload File
 
 ### 10.1. Upload hình ảnh
+
 - **Route**: `/api/upload/image`
 - **Method**: POST
 - **Access**: Private (User needs to be authenticated)
@@ -2250,6 +2391,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
 ## 11. Chatbot/AI Chat
 
 ### 11.1. Chat với AI
+
 - **Route**: `/api/chatbot/chat`
 - **Method**: POST
 - **Access**: Private (User needs to be authenticated)
@@ -2274,6 +2416,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
 ### 11.2. Quản lý Cấu hình Chatbot (Admin)
 
 #### 11.2.1. Lấy tất cả cấu hình
+
 - **Route**: `/api/chatbot/config`
 - **Method**: GET
 - **Access**: Admin only
@@ -2297,6 +2440,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
   ```
 
 #### 11.2.2. Lấy cấu hình theo key
+
 - **Route**: `/api/chatbot/config/{configKey}`
 - **Method**: GET
 - **Access**: Admin only
@@ -2316,6 +2460,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
   ```
 
 #### 11.2.3. Cập nhật cấu hình
+
 - **Route**: `/api/chatbot/config/{configKey}`
 - **Method**: PUT
 - **Access**: Admin only
@@ -2331,6 +2476,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
 ### 11.3. Quản lý Dữ liệu Huấn luyện (Admin)
 
 #### 11.3.1. Tạo dữ liệu huấn luyện (FAQ)
+
 - **Route**: `/api/chatbot/training`
 - **Method**: POST
 - **Access**: Admin only
@@ -2361,6 +2507,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
   ```
 
 #### 11.3.2. Lấy danh sách dữ liệu huấn luyện
+
 - **Route**: `/api/chatbot/training`
 - **Method**: GET
 - **Access**: Admin only
@@ -2383,12 +2530,14 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
   ```
 
 #### 11.3.3. Lấy chi tiết dữ liệu huấn luyện
+
 - **Route**: `/api/chatbot/training/{id}`
 - **Method**: GET
 - **Access**: Admin only
 - **Response**: (Tương tự response tạo dữ liệu huấn luyện)
 
 #### 11.3.4. Cập nhật dữ liệu huấn luyện
+
 - **Route**: `/api/chatbot/training/{id}`
 - **Method**: PUT
 - **Access**: Admin only
@@ -2405,6 +2554,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
 - **Response**: (Tương tự response lấy chi tiết)
 
 #### 11.3.5. Xóa dữ liệu huấn luyện
+
 - **Route**: `/api/chatbot/training/{id}`
 - **Method**: DELETE
 - **Access**: Admin only
@@ -2419,6 +2569,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
 ### 11.4. Lịch sử Chat
 
 #### 11.4.1. Lấy lịch sử chat của người dùng
+
 - **Route**: `/api/chatbot/history`
 - **Method**: GET
 - **Access**: Private (User needs to be authenticated)
@@ -2449,6 +2600,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
   ```
 
 #### 11.4.2. Lấy lịch sử chat theo session
+
 - **Route**: `/api/chatbot/history/session/{sessionId}`
 - **Method**: GET
 - **Access**: Private (User needs to be authenticated)
@@ -2458,6 +2610,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
 - **Response**: (Tương tự response lấy lịch sử chat)
 
 #### 11.4.3. Đánh giá câu trả lời
+
 - **Route**: `/api/chatbot/history/{id}/rate`
 - **Method**: POST
 - **Access**: Private (User needs to be authenticated)
@@ -2484,6 +2637,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
 ### 11.5. Thống kê Chatbot (Admin)
 
 #### 11.5.1. Lấy thống kê chatbot
+
 - **Route**: `/api/chatbot/statistics`
 - **Method**: GET
 - **Access**: Admin only
@@ -2506,6 +2660,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
 ## 12. Quản lý Thanh toán
 
 ### 12.1. Tạo thanh toán (Admin/Staff)
+
 - **Route**: `/api/payments`
 - **Method**: POST
 - **Access**: Admin/Staff only
@@ -2537,6 +2692,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
   ```
 
 ### 12.2. Lấy danh sách thanh toán (Admin/Staff)
+
 - **Route**: `/api/payments`
 - **Method**: GET
 - **Access**: Admin/Staff only
@@ -2562,6 +2718,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
   ```
 
 ### 12.3. Lấy chi tiết thanh toán (Admin/Staff)
+
 - **Route**: `/api/payments/:id`
 - **Method**: GET
 - **Access**: Admin/Staff only
@@ -2583,6 +2740,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
   ```
 
 ### 12.4. Cập nhật trạng thái thanh toán (Admin/Staff)
+
 - **Route**: `/api/payments/:id`
 - **Method**: PUT
 - **Access**: Admin/Staff only
@@ -2596,6 +2754,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
 - **Response**: (Tương tự response lấy chi tiết thanh toán)
 
 ### 12.5. Xóa thanh toán (Admin/Staff)
+
 - **Route**: `/api/payments/:id`
 - **Method**: DELETE
 - **Access**: Admin/Staff only
@@ -2608,6 +2767,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
   ```
 
 ### 12.6. Lấy thanh toán theo đơn hàng (Admin/Staff)
+
 - **Route**: `/api/payments/orders/:orderId/payments`
 - **Method**: GET
 - **Access**: Admin/Staff only
@@ -2628,6 +2788,7 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
   ```
 
 ### 12.7. Tạo thanh toán COD (Admin/Staff)
+
 - **Route**: `/api/payments/cod`
 - **Method**: POST
 - **Access**: Admin/Staff only
@@ -2653,4 +2814,3 @@ Tương tự như quản lý thương hiệu, nhưng sử dụng endpoint `/api/
     }
   }
   ```
-

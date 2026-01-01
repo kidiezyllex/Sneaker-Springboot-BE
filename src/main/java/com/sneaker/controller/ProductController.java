@@ -5,6 +5,7 @@ import com.sneaker.dto.request.ProductUpdateRequest;
 import com.sneaker.dto.request.StockUpdateRequest;
 import com.sneaker.dto.request.ImageUpdateRequest;
 import com.sneaker.dto.response.ApiResponse;
+import com.sneaker.dto.response.PaginationMeta;
 import com.sneaker.entity.Product;
 import com.sneaker.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,7 +33,7 @@ public class ProductController {
     
     @GetMapping
     @Operation(summary = "Get all products", description = "Get paginated list of products with filters")
-    public ResponseEntity<ApiResponse<Map<String, Object>>> getAllProducts(
+    public ResponseEntity<ApiResponse<java.util.List<Product>>> getAllProducts(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Integer brand,
             @RequestParam(required = false) Integer category,
@@ -46,21 +47,17 @@ public class ProductController {
             @RequestParam(defaultValue = "10") int limit) {
         
         Pageable pageable = PageRequest.of(page - 1, limit);
-        Page<Product> products = productService.getAllProducts(
+        Page<Product> productPage = productService.getAllProducts(
             name, brand, category, material, color, size, minPrice, maxPrice, status, pageable
         );
         
-        Map<String, Object> response = Map.of(
-            "products", products.getContent(),
-            "pagination", Map.of(
-                "totalItems", products.getTotalElements(),
-                "totalPages", products.getTotalPages(),
-                "currentPage", page,
-                "limit", limit
+        return ResponseEntity.ok(
+            ApiResponse.success(
+                "Lấy danh sách sản phẩm thành công",
+                productPage.getContent(),
+                PaginationMeta.fromPage(productPage)
             )
         );
-        
-        return ResponseEntity.ok(ApiResponse.success("Lấy danh sách sản phẩm thành công", response));
     }
     
     @GetMapping("/filters")
@@ -72,7 +69,7 @@ public class ProductController {
     
     @GetMapping("/search")
     @Operation(summary = "Search products", description = "Search products by keyword with filters")
-    public ResponseEntity<ApiResponse<Map<String, Object>>> searchProducts(
+    public ResponseEntity<ApiResponse<java.util.List<Product>>> searchProducts(
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) Integer brand,
             @RequestParam(required = false) Integer category,
@@ -85,21 +82,17 @@ public class ProductController {
             @RequestParam(defaultValue = "10") int limit) {
         
         Pageable pageable = PageRequest.of(page - 1, limit);
-        Page<Product> products = productService.searchProducts(
+        Page<Product> productPage = productService.searchProducts(
             keyword, brand, category, material, color, size, minPrice, maxPrice, null, pageable
         );
         
-        Map<String, Object> response = Map.of(
-            "products", products.getContent(),
-            "pagination", Map.of(
-                "totalItems", products.getTotalElements(),
-                "totalPages", products.getTotalPages(),
-                "currentPage", page,
-                "limit", limit
+        return ResponseEntity.ok(
+            ApiResponse.success(
+                "Tìm kiếm sản phẩm thành công",
+                productPage.getContent(),
+                PaginationMeta.fromPage(productPage)
             )
         );
-        
-        return ResponseEntity.ok(ApiResponse.success("Tìm kiếm sản phẩm thành công", response));
     }
     
     @GetMapping("/{id}")
@@ -116,7 +109,7 @@ public class ProductController {
     @SecurityRequirement(name = "bearer-jwt")
     public ResponseEntity<ApiResponse<Product>> createProduct(@Valid @RequestBody ProductCreateRequest request) {
         Product created = productService.createProduct(request);
-        return ResponseEntity.status(201).body(ApiResponse.success("Tạo sản phẩm thành công", created));
+        return ResponseEntity.status(201).body(ApiResponse.created("Tạo sản phẩm thành công", created));
     }
     
     @PutMapping("/{id}")

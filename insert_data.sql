@@ -1,385 +1,1152 @@
-SET FOREIGN_KEY_CHECKS = 0;
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th12 11, 2025 lúc 11:12 PM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.0.30
 
--- ============================================
--- 1. ACCOUNTS (15+ rows)
--- ============================================
-INSERT INTO accounts (code, full_name, phone_number, email, password, birthday, gender, avatar, role, citizen_id, status, created_at, updated_at) VALUES
-('ACC001', 'Nguyễn Văn Anh', '0901234567', 'nguyenvananh@gmail.com', '$2a$10$l1NcsDjlCaBIsVX4SNg1FeKfUvqWKejOkX3JGYLIYKfF1Li80GZDW', '1990-01-15 00:00:00', 1, NULL, 'ADMIN', '001234567890', 'ACTIVE', NOW(), NOW()),
-('ACC002', 'Trần Thị Bình', '0901234568', 'tranthibinh@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1995-05-20 00:00:00', 0, NULL, 'CUSTOMER', '001234567891', 'ACTIVE', NOW(), NOW()),
-('ACC003', 'Lê Văn Cường', '0901234569', 'levancuong@gmail.com', '$2a$10$rx51w6Fzu07iiMqEif2K3u5rzhO05TvaOusM31.Iq6.pajDkgDd7i', '1992-08-10 00:00:00', 1, NULL, 'STAFF', '001234567892', 'ACTIVE', NOW(), NOW()),
-('ACC004', 'Phạm Quốc Dũng', '0901111111', 'phamquocdung@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1993-03-12 00:00:00', 1, NULL, 'CUSTOMER', '001111111111', 'ACTIVE', NOW(), NOW()),
-('ACC005', 'Hoàng Thị Giang', '0902222222', 'hoangthigiang@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1994-07-25 00:00:00', 0, NULL, 'CUSTOMER', '002222222222', 'ACTIVE', NOW(), NOW()),
-('ACC006', 'Vũ Văn Hùng', '0903333333', 'vuvanhung@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1991-11-08 00:00:00', 1, NULL, 'CUSTOMER', '003333333333', 'ACTIVE', NOW(), NOW()),
-('ACC007', 'Đặng Thị Linh', '0904444444', 'dangthilinh@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1996-02-14 00:00:00', 0, NULL, 'CUSTOMER', '004444444444', 'ACTIVE', NOW(), NOW()),
-('ACC008', 'Bùi Văn Minh', '0905555555', 'buivanminh@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1990-09-30 00:00:00', 1, NULL, 'CUSTOMER', '005555555555', 'ACTIVE', NOW(), NOW()),
-('ACC009', 'Ngô Thị Ngọc', '0906666666', 'ngothingoc@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1997-04-18 00:00:00', 0, NULL, 'CUSTOMER', '006666666666', 'ACTIVE', NOW(), NOW()),
-('ACC010', 'Đỗ Văn Phong', '0907777777', 'dovanphong@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1992-12-05 00:00:00', 1, NULL, 'CUSTOMER', '007777777777', 'ACTIVE', NOW(), NOW()),
-('ACC011', 'Hà Thị Quỳnh', '0908888888', 'hathiquynh@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1995-06-22 00:00:00', 0, NULL, 'CUSTOMER', '008888888888', 'ACTIVE', NOW(), NOW()),
-('ACC012', 'Lý Văn Sơn', '0909999999', 'lyvanson@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1993-10-15 00:00:00', 1, NULL, 'CUSTOMER', '009999999999', 'ACTIVE', NOW(), NOW()),
-('ACC013', 'Mai Thị Thảo', '0910000000', 'maithithao@gmail.com', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '1994-01-28 00:00:00', 0, NULL, 'CUSTOMER', '010000000000', 'ACTIVE', NOW(), NOW()),
-('ACC014', 'Trịnh Văn Tùng', '0911111111', 'trinhvantung@gmail.com', '$2a$10$rx51w6Fzu07iiMqEif2K3u5rzhO05TvaOusM31.Iq6.pajDkgDd7i', '1991-05-10 00:00:00', 1, NULL, 'STAFF', '011111111111', 'ACTIVE', NOW(), NOW()),
-('ACC015', 'Phan Văn Khánh', '0912222222', 'phanvankhanh@gmail.com', '$2a$10$l1NcsDjlCaBIsVX4SNg1FeKfUvqWKejOkX3JGYLIYKfF1Li80GZDW', '1988-03-20 00:00:00', 1, NULL, 'ADMIN', '012222222222', 'ACTIVE', NOW(), NOW());
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
--- ============================================
--- 2. BRANDS (12+ rows)
--- ============================================
-INSERT INTO brands (name, status, created_at, updated_at) VALUES
-('Nike', 'ACTIVE', NOW(), NOW()),
-('Adidas', 'ACTIVE', NOW(), NOW()),
-('Puma', 'ACTIVE', NOW(), NOW()),
-('New Balance', 'ACTIVE', NOW(), NOW()),
-('Converse', 'ACTIVE', NOW(), NOW()),
-('Vans', 'ACTIVE', NOW(), NOW()),
-('Reebok', 'ACTIVE', NOW(), NOW()),
-('Under Armour', 'ACTIVE', NOW(), NOW()),
-('Jordan', 'ACTIVE', NOW(), NOW()),
-('Asics', 'ACTIVE', NOW(), NOW()),
-('Fila', 'ACTIVE', NOW(), NOW()),
-('Skechers', 'ACTIVE', NOW(), NOW());
 
--- ============================================
--- 3. CATEGORIES (12+ rows)
--- ============================================
-INSERT INTO categories (name, status, created_at, updated_at) VALUES
-('Running Shoes', 'ACTIVE', NOW(), NOW()),
-('Basketball Shoes', 'ACTIVE', NOW(), NOW()),
-('Casual Shoes', 'ACTIVE', NOW(), NOW()),
-('Sneakers', 'ACTIVE', NOW(), NOW()),
-('Training Shoes', 'ACTIVE', NOW(), NOW()),
-('Lifestyle Shoes', 'ACTIVE', NOW(), NOW()),
-('High-Top Shoes', 'ACTIVE', NOW(), NOW()),
-('Low-Top Shoes', 'ACTIVE', NOW(), NOW()),
-('Slip-On Shoes', 'ACTIVE', NOW(), NOW()),
-('Athletic Shoes', 'ACTIVE', NOW(), NOW()),
-('Walking Shoes', 'ACTIVE', NOW(), NOW()),
-('Skateboarding Shoes', 'ACTIVE', NOW(), NOW());
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
--- ============================================
--- 4. COLORS (15+ rows)
--- ============================================
-INSERT INTO colors (name, code, status, created_at, updated_at) VALUES
-('Black', '#000000', 'ACTIVE', NOW(), NOW()),
-('White', '#FFFFFF', 'ACTIVE', NOW(), NOW()),
-('Red', '#FF0000', 'ACTIVE', NOW(), NOW()),
-('Blue', '#0000FF', 'ACTIVE', NOW(), NOW()),
-('Green', '#008000', 'ACTIVE', NOW(), NOW()),
-('Yellow', '#FFFF00', 'ACTIVE', NOW(), NOW()),
-('Gray', '#808080', 'ACTIVE', NOW(), NOW()),
-('Navy', '#000080', 'ACTIVE', NOW(), NOW()),
-('Pink', '#FFC0CB', 'ACTIVE', NOW(), NOW()),
-('Orange', '#FFA500', 'ACTIVE', NOW(), NOW()),
-('Purple', '#800080', 'ACTIVE', NOW(), NOW()),
-('Brown', '#A52A2A', 'ACTIVE', NOW(), NOW()),
-('Beige', '#F5F5DC', 'ACTIVE', NOW(), NOW()),
-('Silver', '#C0C0C0', 'ACTIVE', NOW(), NOW()),
-('Gold', '#FFD700', 'ACTIVE', NOW(), NOW());
+--
+-- Cơ sở dữ liệu: `sneakerdb`
+--
 
--- ============================================
--- 5. MATERIALS (12+ rows)
--- ============================================
-INSERT INTO materials (name, status, created_at, updated_at) VALUES
-('Leather', 'ACTIVE', NOW(), NOW()),
-('Synthetic Leather', 'ACTIVE', NOW(), NOW()),
-('Mesh', 'ACTIVE', NOW(), NOW()),
-('Canvas', 'ACTIVE', NOW(), NOW()),
-('Rubber', 'ACTIVE', NOW(), NOW()),
-('Knit', 'ACTIVE', NOW(), NOW()),
-('Suede', 'ACTIVE', NOW(), NOW()),
-('Nubuck', 'ACTIVE', NOW(), NOW()),
-('Primeknit', 'ACTIVE', NOW(), NOW()),
-('Flyknit', 'ACTIVE', NOW(), NOW()),
-('Textile', 'ACTIVE', NOW(), NOW()),
-('EVA', 'ACTIVE', NOW(), NOW());
+-- --------------------------------------------------------
 
--- ============================================
--- 6. SIZES (15+ rows)
--- ============================================
-INSERT INTO sizes (value, status, created_at, updated_at) VALUES
-(35, 'ACTIVE', NOW(), NOW()),
-(36, 'ACTIVE', NOW(), NOW()),
-(37, 'ACTIVE', NOW(), NOW()),
-(38, 'ACTIVE', NOW(), NOW()),
-(39, 'ACTIVE', NOW(), NOW()),
-(40, 'ACTIVE', NOW(), NOW()),
-(41, 'ACTIVE', NOW(), NOW()),
-(42, 'ACTIVE', NOW(), NOW()),
-(43, 'ACTIVE', NOW(), NOW()),
-(44, 'ACTIVE', NOW(), NOW()),
-(45, 'ACTIVE', NOW(), NOW()),
-(46, 'ACTIVE', NOW(), NOW()),
-(47, 'ACTIVE', NOW(), NOW()),
-(48, 'ACTIVE', NOW(), NOW()),
-(49, 'ACTIVE', NOW(), NOW());
+--
+-- Cấu trúc bảng cho bảng `accounts`
+--
 
--- ============================================
--- 7. PRODUCTS (15+ rows)
--- ============================================
-INSERT INTO products (code, name, brand_id, category_id, material_id, description, weight, status, created_at, updated_at) VALUES
-('PRD001', 'Nike Air Max 90', 1, 4, 1, 'Classic running shoe with Air Max cushioning technology. Perfect for daily wear and light running activities.', 0.35, 'ACTIVE', NOW(), NOW()),
-('PRD002', 'Adidas Ultraboost 22', 2, 1, 9, 'Premium running shoe with Boost midsole technology for maximum energy return and comfort.', 0.32, 'ACTIVE', NOW(), NOW()),
-('PRD003', 'Nike Dunk Low', 1, 3, 2, 'Iconic basketball-inspired lifestyle shoe with classic design and versatile style.', 0.38, 'ACTIVE', NOW(), NOW()),
-('PRD004', 'Adidas Stan Smith', 2, 3, 1, 'Timeless tennis shoe with clean minimalist design. Perfect for casual everyday wear.', 0.30, 'ACTIVE', NOW(), NOW()),
-('PRD005', 'Puma Suede Classic', 3, 4, 7, 'Classic suede sneaker with retro style. Comfortable and stylish for streetwear.', 0.33, 'ACTIVE', NOW(), NOW()),
-('PRD006', 'New Balance 550', 4, 4, 1, 'Retro basketball-inspired sneaker with premium leather upper and ABZORB cushioning.', 0.36, 'ACTIVE', NOW(), NOW()),
-('PRD007', 'Converse Chuck Taylor All Star', 5, 3, 4, 'Iconic canvas sneaker with timeless design. Perfect for casual and street style.', 0.28, 'ACTIVE', NOW(), NOW()),
-('PRD008', 'Vans Old Skool', 6, 9, 4, 'Classic skate shoe with signature side stripe. Durable and comfortable for skating and casual wear.', 0.31, 'ACTIVE', NOW(), NOW()),
-('PRD009', 'Nike Air Force 1', 1, 2, 1, 'Legendary basketball shoe with Air-Sole unit. Iconic design loved by sneakerheads worldwide.', 0.40, 'ACTIVE', NOW(), NOW()),
-('PRD010', 'Adidas Superstar', 2, 3, 1, 'Classic shell-toe sneaker with three-stripe design. Timeless style for everyday wear.', 0.34, 'ACTIVE', NOW(), NOW()),
-('PRD011', 'Jordan 1 Retro High', 9, 2, 1, 'Iconic high-top basketball shoe with Air cushioning. Premium leather construction.', 0.42, 'ACTIVE', NOW(), NOW()),
-('PRD012', 'Reebok Classic Leather', 7, 3, 1, 'Vintage-inspired sneaker with soft leather upper and comfortable fit.', 0.29, 'ACTIVE', NOW(), NOW()),
-('PRD013', 'Nike Blazer Mid', 1, 4, 1, 'Retro basketball shoe with mid-top design. Versatile style for various occasions.', 0.37, 'ACTIVE', NOW(), NOW()),
-('PRD014', 'Puma RS-X', 3, 4, 2, 'Futuristic running shoe with bold design and responsive cushioning technology.', 0.35, 'ACTIVE', NOW(), NOW()),
-('PRD015', 'New Balance 574', 4, 1, 1, 'Classic running shoe with ENCAP midsole technology. Comfortable and durable.', 0.33, 'ACTIVE', NOW(), NOW());
+CREATE TABLE `accounts` (
+  `id` int(11) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `birthday` datetime(6) DEFAULT NULL,
+  `citizen_id` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `full_name` varchar(255) NOT NULL,
+  `gender` bit(1) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  `role` enum('CUSTOMER','ADMIN','STAFF') NOT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- ============================================
--- 8. PRODUCT_VARIANTS (20+ rows)
--- ============================================
-INSERT INTO product_variants (product_id, color_id, size_id, price, stock, created_at, updated_at) VALUES
-(1, 1, 7, 2500000.00, 50, NOW(), NOW()),
-(1, 2, 7, 2500000.00, 45, NOW(), NOW()),
-(1, 3, 7, 2500000.00, 30, NOW(), NOW()),
-(2, 1, 6, 3200000.00, 40, NOW(), NOW()),
-(2, 2, 6, 3200000.00, 35, NOW(), NOW()),
-(2, 4, 6, 3200000.00, 25, NOW(), NOW()),
-(3, 1, 8, 2800000.00, 60, NOW(), NOW()),
-(3, 2, 8, 2800000.00, 55, NOW(), NOW()),
-(3, 5, 8, 2800000.00, 40, NOW(), NOW()),
-(4, 2, 7, 2200000.00, 70, NOW(), NOW()),
-(4, 1, 7, 2200000.00, 65, NOW(), NOW()),
-(5, 1, 7, 1800000.00, 50, NOW(), NOW()),
-(5, 2, 7, 1800000.00, 45, NOW(), NOW()),
-(6, 1, 8, 2400000.00, 40, NOW(), NOW()),
-(6, 2, 8, 2400000.00, 35, NOW(), NOW()),
-(7, 1, 7, 1500000.00, 80, NOW(), NOW()),
-(7, 2, 7, 1500000.00, 75, NOW(), NOW()),
-(8, 1, 7, 1600000.00, 60, NOW(), NOW()),
-(8, 2, 7, 1600000.00, 55, NOW(), NOW()),
-(9, 1, 8, 3000000.00, 50, NOW(), NOW()),
-(9, 2, 8, 3000000.00, 45, NOW(), NOW()),
-(10, 2, 7, 2100000.00, 55, NOW(), NOW()),
-(10, 1, 7, 2100000.00, 50, NOW(), NOW()),
-(11, 1, 9, 4500000.00, 30, NOW(), NOW()),
-(11, 3, 9, 4500000.00, 25, NOW(), NOW());
+--
+-- Đang đổ dữ liệu cho bảng `accounts`
+--
 
--- ============================================
--- 9. PRODUCT_VARIANT_IMAGES (25+ rows)
--- ============================================
-INSERT INTO product_variant_images (variant_id, image_url, created_at, updated_at) VALUES
-(1, 'https://example.com/images/nike-airmax90-black-1.jpg', NOW(), NOW()),
-(1, 'https://example.com/images/nike-airmax90-black-2.jpg', NOW(), NOW()),
-(2, 'https://example.com/images/nike-airmax90-white-1.jpg', NOW(), NOW()),
-(2, 'https://example.com/images/nike-airmax90-white-2.jpg', NOW(), NOW()),
-(3, 'https://example.com/images/nike-airmax90-red-1.jpg', NOW(), NOW()),
-(4, 'https://example.com/images/adidas-ultraboost-black-1.jpg', NOW(), NOW()),
-(4, 'https://example.com/images/adidas-ultraboost-black-2.jpg', NOW(), NOW()),
-(5, 'https://example.com/images/adidas-ultraboost-white-1.jpg', NOW(), NOW()),
-(6, 'https://example.com/images/adidas-ultraboost-blue-1.jpg', NOW(), NOW()),
-(7, 'https://example.com/images/nike-dunk-black-1.jpg', NOW(), NOW()),
-(7, 'https://example.com/images/nike-dunk-black-2.jpg', NOW(), NOW()),
-(8, 'https://example.com/images/nike-dunk-white-1.jpg', NOW(), NOW()),
-(9, 'https://example.com/images/nike-dunk-green-1.jpg', NOW(), NOW()),
-(10, 'https://example.com/images/adidas-stansmith-white-1.jpg', NOW(), NOW()),
-(11, 'https://example.com/images/adidas-stansmith-black-1.jpg', NOW(), NOW()),
-(12, 'https://example.com/images/puma-suede-black-1.jpg', NOW(), NOW()),
-(13, 'https://example.com/images/puma-suede-white-1.jpg', NOW(), NOW()),
-(14, 'https://example.com/images/nb550-black-1.jpg', NOW(), NOW()),
-(15, 'https://example.com/images/nb550-white-1.jpg', NOW(), NOW()),
-(16, 'https://example.com/images/converse-black-1.jpg', NOW(), NOW()),
-(17, 'https://example.com/images/converse-white-1.jpg', NOW(), NOW()),
-(18, 'https://example.com/images/vans-black-1.jpg', NOW(), NOW()),
-(19, 'https://example.com/images/vans-white-1.jpg', NOW(), NOW()),
-(20, 'https://example.com/images/nike-af1-black-1.jpg', NOW(), NOW()),
-(21, 'https://example.com/images/nike-af1-white-1.jpg', NOW(), NOW());
+INSERT INTO `accounts` (`id`, `avatar`, `birthday`, `citizen_id`, `code`, `created_at`, `email`, `full_name`, `gender`, `password`, `phone_number`, `role`, `status`, `updated_at`) VALUES
+(1, NULL, '1990-01-15 00:00:00.000000', '001234567890', 'ACC001', '2025-12-11 00:14:59.000000', 'nguyenvananh@gmail.com', 'Nguyễn Văn Anh', b'1', '$2a$10$l1NcsDjlCaBIsVX4SNg1FeKfUvqWKejOkX3JGYLIYKfF1Li80GZDW', '0901234567', 'ADMIN', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(2, NULL, '1995-05-20 00:00:00.000000', '001234567891', 'ACC002', '2025-12-11 00:14:59.000000', 'tranthibinh@gmail.com', 'Trần Thị Bình', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0901234568', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(3, NULL, '1992-08-10 00:00:00.000000', '001234567892', 'ACC003', '2025-12-11 00:14:59.000000', 'levancuong@gmail.com', 'Lê Văn Cường', b'1', '$2a$10$rx51w6Fzu07iiMqEif2K3u5rzhO05TvaOusM31.Iq6.pajDkgDd7i', '0901234569', 'STAFF', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(4, NULL, '1993-03-12 00:00:00.000000', '001111111111', 'ACC004', '2025-12-11 00:14:59.000000', 'phamquocdung@gmail.com', 'Phạm Quốc Dũng', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0901111111', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(5, NULL, '1994-07-25 00:00:00.000000', '002222222222', 'ACC005', '2025-12-11 00:14:59.000000', 'hoangthigiang@gmail.com', 'Hoàng Thị Giang', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0902222222', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(6, NULL, '1991-11-08 00:00:00.000000', '003333333333', 'ACC006', '2025-12-11 00:14:59.000000', 'vuvanhung@gmail.com', 'Vũ Văn Hùng', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0903333333', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(7, NULL, '1996-02-14 00:00:00.000000', '004444444444', 'ACC007', '2025-12-11 00:14:59.000000', 'dangthilinh@gmail.com', 'Đặng Thị Linh', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0904444444', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(8, NULL, '1990-09-30 00:00:00.000000', '005555555555', 'ACC008', '2025-12-11 00:14:59.000000', 'buivanminh@gmail.com', 'Bùi Văn Minh', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0905555555', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(9, NULL, '1997-04-18 00:00:00.000000', '006666666666', 'ACC009', '2025-12-11 00:14:59.000000', 'ngothingoc@gmail.com', 'Ngô Thị Ngọc', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0906666666', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(10, NULL, '1992-12-05 00:00:00.000000', '007777777777', 'ACC010', '2025-12-11 00:14:59.000000', 'dovanphong@gmail.com', 'Đỗ Văn Phong', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0907777777', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(11, NULL, '1995-06-22 00:00:00.000000', '008888888888', 'ACC011', '2025-12-11 00:14:59.000000', 'hathiquynh@gmail.com', 'Hà Thị Quỳnh', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0908888888', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(12, NULL, '1993-10-15 00:00:00.000000', '009999999999', 'ACC012', '2025-12-11 00:14:59.000000', 'lyvanson@gmail.com', 'Lý Văn Sơn', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0909999999', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(13, NULL, '1994-01-28 00:00:00.000000', '010000000000', 'ACC013', '2025-12-11 00:14:59.000000', 'maithithao@gmail.com', 'Mai Thị Thảo', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0910000000', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(14, NULL, '1991-05-10 00:00:00.000000', '011111111111', 'ACC014', '2025-12-11 00:14:59.000000', 'trinhvantung@gmail.com', 'Trịnh Văn Tùng', b'1', '$2a$10$rx51w6Fzu07iiMqEif2K3u5rzhO05TvaOusM31.Iq6.pajDkgDd7i', '0911111111', 'STAFF', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(15, NULL, '1988-03-20 00:00:00.000000', '012222222222', 'ACC015', '2025-12-11 00:14:59.000000', 'phanvankhanh@gmail.com', 'Phan Văn Khánh', b'1', '$2a$10$l1NcsDjlCaBIsVX4SNg1FeKfUvqWKejOkX3JGYLIYKfF1Li80GZDW', '0912222222', 'ADMIN', 'ACTIVE', '2025-12-11 00:14:59.000000');
 
--- ============================================
--- 10. VOUCHERS (15+ rows)
--- ============================================
-INSERT INTO vouchers (code, name, type, value, quantity, used_count, start_date, end_date, min_order_value, max_discount, status, created_at, updated_at) VALUES
-('VOUCHER10', 'Giảm 10%', 'PERCENTAGE', 10.00, 100, 5, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 500000.00, 200000.00, 'ACTIVE', NOW(), NOW()),
-('VOUCHER20', 'Giảm 20%', 'PERCENTAGE', 20.00, 50, 2, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 1000000.00, 500000.00, 'ACTIVE', NOW(), NOW()),
-('VOUCHER50K', 'Giảm 50.000đ', 'FIXED_AMOUNT', 50000.00, 200, 10, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 300000.00, NULL, 'ACTIVE', NOW(), NOW()),
-('VOUCHER100K', 'Giảm 100.000đ', 'FIXED_AMOUNT', 100000.00, 100, 3, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 500000.00, NULL, 'ACTIVE', NOW(), NOW()),
-('VOUCHER200K', 'Giảm 200.000đ', 'FIXED_AMOUNT', 200000.00, 50, 1, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 1000000.00, NULL, 'ACTIVE', NOW(), NOW()),
-('NEWUSER', 'Giảm 15% cho khách hàng mới', 'PERCENTAGE', 15.00, 500, 25, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 200000.00, 150000.00, 'ACTIVE', NOW(), NOW()),
-('SUMMER2024', 'Giảm 25% mùa hè', 'PERCENTAGE', 25.00, 30, 0, '2024-06-01 00:00:00', '2024-08-31 23:59:59', 800000.00, 400000.00, 'ACTIVE', NOW(), NOW()),
-('VIP50K', 'Voucher VIP 50K', 'FIXED_AMOUNT', 50000.00, 100, 5, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 200000.00, NULL, 'ACTIVE', NOW(), NOW()),
-('VIP100K', 'Voucher VIP 100K', 'FIXED_AMOUNT', 100000.00, 50, 2, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 500000.00, NULL, 'ACTIVE', NOW(), NOW()),
-('WEEKEND10', 'Giảm 10% cuối tuần', 'PERCENTAGE', 10.00, 200, 15, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 300000.00, 100000.00, 'ACTIVE', NOW(), NOW()),
-('BIRTHDAY20', 'Giảm 20% sinh nhật', 'PERCENTAGE', 20.00, 1000, 50, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 400000.00, 200000.00, 'ACTIVE', NOW(), NOW()),
-('FLASH30', 'Flash Sale 30%', 'PERCENTAGE', 30.00, 20, 0, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 1500000.00, 600000.00, 'ACTIVE', NOW(), NOW()),
-('FREESHIP', 'Miễn phí ship', 'FIXED_AMOUNT', 30000.00, 500, 30, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 200000.00, NULL, 'ACTIVE', NOW(), NOW()),
-('MEGA50', 'Mega Sale 50%', 'PERCENTAGE', 50.00, 10, 0, '2024-11-01 00:00:00', '2024-11-30 23:59:59', 2000000.00, 1000000.00, 'ACTIVE', NOW(), NOW()),
-('WELCOME15', 'Chào mừng 15%', 'PERCENTAGE', 15.00, 1000, 100, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 300000.00, 150000.00, 'ACTIVE', NOW(), NOW());
+-- --------------------------------------------------------
 
--- ============================================
--- 11. PROMOTIONS (15+ rows)
--- ============================================
-INSERT INTO promotions (name, description, discount_percent, start_date, end_date, status, created_at, updated_at) VALUES
-('Summer Sale 2024', 'Khuyến mãi mùa hè với giảm giá lớn cho tất cả sản phẩm', 20.00, '2024-06-01 00:00:00', '2024-08-31 23:59:59', 'ACTIVE', NOW(), NOW()),
-('Back to School', 'Chương trình khuyến mãi cho học sinh, sinh viên', 15.00, '2024-08-01 00:00:00', '2024-09-30 23:59:59', 'ACTIVE', NOW(), NOW()),
-('Black Friday', 'Siêu sale Black Friday với giảm giá lên đến 50%', 50.00, '2024-11-25 00:00:00', '2024-11-30 23:59:59', 'ACTIVE', NOW(), NOW()),
-('New Year Sale', 'Khuyến mãi năm mới với nhiều ưu đãi hấp dẫn', 25.00, '2024-12-20 00:00:00', '2025-01-10 23:59:59', 'ACTIVE', NOW(), NOW()),
-('Nike Collection Sale', 'Giảm giá đặc biệt cho bộ sưu tập Nike', 30.00, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 'ACTIVE', NOW(), NOW()),
-('Adidas Flash Sale', 'Flash sale cho sản phẩm Adidas', 25.00, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 'ACTIVE', NOW(), NOW()),
-('Weekend Special', 'Khuyến mãi cuối tuần cho tất cả sản phẩm', 10.00, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 'ACTIVE', NOW(), NOW()),
-('Running Shoes Promotion', 'Giảm giá giày chạy bộ', 20.00, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 'ACTIVE', NOW(), NOW()),
-('Basketball Shoes Sale', 'Khuyến mãi giày bóng rổ', 15.00, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 'ACTIVE', NOW(), NOW()),
-('Lifestyle Collection', 'Giảm giá bộ sưu tập lifestyle', 12.00, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 'ACTIVE', NOW(), NOW()),
-('Mid-Year Sale', 'Khuyến mãi giữa năm', 18.00, '2024-06-15 00:00:00', '2024-07-15 23:59:59', 'ACTIVE', NOW(), NOW()),
-('End of Season', 'Giảm giá cuối mùa', 35.00, '2024-02-01 00:00:00', '2024-02-29 23:59:59', 'ACTIVE', NOW(), NOW()),
-('Spring Collection', 'Khuyến mãi bộ sưu tập mùa xuân', 22.00, '2024-03-01 00:00:00', '2024-05-31 23:59:59', 'ACTIVE', NOW(), NOW()),
-('Winter Warm Up', 'Khuyến mãi mùa đông', 20.00, '2024-12-01 00:00:00', '2024-12-31 23:59:59', 'ACTIVE', NOW(), NOW()),
-('Mega Clearance', 'Thanh lý siêu lớn', 40.00, '2024-01-01 00:00:00', '2024-12-31 23:59:59', 'ACTIVE', NOW(), NOW());
+--
+-- Cấu trúc bảng cho bảng `account_addresses`
+--
 
--- ============================================
--- 12. PROMOTION_PRODUCTS (Junction Table - 20+ rows)
--- ============================================
-INSERT INTO promotion_products (promotion_id, product_id) VALUES
-(1, 1), (1, 2), (1, 3), (1, 4), (1, 5),
-(2, 6), (2, 7), (2, 8),
-(3, 1), (3, 2), (3, 9), (3, 10),
-(4, 11), (4, 12), (4, 13),
-(5, 1), (5, 3), (5, 9), (5, 13),
-(6, 2), (6, 4), (6, 10),
-(7, 1), (7, 2), (7, 3), (7, 4), (7, 5);
+CREATE TABLE `account_addresses` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `district_id` varchar(255) NOT NULL,
+  `is_default` bit(1) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `phone_number` varchar(255) NOT NULL,
+  `province_id` varchar(255) NOT NULL,
+  `specific_address` varchar(255) NOT NULL,
+  `type` bit(1) DEFAULT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `ward_id` varchar(255) NOT NULL,
+  `account_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- ============================================
--- 13. ACCOUNT_ADDRESSES (15+ rows)
--- ============================================
-INSERT INTO account_addresses (account_id, name, phone_number, province_id, district_id, ward_id, specific_address, type, is_default, created_at, updated_at) VALUES
-(2, 'Nguyen Van A', '0901234568', '79', '760', '26734', '123 Đường ABC, Phường XYZ', 0, 1, NOW(), NOW()),
-(2, 'Nguyen Van A', '0901234568', '79', '760', '26735', '456 Đường DEF, Phường UVW', 0, 0, NOW(), NOW()),
-(4, 'Nguyen Van A', '0901111111', '79', '760', '26734', '789 Đường GHI, Phường RST', 0, 1, NOW(), NOW()),
-(5, 'Tran Thi B', '0902222222', '01', '001', '00001', '321 Đường JKL, Phường MNO', 0, 1, NOW(), NOW()),
-(6, 'Le Van C', '0903333333', '48', '490', '20215', '654 Đường PQR, Phường STU', 0, 1, NOW(), NOW()),
-(7, 'Pham Thi D', '0904444444', '79', '760', '26734', '987 Đường VWX, Phường YZA', 0, 1, NOW(), NOW()),
-(8, 'Hoang Van E', '0905555555', '24', '213', '07198', '147 Đường BCD, Phường EFG', 0, 1, NOW(), NOW()),
-(9, 'Vu Thi F', '0906666666', '79', '760', '26735', '258 Đường HIJ, Phường KLM', 0, 1, NOW(), NOW()),
-(10, 'Dang Van G', '0907777777', '31', '312', '11689', '369 Đường NOP, Phường QRS', 0, 1, NOW(), NOW()),
-(11, 'Bui Thi H', '0908888888', '79', '760', '26734', '741 Đường TUV, Phường WXY', 0, 1, NOW(), NOW()),
-(12, 'Do Van I', '0909999999', '92', '916', '31156', '852 Đường ZAB, Phường CDE', 0, 1, NOW(), NOW()),
-(13, 'Ngo Thi K', '0910000000', '79', '760', '26735', '963 Đường FGH, Phường IJK', 0, 1, NOW(), NOW()),
-(4, 'Nguyen Van A', '0901111111', '01', '001', '00001', '159 Đường LMN, Phường OPQ', 0, 0, NOW(), NOW()),
-(5, 'Tran Thi B', '0902222222', '48', '490', '20215', '357 Đường RST, Phường UVW', 0, 0, NOW(), NOW()),
-(6, 'Le Van C', '0903333333', '24', '213', '07198', '468 Đường XYZ, Phường ABC', 0, 0, NOW(), NOW());
+--
+-- Đang đổ dữ liệu cho bảng `account_addresses`
+--
 
--- ============================================
--- 14. ORDERS (15+ rows)
--- ============================================
-INSERT INTO orders (code, customer_id, staff_id, voucher_id, sub_total, discount, total, shipping_name, shipping_phone_number, shipping_province_id, shipping_district_id, shipping_ward_id, shipping_specific_address, payment_method, payment_status, order_status, created_at, updated_at) VALUES
-('ORD001', 2, 3, 1, 2500000.00, 250000.00, 2250000.00, 'Nguyen Van A', '0901234568', '79', '760', '26734', '123 Đường ABC, Phường XYZ', 'COD', 'PENDING', 'CHO_XAC_NHAN', NOW(), NOW()),
-('ORD002', 4, NULL, NULL, 3200000.00, 0.00, 3200000.00, 'Nguyen Van A', '0901111111', '79', '760', '26734', '789 Đường GHI, Phường RST', 'BANK_TRANSFER', 'PENDING', 'CHO_GIAO_HANG', NOW(), NOW()),
-('ORD003', 5, 3, 3, 1800000.00, 50000.00, 1750000.00, 'Tran Thi B', '0902222222', '01', '001', '00001', '321 Đường JKL, Phường MNO', 'COD', 'PENDING', 'DANG_VAN_CHUYEN', NOW(), NOW()),
-('ORD004', 6, NULL, NULL, 2200000.00, 0.00, 2200000.00, 'Le Van C', '0903333333', '48', '490', '20215', '654 Đường PQR, Phường STU', 'CASH', 'PAID', 'DA_GIAO_HANG', NOW(), NOW()),
-('ORD005', 7, 14, 2, 5000000.00, 1000000.00, 4000000.00, 'Pham Thi D', '0904444444', '79', '760', '26734', '987 Đường VWX, Phường YZA', 'BANK_TRANSFER', 'PAID', 'HOAN_THANH', NOW(), NOW()),
-('ORD006', 8, NULL, NULL, 1500000.00, 0.00, 1500000.00, 'Hoang Van E', '0905555555', '24', '213', '07198', '147 Đường BCD, Phường EFG', 'COD', 'PENDING', 'CHO_XAC_NHAN', NOW(), NOW()),
-('ORD007', 9, 3, 1, 2800000.00, 280000.00, 2520000.00, 'Vu Thi F', '0906666666', '79', '760', '26735', '258 Đường HIJ, Phường KLM', 'CASH', 'PAID', 'DA_GIAO_HANG', NOW(), NOW()),
-('ORD008', 10, NULL, NULL, 2400000.00, 0.00, 2400000.00, 'Dang Van G', '0907777777', '31', '312', '11689', '369 Đường NOP, Phường QRS', 'BANK_TRANSFER', 'PARTIAL_PAID', 'DANG_VAN_CHUYEN', NOW(), NOW()),
-('ORD009', 11, 14, 4, 4500000.00, 100000.00, 4400000.00, 'Bui Thi H', '0908888888', '79', '760', '26734', '741 Đường TUV, Phường WXY', 'CASH', 'PAID', 'HOAN_THANH', NOW(), NOW()),
-('ORD010', 12, NULL, NULL, 1600000.00, 0.00, 1600000.00, 'Do Van I', '0909999999', '92', '916', '31156', '852 Đường ZAB, Phường CDE', 'COD', 'PENDING', 'CHO_XAC_NHAN', NOW(), NOW()),
-('ORD011', 13, 3, NULL, 2100000.00, 0.00, 2100000.00, 'Ngo Thi K', '0910000000', '79', '760', '26735', '963 Đường FGH, Phường IJK', 'BANK_TRANSFER', 'PAID', 'DA_GIAO_HANG', NOW(), NOW()),
-('ORD012', 2, NULL, 5, 3000000.00, 200000.00, 2800000.00, 'Nguyen Van A', '0901234568', '79', '760', '26734', '123 Đường ABC, Phường XYZ', 'COD', 'PENDING', 'CHO_GIAO_HANG', NOW(), NOW()),
-('ORD013', 4, 14, NULL, 1800000.00, 0.00, 1800000.00, 'Nguyen Van A', '0901111111', '79', '760', '26734', '789 Đường GHI, Phường RST', 'CASH', 'PAID', 'HOAN_THANH', NOW(), NOW()),
-('ORD014', 5, NULL, 1, 2500000.00, 250000.00, 2250000.00, 'Tran Thi B', '0902222222', '01', '001', '00001', '321 Đường JKL, Phường MNO', 'BANK_TRANSFER', 'PARTIAL_PAID', 'DANG_VAN_CHUYEN', NOW(), NOW()),
-('ORD015', 6, 3, NULL, 3200000.00, 0.00, 3200000.00, 'Le Van C', '0903333333', '48', '490', '20215', '654 Đường PQR, Phường STU', 'COD', 'PENDING', 'CHO_XAC_NHAN', NOW(), NOW());
+INSERT INTO `account_addresses` (`id`, `created_at`, `district_id`, `is_default`, `name`, `phone_number`, `province_id`, `specific_address`, `type`, `updated_at`, `ward_id`, `account_id`) VALUES
+(1, '2025-12-11 00:15:00.000000', '760', b'1', 'Nguyen Van A', '0901234568', '79', '123 Đường ABC, Phường XYZ', b'0', '2025-12-11 00:15:00.000000', '26734', 2),
+(2, '2025-12-11 00:15:00.000000', '760', b'0', 'Nguyen Van A', '0901234568', '79', '456 Đường DEF, Phường UVW', b'0', '2025-12-11 00:15:00.000000', '26735', 2),
+(3, '2025-12-11 00:15:00.000000', '760', b'1', 'Nguyen Van A', '0901111111', '79', '789 Đường GHI, Phường RST', b'0', '2025-12-11 00:15:00.000000', '26734', 4),
+(4, '2025-12-11 00:15:00.000000', '001', b'1', 'Tran Thi B', '0902222222', '01', '321 Đường JKL, Phường MNO', b'0', '2025-12-11 00:15:00.000000', '00001', 5),
+(5, '2025-12-11 00:15:00.000000', '490', b'1', 'Le Van C', '0903333333', '48', '654 Đường PQR, Phường STU', b'0', '2025-12-11 00:15:00.000000', '20215', 6),
+(6, '2025-12-11 00:15:00.000000', '760', b'1', 'Pham Thi D', '0904444444', '79', '987 Đường VWX, Phường YZA', b'0', '2025-12-11 00:15:00.000000', '26734', 7),
+(7, '2025-12-11 00:15:00.000000', '213', b'1', 'Hoang Van E', '0905555555', '24', '147 Đường BCD, Phường EFG', b'0', '2025-12-11 00:15:00.000000', '07198', 8),
+(8, '2025-12-11 00:15:00.000000', '760', b'1', 'Vu Thi F', '0906666666', '79', '258 Đường HIJ, Phường KLM', b'0', '2025-12-11 00:15:00.000000', '26735', 9),
+(9, '2025-12-11 00:15:00.000000', '312', b'1', 'Dang Van G', '0907777777', '31', '369 Đường NOP, Phường QRS', b'0', '2025-12-11 00:15:00.000000', '11689', 10),
+(10, '2025-12-11 00:15:00.000000', '760', b'1', 'Bui Thi H', '0908888888', '79', '741 Đường TUV, Phường WXY', b'0', '2025-12-11 00:15:00.000000', '26734', 11),
+(11, '2025-12-11 00:15:00.000000', '916', b'1', 'Do Van I', '0909999999', '92', '852 Đường ZAB, Phường CDE', b'0', '2025-12-11 00:15:00.000000', '31156', 12),
+(12, '2025-12-11 00:15:00.000000', '760', b'1', 'Ngo Thi K', '0910000000', '79', '963 Đường FGH, Phường IJK', b'0', '2025-12-11 00:15:00.000000', '26735', 13),
+(13, '2025-12-11 00:15:00.000000', '001', b'0', 'Nguyen Van A', '0901111111', '01', '159 Đường LMN, Phường OPQ', b'0', '2025-12-11 00:15:00.000000', '00001', 4),
+(14, '2025-12-11 00:15:00.000000', '490', b'0', 'Tran Thi B', '0902222222', '48', '357 Đường RST, Phường UVW', b'0', '2025-12-11 00:15:00.000000', '20215', 5),
+(15, '2025-12-11 00:15:00.000000', '213', b'0', 'Le Van C', '0903333333', '24', '468 Đường XYZ, Phường ABC', b'0', '2025-12-11 00:15:00.000000', '07198', 6);
 
--- ============================================
--- 15. ORDER_ITEMS (20+ rows)
--- ============================================
-INSERT INTO order_items (order_id, variant_id, quantity, price, created_at, updated_at) VALUES
-(1, 1, 1, 2500000.00, NOW(), NOW()),
-(2, 4, 1, 3200000.00, NOW(), NOW()),
-(3, 12, 1, 1800000.00, NOW(), NOW()),
-(4, 10, 1, 2200000.00, NOW(), NOW()),
-(5, 20, 1, 3000000.00, NOW(), NOW()),
-(5, 21, 1, 3000000.00, NOW(), NOW()),
-(6, 16, 1, 1500000.00, NOW(), NOW()),
-(7, 7, 1, 2800000.00, NOW(), NOW()),
-(8, 14, 1, 2400000.00, NOW(), NOW()),
-(9, 23, 1, 4500000.00, NOW(), NOW()),
-(10, 18, 1, 1600000.00, NOW(), NOW()),
-(11, 22, 1, 2100000.00, NOW(), NOW()),
-(12, 20, 1, 3000000.00, NOW(), NOW()),
-(13, 12, 1, 1800000.00, NOW(), NOW()),
-(14, 1, 1, 2500000.00, NOW(), NOW()),
-(15, 4, 1, 3200000.00, NOW(), NOW()),
-(1, 2, 1, 2500000.00, NOW(), NOW()),
-(2, 5, 1, 3200000.00, NOW(), NOW()),
-(3, 13, 1, 1800000.00, NOW(), NOW()),
-(4, 11, 1, 2200000.00, NOW(), NOW()),
-(7, 8, 1, 2800000.00, NOW(), NOW()),
-(8, 15, 1, 2400000.00, NOW(), NOW());
+-- --------------------------------------------------------
 
--- ============================================
--- 16. PAYMENTS (20+ rows)
--- ============================================
-INSERT INTO payments (order_id, amount, method, status, bank_transfer_info, note, created_at, updated_at) VALUES
-(1, 2250000.00, 'COD', 'PENDING', NULL, 'Thanh toán khi nhận hàng', NOW(), NOW()),
-(2, 3200000.00, 'BANK_TRANSFER', 'PENDING', '{"bank": "Vietcombank", "account": "1234567890", "transaction": "TXN001"}', 'Chuyển khoản ngân hàng', NOW(), NOW()),
-(3, 1750000.00, 'COD', 'PENDING', NULL, 'Thanh toán khi nhận hàng', NOW(), NOW()),
-(4, 2200000.00, 'CASH', 'COMPLETED', NULL, 'Thanh toán tiền mặt tại cửa hàng', NOW(), NOW()),
-(5, 4000000.00, 'BANK_TRANSFER', 'COMPLETED', '{"bank": "BIDV", "account": "0987654321", "transaction": "TXN002"}', 'Đã thanh toán đầy đủ', NOW(), NOW()),
-(6, 1500000.00, 'COD', 'PENDING', NULL, 'Thanh toán khi nhận hàng', NOW(), NOW()),
-(7, 2520000.00, 'CASH', 'COMPLETED', NULL, 'Thanh toán tiền mặt', NOW(), NOW()),
-(8, 1200000.00, 'BANK_TRANSFER', 'COMPLETED', '{"bank": "Techcombank", "account": "1122334455", "transaction": "TXN003"}', 'Thanh toán một phần', NOW(), NOW()),
-(8, 1200000.00, 'BANK_TRANSFER', 'PENDING', '{"bank": "Techcombank", "account": "1122334455", "transaction": "TXN004"}', 'Thanh toán phần còn lại', NOW(), NOW()),
-(9, 4400000.00, 'CASH', 'COMPLETED', NULL, 'Thanh toán tiền mặt đầy đủ', NOW(), NOW()),
-(10, 1600000.00, 'COD', 'PENDING', NULL, 'Thanh toán khi nhận hàng', NOW(), NOW()),
-(11, 2100000.00, 'BANK_TRANSFER', 'COMPLETED', '{"bank": "Vietinbank", "account": "5566778899", "transaction": "TXN005"}', 'Đã thanh toán', NOW(), NOW()),
-(12, 2800000.00, 'COD', 'PENDING', NULL, 'Thanh toán khi nhận hàng', NOW(), NOW()),
-(13, 1800000.00, 'CASH', 'COMPLETED', NULL, 'Thanh toán tiền mặt', NOW(), NOW()),
-(14, 1125000.00, 'BANK_TRANSFER', 'COMPLETED', '{"bank": "ACB", "account": "9988776655", "transaction": "TXN006"}', 'Thanh toán một phần', NOW(), NOW()),
-(14, 1125000.00, 'BANK_TRANSFER', 'PENDING', '{"bank": "ACB", "account": "9988776655", "transaction": "TXN007"}', 'Thanh toán phần còn lại', NOW(), NOW()),
-(15, 3200000.00, 'COD', 'PENDING', NULL, 'Thanh toán khi nhận hàng', NOW(), NOW()),
-(2, 3200000.00, 'VNPAY', 'COMPLETED', '{"transaction": "VNPAY001", "payment_id": "12345"}', 'Thanh toán qua VNPay', NOW(), NOW()),
-(5, 4000000.00, 'MOMO', 'COMPLETED', '{"transaction": "MOMO001", "payment_id": "67890"}', 'Thanh toán qua MoMo', NOW(), NOW()),
-(11, 2100000.00, 'VNPAY', 'COMPLETED', '{"transaction": "VNPAY002", "payment_id": "11111"}', 'Thanh toán qua VNPay', NOW(), NOW());
+--
+-- Cấu trúc bảng cho bảng `brands`
+--
 
--- ============================================
--- 17. RETURNS (12+ rows)
--- ============================================
-INSERT INTO returns (code, original_order_id, customer_id, staff_id, items, total_refund, reason, note, status, created_at, updated_at) VALUES
-('RET001', 4, 6, 3, '[{"variantId": 10, "quantity": 1, "price": 2200000.00}]', 2200000.00, 'Sản phẩm không đúng kích thước', 'Khách hàng yêu cầu đổi size', 'CHO_XU_LY', NOW(), NOW()),
-('RET002', 7, 9, 14, '[{"variantId": 7, "quantity": 1, "price": 2800000.00}]', 2800000.00, 'Sản phẩm bị lỗi', 'Giày bị trầy xước', 'DA_HOAN_TIEN', NOW(), NOW()),
-('RET003', 9, 11, NULL, '[{"variantId": 23, "quantity": 1, "price": 4500000.00}]', 4500000.00, 'Không vừa', 'Size không phù hợp', 'CHO_XU_LY', NOW(), NOW()),
-('RET004', 11, 13, 3, '[{"variantId": 22, "quantity": 1, "price": 2100000.00}]', 2100000.00, 'Sản phẩm không đúng mô tả', 'Màu sắc không đúng', 'DA_HOAN_TIEN', NOW(), NOW()),
-('RET005', 13, 4, 14, '[{"variantId": 12, "quantity": 1, "price": 1800000.00}]', 1800000.00, 'Không hài lòng', 'Chất lượng không như mong đợi', 'CHO_XU_LY', NOW(), NOW()),
-('RET006', 5, 7, NULL, '[{"variantId": 20, "quantity": 1, "price": 3000000.00}]', 3000000.00, 'Đổi ý', 'Không muốn mua nữa', 'DA_HUY', NOW(), NOW()),
-('RET007', 1, 2, 3, '[{"variantId": 1, "quantity": 1, "price": 2500000.00}]', 2250000.00, 'Sản phẩm bị hỏng', 'Giày bị nứt đế', 'DA_HOAN_TIEN', NOW(), NOW()),
-('RET008', 8, 10, 14, '[{"variantId": 14, "quantity": 1, "price": 2400000.00}]', 2400000.00, 'Không vừa chân', 'Size quá nhỏ', 'CHO_XU_LY', NOW(), NOW()),
-('RET009', 12, 2, NULL, '[{"variantId": 20, "quantity": 1, "price": 3000000.00}]', 2800000.00, 'Sản phẩm lỗi', 'Có vết bẩn trên giày', 'CHO_XU_LY', NOW(), NOW()),
-('RET010', 4, 6, 3, '[{"variantId": 10, "quantity": 1, "price": 2200000.00}]', 2200000.00, 'Đổi màu', 'Muốn đổi sang màu khác', 'DA_HOAN_TIEN', NOW(), NOW()),
-('RET011', 7, 9, 14, '[{"variantId": 8, "quantity": 1, "price": 2800000.00}]', 2800000.00, 'Không phù hợp', 'Kiểu dáng không hợp', 'CHO_XU_LY', NOW(), NOW()),
-('RET012', 11, 13, 3, '[{"variantId": 22, "quantity": 1, "price": 2100000.00}]', 2100000.00, 'Sản phẩm lỗi', 'Đường chỉ bị lỗi', 'DA_HOAN_TIEN', NOW(), NOW());
+CREATE TABLE `brands` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- ============================================
--- 18. NOTIFICATIONS (20+ rows)
--- ============================================
-INSERT INTO notifications (account_id, title, message, type, is_read, created_at, updated_at) VALUES
-(2, 'Đơn hàng đã được xác nhận', 'Đơn hàng ORD001 của bạn đã được xác nhận và đang được chuẩn bị', 'ORDER', 0, NOW(), NOW()),
-(2, 'Đơn hàng đang được vận chuyển', 'Đơn hàng ORD012 của bạn đang được vận chuyển', 'ORDER', 0, NOW(), NOW()),
-(4, 'Đơn hàng đã được giao', 'Đơn hàng ORD002 của bạn đã được giao thành công', 'ORDER', 1, NOW(), NOW()),
-(4, 'Đơn hàng hoàn thành', 'Đơn hàng ORD013 của bạn đã hoàn thành', 'ORDER', 1, NOW(), NOW()),
-(5, 'Đơn hàng đang vận chuyển', 'Đơn hàng ORD003 của bạn đang được vận chuyển', 'ORDER', 0, NOW(), NOW()),
-(5, 'Đơn hàng đang vận chuyển', 'Đơn hàng ORD014 của bạn đang được vận chuyển', 'ORDER', 0, NOW(), NOW()),
-(6, 'Đơn hàng đã được giao', 'Đơn hàng ORD004 của bạn đã được giao thành công', 'ORDER', 1, NOW(), NOW()),
-(6, 'Đơn hàng đã được xác nhận', 'Đơn hàng ORD015 của bạn đã được xác nhận', 'ORDER', 0, NOW(), NOW()),
-(7, 'Đơn hàng hoàn thành', 'Đơn hàng ORD005 của bạn đã hoàn thành', 'ORDER', 1, NOW(), NOW()),
-(8, 'Đơn hàng đã được xác nhận', 'Đơn hàng ORD008 của bạn đã được xác nhận', 'ORDER', 0, NOW(), NOW()),
-(9, 'Đơn hàng đã được giao', 'Đơn hàng ORD007 của bạn đã được giao thành công', 'ORDER', 1, NOW(), NOW()),
-(11, 'Đơn hàng hoàn thành', 'Đơn hàng ORD009 của bạn đã hoàn thành', 'ORDER', 1, NOW(), NOW()),
-(13, 'Đơn hàng đã được giao', 'Đơn hàng ORD011 của bạn đã được giao thành công', 'ORDER', 1, NOW(), NOW()),
-(NULL, 'Khuyến mãi mới', 'Khuyến mãi Summer Sale 2024 với giảm giá lên đến 20%', 'PROMOTION', 0, NOW(), NOW()),
-(NULL, 'Voucher mới', 'Bạn có voucher mới: VOUCHER10 - Giảm 10% cho đơn hàng từ 500.000đ', 'VOUCHER', 0, NOW(), NOW()),
-(NULL, 'Thông báo hệ thống', 'Hệ thống sẽ bảo trì vào ngày 15/12/2024 từ 2h-4h sáng', 'SYSTEM', 0, NOW(), NOW()),
-(2, 'Voucher mới', 'Bạn có voucher mới: NEWUSER - Giảm 15% cho khách hàng mới', 'VOUCHER', 0, NOW(), NOW()),
-(4, 'Khuyến mãi', 'Khuyến mãi Back to School với giảm giá 15%', 'PROMOTION', 0, NOW(), NOW()),
-(5, 'Voucher', 'Bạn có voucher: VOUCHER50K - Giảm 50.000đ', 'VOUCHER', 0, NOW(), NOW()),
-(6, 'Thông báo hệ thống', 'Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi', 'SYSTEM', 1, NOW(), NOW());
+--
+-- Đang đổ dữ liệu cho bảng `brands`
+--
 
-SET FOREIGN_KEY_CHECKS = 1;
+INSERT INTO `brands` (`id`, `created_at`, `name`, `status`, `updated_at`) VALUES
+(1, '2025-12-11 00:14:59.000000', 'Nike', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(2, '2025-12-11 00:14:59.000000', 'Adidas', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(3, '2025-12-11 00:14:59.000000', 'Puma', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(4, '2025-12-11 00:14:59.000000', 'New Balance', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(5, '2025-12-11 00:14:59.000000', 'Converse', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(6, '2025-12-11 00:14:59.000000', 'Vans', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(7, '2025-12-11 00:14:59.000000', 'Reebok', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(8, '2025-12-11 00:14:59.000000', 'Under Armour', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(9, '2025-12-11 00:14:59.000000', 'Jordan', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(10, '2025-12-11 00:14:59.000000', 'Asics', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(11, '2025-12-11 00:14:59.000000', 'Fila', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(12, '2025-12-11 00:14:59.000000', 'Skechers', 'ACTIVE', '2025-12-11 00:14:59.000000');
 
--- ============================================
--- Script completed successfully!
--- ============================================
+-- --------------------------------------------------------
 
+--
+-- Cấu trúc bảng cho bảng `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `categories`
+--
+
+INSERT INTO `categories` (`id`, `created_at`, `name`, `status`, `updated_at`) VALUES
+(1, '2025-12-11 00:14:59.000000', 'Running Shoes', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(2, '2025-12-11 00:14:59.000000', 'Basketball Shoes', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(3, '2025-12-11 00:14:59.000000', 'Casual Shoes', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(4, '2025-12-11 00:14:59.000000', 'Sneakers', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(5, '2025-12-11 00:14:59.000000', 'Training Shoes', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(6, '2025-12-11 00:14:59.000000', 'Lifestyle Shoes', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(7, '2025-12-11 00:14:59.000000', 'High-Top Shoes', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(8, '2025-12-11 00:14:59.000000', 'Low-Top Shoes', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(9, '2025-12-11 00:14:59.000000', 'Slip-On Shoes', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(10, '2025-12-11 00:14:59.000000', 'Athletic Shoes', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(11, '2025-12-11 00:14:59.000000', 'Walking Shoes', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(12, '2025-12-11 00:14:59.000000', 'Skateboarding Shoes', 'ACTIVE', '2025-12-11 00:14:59.000000');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chatbot_configs`
+--
+
+CREATE TABLE `chatbot_configs` (
+  `id` int(11) NOT NULL,
+  `config_key` varchar(255) NOT NULL,
+  `config_value` text DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chatbot_trainings`
+--
+
+CREATE TABLE `chatbot_trainings` (
+  `id` int(11) NOT NULL,
+  `answer` text NOT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `priority` int(11) DEFAULT NULL,
+  `question` text NOT NULL,
+  `status` enum('ACTIVE','INACTIVE') DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chat_histories`
+--
+
+CREATE TABLE `chat_histories` (
+  `id` int(11) NOT NULL,
+  `bot_response` text NOT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `feedback` text DEFAULT NULL,
+  `rating` int(11) DEFAULT NULL,
+  `session_id` varchar(255) DEFAULT NULL,
+  `user_message` text NOT NULL,
+  `account_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `colors`
+--
+
+CREATE TABLE `colors` (
+  `id` int(11) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `colors`
+--
+
+INSERT INTO `colors` (`id`, `code`, `created_at`, `name`, `status`, `updated_at`) VALUES
+(1, '#000000', '2025-12-11 00:14:59.000000', 'Black', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(2, '#FFFFFF', '2025-12-11 00:14:59.000000', 'White', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(3, '#FF0000', '2025-12-11 00:14:59.000000', 'Red', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(4, '#0000FF', '2025-12-11 00:14:59.000000', 'Blue', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(5, '#008000', '2025-12-11 00:14:59.000000', 'Green', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(6, '#FFFF00', '2025-12-11 00:14:59.000000', 'Yellow', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(7, '#808080', '2025-12-11 00:14:59.000000', 'Gray', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(8, '#000080', '2025-12-11 00:14:59.000000', 'Navy', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(9, '#FFC0CB', '2025-12-11 00:14:59.000000', 'Pink', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(10, '#FFA500', '2025-12-11 00:14:59.000000', 'Orange', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(11, '#800080', '2025-12-11 00:14:59.000000', 'Purple', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(12, '#A52A2A', '2025-12-11 00:14:59.000000', 'Brown', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(13, '#F5F5DC', '2025-12-11 00:14:59.000000', 'Beige', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(14, '#C0C0C0', '2025-12-11 00:14:59.000000', 'Silver', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(15, '#FFD700', '2025-12-11 00:14:59.000000', 'Gold', 'ACTIVE', '2025-12-11 00:14:59.000000');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `materials`
+--
+
+CREATE TABLE `materials` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `materials`
+--
+
+INSERT INTO `materials` (`id`, `created_at`, `name`, `status`, `updated_at`) VALUES
+(1, '2025-12-11 00:14:59.000000', 'Leather', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(2, '2025-12-11 00:14:59.000000', 'Synthetic Leather', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(3, '2025-12-11 00:14:59.000000', 'Mesh', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(4, '2025-12-11 00:14:59.000000', 'Canvas', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(5, '2025-12-11 00:14:59.000000', 'Rubber', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(6, '2025-12-11 00:14:59.000000', 'Knit', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(7, '2025-12-11 00:14:59.000000', 'Suede', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(8, '2025-12-11 00:14:59.000000', 'Nubuck', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(9, '2025-12-11 00:14:59.000000', 'Primeknit', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(10, '2025-12-11 00:14:59.000000', 'Flyknit', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(11, '2025-12-11 00:14:59.000000', 'Textile', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(12, '2025-12-11 00:14:59.000000', 'EVA', 'ACTIVE', '2025-12-11 00:14:59.000000');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `is_read` bit(1) NOT NULL,
+  `message` text NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `type` enum('VOUCHER','ORDER','SYSTEM','PROMOTION') NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `account_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `created_at`, `is_read`, `message`, `title`, `type`, `updated_at`, `account_id`) VALUES
+(1, '2025-12-11 00:15:00.000000', b'0', 'Đơn hàng ORD001 của bạn đã được xác nhận và đang được chuẩn bị', 'Đơn hàng đã được xác nhận', 'ORDER', '2025-12-11 00:15:00.000000', 2),
+(2, '2025-12-11 00:15:00.000000', b'0', 'Đơn hàng ORD012 của bạn đang được vận chuyển', 'Đơn hàng đang được vận chuyển', 'ORDER', '2025-12-11 00:15:00.000000', 2),
+(3, '2025-12-11 00:15:00.000000', b'1', 'Đơn hàng ORD002 của bạn đã được giao thành công', 'Đơn hàng đã được giao', 'ORDER', '2025-12-11 00:15:00.000000', 4),
+(4, '2025-12-11 00:15:00.000000', b'1', 'Đơn hàng ORD013 của bạn đã hoàn thành', 'Đơn hàng hoàn thành', 'ORDER', '2025-12-11 00:15:00.000000', 4),
+(5, '2025-12-11 00:15:00.000000', b'0', 'Đơn hàng ORD003 của bạn đang được vận chuyển', 'Đơn hàng đang vận chuyển', 'ORDER', '2025-12-11 00:15:00.000000', 5),
+(6, '2025-12-11 00:15:00.000000', b'0', 'Đơn hàng ORD014 của bạn đang được vận chuyển', 'Đơn hàng đang vận chuyển', 'ORDER', '2025-12-11 00:15:00.000000', 5),
+(7, '2025-12-11 00:15:00.000000', b'1', 'Đơn hàng ORD004 của bạn đã được giao thành công', 'Đơn hàng đã được giao', 'ORDER', '2025-12-11 00:15:00.000000', 6),
+(8, '2025-12-11 00:15:00.000000', b'0', 'Đơn hàng ORD015 của bạn đã được xác nhận', 'Đơn hàng đã được xác nhận', 'ORDER', '2025-12-11 00:15:00.000000', 6),
+(9, '2025-12-11 00:15:00.000000', b'1', 'Đơn hàng ORD005 của bạn đã hoàn thành', 'Đơn hàng hoàn thành', 'ORDER', '2025-12-11 00:15:00.000000', 7),
+(10, '2025-12-11 00:15:00.000000', b'0', 'Đơn hàng ORD008 của bạn đã được xác nhận', 'Đơn hàng đã được xác nhận', 'ORDER', '2025-12-11 00:15:00.000000', 8),
+(11, '2025-12-11 00:15:00.000000', b'1', 'Đơn hàng ORD007 của bạn đã được giao thành công', 'Đơn hàng đã được giao', 'ORDER', '2025-12-11 00:15:00.000000', 9),
+(12, '2025-12-11 00:15:00.000000', b'1', 'Đơn hàng ORD009 của bạn đã hoàn thành', 'Đơn hàng hoàn thành', 'ORDER', '2025-12-11 00:15:00.000000', 11),
+(13, '2025-12-11 00:15:00.000000', b'1', 'Đơn hàng ORD011 của bạn đã được giao thành công', 'Đơn hàng đã được giao', 'ORDER', '2025-12-11 00:15:00.000000', 13),
+(14, '2025-12-11 00:15:00.000000', b'0', 'Khuyến mãi Summer Sale 2024 với giảm giá lên đến 20%', 'Khuyến mãi mới', 'PROMOTION', '2025-12-11 00:15:00.000000', NULL),
+(15, '2025-12-11 00:15:00.000000', b'0', 'Bạn có voucher mới: VOUCHER10 - Giảm 10% cho đơn hàng từ 500.000đ', 'Voucher mới', 'VOUCHER', '2025-12-11 00:15:00.000000', NULL),
+(16, '2025-12-11 00:15:00.000000', b'0', 'Hệ thống sẽ bảo trì vào ngày 15/12/2024 từ 2h-4h sáng', 'Thông báo hệ thống', 'SYSTEM', '2025-12-11 00:15:00.000000', NULL),
+(17, '2025-12-11 00:15:00.000000', b'0', 'Bạn có voucher mới: NEWUSER - Giảm 15% cho khách hàng mới', 'Voucher mới', 'VOUCHER', '2025-12-11 00:15:00.000000', 2),
+(18, '2025-12-11 00:15:00.000000', b'0', 'Khuyến mãi Back to School với giảm giá 15%', 'Khuyến mãi', 'PROMOTION', '2025-12-11 00:15:00.000000', 4),
+(19, '2025-12-11 00:15:00.000000', b'0', 'Bạn có voucher: VOUCHER50K - Giảm 50.000đ', 'Voucher', 'VOUCHER', '2025-12-11 00:15:00.000000', 5),
+(20, '2025-12-11 00:15:00.000000', b'1', 'Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi', 'Thông báo hệ thống', 'SYSTEM', '2025-12-11 00:15:00.000000', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `discount` decimal(12,2) NOT NULL,
+  `order_status` enum('CHO_XAC_NHAN','CHO_GIAO_HANG','DANG_VAN_CHUYEN','DA_GIAO_HANG','HOAN_THANH','DA_HUY') NOT NULL,
+  `payment_method` enum('CASH','BANK_TRANSFER','COD','MIXED') NOT NULL,
+  `payment_status` enum('PENDING','PARTIAL_PAID','PAID') NOT NULL,
+  `shipping_district_id` varchar(255) DEFAULT NULL,
+  `shipping_name` varchar(255) DEFAULT NULL,
+  `shipping_phone_number` varchar(255) DEFAULT NULL,
+  `shipping_province_id` varchar(255) DEFAULT NULL,
+  `shipping_specific_address` varchar(255) DEFAULT NULL,
+  `shipping_ward_id` varchar(255) DEFAULT NULL,
+  `sub_total` decimal(12,2) NOT NULL,
+  `total` decimal(12,2) NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `staff_id` int(11) DEFAULT NULL,
+  `voucher_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `orders`
+--
+
+INSERT INTO `orders` (`id`, `code`, `created_at`, `discount`, `order_status`, `payment_method`, `payment_status`, `shipping_district_id`, `shipping_name`, `shipping_phone_number`, `shipping_province_id`, `shipping_specific_address`, `shipping_ward_id`, `sub_total`, `total`, `updated_at`, `customer_id`, `staff_id`, `voucher_id`) VALUES
+(1, 'ORD001', '2025-12-11 00:15:00.000000', 250000.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '760', 'Nguyen Van A', '0901234568', '79', '123 Đường ABC, Phường XYZ', '26734', 2500000.00, 2250000.00, '2025-12-11 00:15:00.000000', 2, 3, 1),
+(2, 'ORD002', '2025-12-11 00:15:00.000000', 0.00, 'CHO_GIAO_HANG', 'BANK_TRANSFER', 'PENDING', '760', 'Nguyen Van A', '0901111111', '79', '789 Đường GHI, Phường RST', '26734', 3200000.00, 3200000.00, '2025-12-11 00:15:00.000000', 4, NULL, NULL),
+(3, 'ORD003', '2025-12-11 00:15:00.000000', 50000.00, 'DANG_VAN_CHUYEN', 'COD', 'PENDING', '001', 'Tran Thi B', '0902222222', '01', '321 Đường JKL, Phường MNO', '00001', 1800000.00, 1750000.00, '2025-12-11 00:15:00.000000', 5, 3, 3),
+(4, 'ORD004', '2025-12-11 00:15:00.000000', 0.00, 'DA_GIAO_HANG', 'CASH', 'PAID', '490', 'Le Van C', '0903333333', '48', '654 Đường PQR, Phường STU', '20215', 2200000.00, 2200000.00, '2025-12-11 00:15:00.000000', 6, NULL, NULL),
+(5, 'ORD005', '2025-12-11 00:15:00.000000', 1000000.00, 'HOAN_THANH', 'BANK_TRANSFER', 'PAID', '760', 'Pham Thi D', '0904444444', '79', '987 Đường VWX, Phường YZA', '26734', 5000000.00, 4000000.00, '2025-12-11 00:15:00.000000', 7, 14, 2),
+(6, 'ORD006', '2025-12-11 00:15:00.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '213', 'Hoang Van E', '0905555555', '24', '147 Đường BCD, Phường EFG', '07198', 1500000.00, 1500000.00, '2025-12-11 00:15:00.000000', 8, NULL, NULL),
+(7, 'ORD007', '2025-12-11 00:15:00.000000', 280000.00, 'DA_GIAO_HANG', 'CASH', 'PAID', '760', 'Vu Thi F', '0906666666', '79', '258 Đường HIJ, Phường KLM', '26735', 2800000.00, 2520000.00, '2025-12-11 00:15:00.000000', 9, 3, 1),
+(8, 'ORD008', '2025-12-11 00:15:00.000000', 0.00, 'DANG_VAN_CHUYEN', 'BANK_TRANSFER', 'PARTIAL_PAID', '312', 'Dang Van G', '0907777777', '31', '369 Đường NOP, Phường QRS', '11689', 2400000.00, 2400000.00, '2025-12-11 00:15:00.000000', 10, NULL, NULL),
+(9, 'ORD009', '2025-12-11 00:15:00.000000', 100000.00, 'HOAN_THANH', 'CASH', 'PAID', '760', 'Bui Thi H', '0908888888', '79', '741 Đường TUV, Phường WXY', '26734', 4500000.00, 4400000.00, '2025-12-11 00:15:00.000000', 11, 14, 4),
+(10, 'ORD010', '2025-12-11 00:15:00.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '916', 'Do Van I', '0909999999', '92', '852 Đường ZAB, Phường CDE', '31156', 1600000.00, 1600000.00, '2025-12-11 00:15:00.000000', 12, NULL, NULL),
+(11, 'ORD011', '2025-12-11 00:15:00.000000', 0.00, 'DA_GIAO_HANG', 'BANK_TRANSFER', 'PAID', '760', 'Ngo Thi K', '0910000000', '79', '963 Đường FGH, Phường IJK', '26735', 2100000.00, 2100000.00, '2025-12-11 00:15:00.000000', 13, 3, NULL),
+(12, 'ORD012', '2025-12-11 00:15:00.000000', 200000.00, 'CHO_GIAO_HANG', 'COD', 'PENDING', '760', 'Nguyen Van A', '0901234568', '79', '123 Đường ABC, Phường XYZ', '26734', 3000000.00, 2800000.00, '2025-12-11 00:15:00.000000', 2, NULL, 5),
+(13, 'ORD013', '2025-12-11 00:15:00.000000', 0.00, 'HOAN_THANH', 'CASH', 'PAID', '760', 'Nguyen Van A', '0901111111', '79', '789 Đường GHI, Phường RST', '26734', 1800000.00, 1800000.00, '2025-12-11 00:15:00.000000', 4, 14, NULL),
+(14, 'ORD014', '2025-12-11 00:15:00.000000', 250000.00, 'DANG_VAN_CHUYEN', 'BANK_TRANSFER', 'PARTIAL_PAID', '001', 'Tran Thi B', '0902222222', '01', '321 Đường JKL, Phường MNO', '00001', 2500000.00, 2250000.00, '2025-12-11 00:15:00.000000', 5, NULL, 1),
+(15, 'ORD015', '2025-12-11 00:15:00.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '490', 'Le Van C', '0903333333', '48', '654 Đường PQR, Phường STU', '20215', 3200000.00, 3200000.00, '2025-12-11 00:15:00.000000', 6, 3, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `variant_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `created_at`, `price`, `quantity`, `updated_at`, `order_id`, `variant_id`) VALUES
+(1, '2025-12-11 00:15:00.000000', 2500000.00, 1, '2025-12-11 00:15:00.000000', 1, 1),
+(2, '2025-12-11 00:15:00.000000', 3200000.00, 1, '2025-12-11 00:15:00.000000', 2, 4),
+(3, '2025-12-11 00:15:00.000000', 1800000.00, 1, '2025-12-11 00:15:00.000000', 3, 12),
+(4, '2025-12-11 00:15:00.000000', 2200000.00, 1, '2025-12-11 00:15:00.000000', 4, 10),
+(5, '2025-12-11 00:15:00.000000', 3000000.00, 1, '2025-12-11 00:15:00.000000', 5, 20),
+(6, '2025-12-11 00:15:00.000000', 3000000.00, 1, '2025-12-11 00:15:00.000000', 5, 21),
+(7, '2025-12-11 00:15:00.000000', 1500000.00, 1, '2025-12-11 00:15:00.000000', 6, 16),
+(8, '2025-12-11 00:15:00.000000', 2800000.00, 1, '2025-12-11 00:15:00.000000', 7, 7),
+(9, '2025-12-11 00:15:00.000000', 2400000.00, 1, '2025-12-11 00:15:00.000000', 8, 14),
+(11, '2025-12-11 00:15:00.000000', 1600000.00, 1, '2025-12-11 00:15:00.000000', 10, 18),
+(13, '2025-12-11 00:15:00.000000', 3000000.00, 1, '2025-12-11 00:15:00.000000', 12, 20),
+(14, '2025-12-11 00:15:00.000000', 1800000.00, 1, '2025-12-11 00:15:00.000000', 13, 12),
+(15, '2025-12-11 00:15:00.000000', 2500000.00, 1, '2025-12-11 00:15:00.000000', 14, 1),
+(16, '2025-12-11 00:15:00.000000', 3200000.00, 1, '2025-12-11 00:15:00.000000', 15, 4),
+(17, '2025-12-11 00:15:00.000000', 2500000.00, 1, '2025-12-11 00:15:00.000000', 1, 2),
+(18, '2025-12-11 00:15:00.000000', 3200000.00, 1, '2025-12-11 00:15:00.000000', 2, 5),
+(19, '2025-12-11 00:15:00.000000', 1800000.00, 1, '2025-12-11 00:15:00.000000', 3, 13),
+(20, '2025-12-11 00:15:00.000000', 2200000.00, 1, '2025-12-11 00:15:00.000000', 4, 11),
+(21, '2025-12-11 00:15:00.000000', 2800000.00, 1, '2025-12-11 00:15:00.000000', 7, 8),
+(22, '2025-12-11 00:15:00.000000', 2400000.00, 1, '2025-12-11 00:15:00.000000', 8, 15);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `amount` double NOT NULL,
+  `bank_transfer_info` text DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `method` enum('CASH','BANK_TRANSFER','COD','VNPAY','MOMO') NOT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `status` enum('PENDING','COMPLETED','FAILED','REFUNDED') NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `order_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `payments`
+--
+
+INSERT INTO `payments` (`id`, `amount`, `bank_transfer_info`, `created_at`, `method`, `note`, `status`, `updated_at`, `order_id`) VALUES
+(1, 2250000, NULL, '2025-12-11 00:15:00.000000', 'COD', 'Thanh toán khi nhận hàng', 'PENDING', '2025-12-11 00:15:00.000000', 1),
+(2, 3200000, '{\"bank\": \"Vietcombank\", \"account\": \"1234567890\", \"transaction\": \"TXN001\"}', '2025-12-11 00:15:00.000000', 'BANK_TRANSFER', 'Chuyển khoản ngân hàng', 'PENDING', '2025-12-11 00:15:00.000000', 2),
+(3, 1750000, NULL, '2025-12-11 00:15:00.000000', 'COD', 'Thanh toán khi nhận hàng', 'PENDING', '2025-12-11 00:15:00.000000', 3),
+(4, 2200000, NULL, '2025-12-11 00:15:00.000000', 'CASH', 'Thanh toán tiền mặt tại cửa hàng', 'COMPLETED', '2025-12-11 00:15:00.000000', 4),
+(5, 4000000, '{\"bank\": \"BIDV\", \"account\": \"0987654321\", \"transaction\": \"TXN002\"}', '2025-12-11 00:15:00.000000', 'BANK_TRANSFER', 'Đã thanh toán đầy đủ', 'COMPLETED', '2025-12-11 00:15:00.000000', 5),
+(6, 1500000, NULL, '2025-12-11 00:15:00.000000', 'COD', 'Thanh toán khi nhận hàng', 'PENDING', '2025-12-11 00:15:00.000000', 6),
+(7, 2520000, NULL, '2025-12-11 00:15:00.000000', 'CASH', 'Thanh toán tiền mặt', 'COMPLETED', '2025-12-11 00:15:00.000000', 7),
+(8, 1200000, '{\"bank\": \"Techcombank\", \"account\": \"1122334455\", \"transaction\": \"TXN003\"}', '2025-12-11 00:15:00.000000', 'BANK_TRANSFER', 'Thanh toán một phần', 'COMPLETED', '2025-12-11 00:15:00.000000', 8),
+(9, 1200000, '{\"bank\": \"Techcombank\", \"account\": \"1122334455\", \"transaction\": \"TXN004\"}', '2025-12-11 00:15:00.000000', 'BANK_TRANSFER', 'Thanh toán phần còn lại', 'PENDING', '2025-12-11 00:15:00.000000', 8),
+(10, 4400000, NULL, '2025-12-11 00:15:00.000000', 'CASH', 'Thanh toán tiền mặt đầy đủ', 'COMPLETED', '2025-12-11 00:15:00.000000', 9),
+(11, 1600000, NULL, '2025-12-11 00:15:00.000000', 'COD', 'Thanh toán khi nhận hàng', 'PENDING', '2025-12-11 00:15:00.000000', 10),
+(12, 2100000, '{\"bank\": \"Vietinbank\", \"account\": \"5566778899\", \"transaction\": \"TXN005\"}', '2025-12-11 00:15:00.000000', 'BANK_TRANSFER', 'Đã thanh toán', 'COMPLETED', '2025-12-11 00:15:00.000000', 11),
+(13, 2800000, NULL, '2025-12-11 00:15:00.000000', 'COD', 'Thanh toán khi nhận hàng', 'PENDING', '2025-12-11 00:15:00.000000', 12),
+(14, 1800000, NULL, '2025-12-11 00:15:00.000000', 'CASH', 'Thanh toán tiền mặt', 'COMPLETED', '2025-12-11 00:15:00.000000', 13),
+(15, 1125000, '{\"bank\": \"ACB\", \"account\": \"9988776655\", \"transaction\": \"TXN006\"}', '2025-12-11 00:15:00.000000', 'BANK_TRANSFER', 'Thanh toán một phần', 'COMPLETED', '2025-12-11 00:15:00.000000', 14),
+(16, 1125000, '{\"bank\": \"ACB\", \"account\": \"9988776655\", \"transaction\": \"TXN007\"}', '2025-12-11 00:15:00.000000', 'BANK_TRANSFER', 'Thanh toán phần còn lại', 'PENDING', '2025-12-11 00:15:00.000000', 14),
+(17, 3200000, NULL, '2025-12-11 00:15:00.000000', 'COD', 'Thanh toán khi nhận hàng', 'PENDING', '2025-12-11 00:15:00.000000', 15),
+(18, 3200000, '{\"transaction\": \"VNPAY001\", \"payment_id\": \"12345\"}', '2025-12-11 00:15:00.000000', 'VNPAY', 'Thanh toán qua VNPay', 'COMPLETED', '2025-12-11 00:15:00.000000', 2),
+(19, 4000000, '{\"transaction\": \"MOMO001\", \"payment_id\": \"67890\"}', '2025-12-11 00:15:00.000000', 'MOMO', 'Thanh toán qua MoMo', 'COMPLETED', '2025-12-11 00:15:00.000000', 5),
+(20, 2100000, '{\"transaction\": \"VNPAY002\", \"payment_id\": \"11111\"}', '2025-12-11 00:15:00.000000', 'VNPAY', 'Thanh toán qua VNPay', 'COMPLETED', '2025-12-11 00:15:00.000000', 11);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `description` text NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `weight` decimal(8,2) NOT NULL,
+  `brand_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `material_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `products`
+--
+
+INSERT INTO `products` (`id`, `code`, `created_at`, `description`, `name`, `status`, `updated_at`, `weight`, `brand_id`, `category_id`, `material_id`) VALUES
+(1, 'PRD001', '2025-12-11 00:14:59.000000', 'Classic running shoe with Air Max cushioning technology. Perfect for daily wear and light running activities.', 'Nike Air Max 90 3M Pack', 'ACTIVE', '2025-12-11 21:51:43.000000', 0.35, 1, 4, 1),
+(2, 'PRD002', '2025-12-11 00:14:59.000000', 'Premium running shoe with Boost midsole technology for maximum energy return and comfort.', 'Adidas Campus Prince 032c Black', 'ACTIVE', '2025-12-11 21:55:24.000000', 0.32, 2, 1, 9),
+(3, 'PRD003', '2025-12-11 00:14:59.000000', 'Iconic basketball-inspired lifestyle shoe with classic design and versatile style.', 'Nike Dunk Low', 'ACTIVE', '2025-12-11 00:14:59.000000', 0.38, 1, 3, 2),
+(4, 'PRD004', '2025-12-11 00:14:59.000000', 'Timeless tennis shoe with clean minimalist design. Perfect for casual everyday wear.', 'Adidas Stan Smith', 'ACTIVE', '2025-12-11 00:14:59.000000', 0.30, 2, 3, 1),
+(5, 'PRD005', '2025-12-11 00:14:59.000000', 'Classic suede sneaker with retro style. Comfortable and stylish for streetwear.', 'Puma 180 \'Corduroy - Alpine Snow Chocolate Chip\'', 'ACTIVE', '2025-12-11 21:57:07.000000', 0.33, 3, 4, 7),
+(6, 'PRD006', '2025-12-11 00:14:59.000000', 'Retro basketball-inspired sneaker with premium leather upper and ABZORB cushioning.', 'New Balance 009 Black White', 'ACTIVE', '2025-12-11 21:57:51.000000', 0.36, 4, 4, 1),
+(7, 'PRD007', '2025-12-11 00:14:59.000000', 'Iconic canvas sneaker with timeless design. Perfect for casual and street style.', 'Converse Chuck Taylor All-Star Lugged Hi A-COLD-WALL', 'ACTIVE', '2025-12-11 21:59:00.000000', 0.28, 5, 3, 4),
+(8, 'PRD008', '2025-12-11 00:14:59.000000', 'Classic skate shoe with signature side stripe. Durable and comfortable for skating and casual wear.', 'Vans Old Skool A$AP Worldwide Silver Reflective Flames', 'ACTIVE', '2025-12-11 22:00:36.000000', 0.31, 6, 9, 4),
+(9, 'PRD009', '2025-12-11 00:14:59.000000', 'Legendary basketball shoe with Air-Sole unit. Iconic design loved by sneakerheads worldwide.', 'Nike Air Force 1', 'ACTIVE', '2025-12-11 00:14:59.000000', 0.40, 1, 2, 1),
+(11, 'PRD011', '2025-12-11 00:14:59.000000', 'Iconic high-top basketball shoe with Air cushioning. Premium leather construction.', 'Jordan 1 Retro High OG A Ma Maniére', 'ACTIVE', '2025-12-11 22:01:34.000000', 0.42, 9, 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `product_variants`
+--
+
+CREATE TABLE `product_variants` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `stock` int(11) NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `color_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `size_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `product_variants`
+--
+
+INSERT INTO `product_variants` (`id`, `created_at`, `price`, `stock`, `updated_at`, `color_id`, `product_id`, `size_id`) VALUES
+(1, '2025-12-11 00:14:59.000000', 2500000.00, 50, '2025-12-11 00:14:59.000000', 1, 1, 7),
+(2, '2025-12-11 00:14:59.000000', 2500000.00, 45, '2025-12-11 00:14:59.000000', 2, 1, 7),
+(3, '2025-12-11 00:14:59.000000', 2500000.00, 30, '2025-12-11 00:14:59.000000', 3, 1, 7),
+(4, '2025-12-11 00:14:59.000000', 3200000.00, 40, '2025-12-11 00:14:59.000000', 1, 2, 6),
+(5, '2025-12-11 00:14:59.000000', 3200000.00, 35, '2025-12-11 00:14:59.000000', 2, 2, 6),
+(6, '2025-12-11 00:14:59.000000', 3200000.00, 25, '2025-12-11 00:14:59.000000', 4, 2, 6),
+(7, '2025-12-11 00:14:59.000000', 2800000.00, 60, '2025-12-11 00:14:59.000000', 1, 3, 8),
+(8, '2025-12-11 00:14:59.000000', 2800000.00, 55, '2025-12-11 00:14:59.000000', 2, 3, 8),
+(9, '2025-12-11 00:14:59.000000', 2800000.00, 40, '2025-12-11 00:14:59.000000', 5, 3, 8),
+(10, '2025-12-11 00:14:59.000000', 2200000.00, 70, '2025-12-11 00:14:59.000000', 2, 4, 7),
+(11, '2025-12-11 00:14:59.000000', 2200000.00, 65, '2025-12-11 00:14:59.000000', 1, 4, 7),
+(12, '2025-12-11 00:14:59.000000', 1800000.00, 50, '2025-12-11 00:14:59.000000', 1, 5, 7),
+(13, '2025-12-11 00:14:59.000000', 1800000.00, 45, '2025-12-11 00:14:59.000000', 2, 5, 7),
+(14, '2025-12-11 00:14:59.000000', 2400000.00, 40, '2025-12-11 00:14:59.000000', 1, 6, 8),
+(15, '2025-12-11 00:14:59.000000', 2400000.00, 35, '2025-12-11 00:14:59.000000', 2, 6, 8),
+(16, '2025-12-11 00:14:59.000000', 1500000.00, 80, '2025-12-11 00:14:59.000000', 1, 7, 7),
+(17, '2025-12-11 00:14:59.000000', 1500000.00, 75, '2025-12-11 00:14:59.000000', 2, 7, 7),
+(18, '2025-12-11 00:14:59.000000', 1600000.00, 60, '2025-12-11 00:14:59.000000', 1, 8, 7),
+(19, '2025-12-11 00:14:59.000000', 1600000.00, 55, '2025-12-11 00:14:59.000000', 2, 8, 7),
+(20, '2025-12-11 00:14:59.000000', 3000000.00, 50, '2025-12-11 00:14:59.000000', 1, 9, 8),
+(21, '2025-12-11 00:14:59.000000', 3000000.00, 45, '2025-12-11 00:14:59.000000', 2, 9, 8),
+(24, '2025-12-11 00:14:59.000000', 4500000.00, 30, '2025-12-11 00:14:59.000000', 1, 11, 9),
+(25, '2025-12-11 00:14:59.000000', 4500000.00, 25, '2025-12-11 00:14:59.000000', 3, 11, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `product_variant_images`
+--
+
+CREATE TABLE `product_variant_images` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `image_url` varchar(255) NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `variant_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `product_variant_images`
+--
+
+INSERT INTO `product_variant_images` (`id`, `created_at`, `image_url`, `updated_at`, `variant_id`) VALUES
+(389, '2025-12-11 21:47:45.000000', 'https://res.cloudinary.com/drqbhj6ft/image/upload/v1765488300/sneaker/15/images/sneaker/15/images/c28c2925-4ba8-41a3-a7c0-dd90f1d46c62.png', '2025-12-11 21:47:45.000000', 3),
+(390, '2025-12-11 21:48:39.000000', 'https://res.cloudinary.com/drqbhj6ft/image/upload/v1765488300/sneaker/15/images/sneaker/15/images/c28c2925-4ba8-41a3-a7c0-dd90f1d46c62.png', '2025-12-11 21:48:39.000000', 2),
+(391, '2025-12-11 21:50:50.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/045/793/514/original/CZ2975_001.png.png', '2025-12-11 21:50:50.000000', 1),
+(392, '2025-12-11 21:52:51.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/045/793/514/original/CZ2975_001.png.png', '2025-12-11 21:52:51.000000', 7),
+(393, '2025-12-11 21:52:55.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/045/793/514/original/CZ2975_001.png.png', '2025-12-11 21:52:55.000000', 8),
+(394, '2025-12-11 21:52:59.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/045/793/514/original/CZ2975_001.png.png', '2025-12-11 21:52:59.000000', 9),
+(395, '2025-12-11 21:53:54.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/106/016/224/original/631381_002.png.png', '2025-12-11 21:53:54.000000', 20),
+(396, '2025-12-11 21:53:57.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/106/016/224/original/631381_002.png.png', '2025-12-11 21:53:57.000000', 21),
+(397, '2025-12-11 21:55:34.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/045/246/473/original/FX3495.png.png', '2025-12-11 21:55:34.000000', 4),
+(398, '2025-12-11 21:55:37.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/045/246/473/original/FX3495.png.png', '2025-12-11 21:55:37.000000', 5),
+(399, '2025-12-11 21:55:40.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/045/246/473/original/FX3495.png.png', '2025-12-11 21:55:40.000000', 6),
+(400, '2025-12-11 21:56:19.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/038/918/761/original/EG5933.png.png', '2025-12-11 21:56:19.000000', 11),
+(401, '2025-12-11 21:56:22.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/038/918/761/original/EG5933.png.png', '2025-12-11 21:56:22.000000', 10),
+(402, '2025-12-11 21:57:15.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/109/440/400/original/394873_02.png.png', '2025-12-11 21:57:15.000000', 12),
+(403, '2025-12-11 21:57:18.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/109/440/400/original/394873_02.png.png', '2025-12-11 21:57:18.000000', 13),
+(404, '2025-12-11 21:57:58.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/013/818/833/original/ML009UTB.png.png', '2025-12-11 21:57:58.000000', 14),
+(405, '2025-12-11 21:58:01.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/013/818/833/original/ML009UTB.png.png', '2025-12-11 21:58:01.000000', 15),
+(406, '2025-12-11 21:59:05.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/042/787/341/original/628892_00.png.png', '2025-12-11 21:59:05.000000', 17),
+(407, '2025-12-11 21:59:06.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/042/787/341/original/628892_00.png.png', '2025-12-11 21:59:06.000000', 16),
+(408, '2025-12-11 22:00:44.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/095/740/981/original/VN0A7Q2J6UR.png.png', '2025-12-11 22:00:44.000000', 18),
+(409, '2025-12-11 22:00:46.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/095/740/981/original/VN0A7Q2J6UR.png.png', '2025-12-11 22:00:46.000000', 19),
+(410, '2025-12-11 22:01:49.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/071/724/031/original/808985_00.png.png', '2025-12-11 22:01:49.000000', 25),
+(411, '2025-12-11 22:01:50.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/071/724/031/original/808985_00.png.png', '2025-12-11 22:01:50.000000', 24);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `promotions`
+--
+
+CREATE TABLE `promotions` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `description` text DEFAULT NULL,
+  `discount_percent` decimal(5,2) NOT NULL,
+  `end_date` datetime(6) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `start_date` datetime(6) NOT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `promotions`
+--
+
+INSERT INTO `promotions` (`id`, `created_at`, `description`, `discount_percent`, `end_date`, `name`, `start_date`, `status`, `updated_at`) VALUES
+(1, '2025-12-11 00:15:00.000000', 'Khuyến mãi mùa hè với giảm giá lớn cho tất cả sản phẩm', 20.00, '2024-08-31 23:59:59.000000', 'Summer Sale 2024', '2024-06-01 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000'),
+(2, '2025-12-11 00:15:00.000000', 'Chương trình khuyến mãi cho học sinh, sinh viên', 15.00, '2024-09-30 23:59:59.000000', 'Back to School', '2024-08-01 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000'),
+(3, '2025-12-11 00:15:00.000000', 'Siêu sale Black Friday với giảm giá lên đến 50%', 50.00, '2024-11-30 23:59:59.000000', 'Black Friday', '2024-11-25 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000'),
+(4, '2025-12-11 00:15:00.000000', 'Khuyến mãi năm mới với nhiều ưu đãi hấp dẫn', 25.00, '2025-01-10 23:59:59.000000', 'New Year Sale', '2024-12-20 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000'),
+(5, '2025-12-11 00:15:00.000000', 'Giảm giá đặc biệt cho bộ sưu tập Nike', 30.00, '2024-12-31 23:59:59.000000', 'Nike Collection Sale', '2024-01-01 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000'),
+(6, '2025-12-11 00:15:00.000000', 'Flash sale cho sản phẩm Adidas', 25.00, '2024-12-31 23:59:59.000000', 'Adidas Flash Sale', '2024-01-01 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000'),
+(7, '2025-12-11 00:15:00.000000', 'Khuyến mãi cuối tuần cho tất cả sản phẩm', 10.00, '2024-12-31 23:59:59.000000', 'Weekend Special', '2024-01-01 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000'),
+(8, '2025-12-11 00:15:00.000000', 'Giảm giá giày chạy bộ', 20.00, '2024-12-31 23:59:59.000000', 'Running Shoes Promotion', '2024-01-01 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000'),
+(9, '2025-12-11 00:15:00.000000', 'Khuyến mãi giày bóng rổ', 15.00, '2024-12-31 23:59:59.000000', 'Basketball Shoes Sale', '2024-01-01 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000'),
+(10, '2025-12-11 00:15:00.000000', 'Giảm giá bộ sưu tập lifestyle', 12.00, '2024-12-31 23:59:59.000000', 'Lifestyle Collection', '2024-01-01 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000'),
+(11, '2025-12-11 00:15:00.000000', 'Khuyến mãi giữa năm', 18.00, '2024-07-15 23:59:59.000000', 'Mid-Year Sale', '2024-06-15 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000'),
+(12, '2025-12-11 00:15:00.000000', 'Giảm giá cuối mùa', 35.00, '2024-02-29 23:59:59.000000', 'End of Season', '2024-02-01 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000'),
+(13, '2025-12-11 00:15:00.000000', 'Khuyến mãi bộ sưu tập mùa xuân', 22.00, '2024-05-31 23:59:59.000000', 'Spring Collection', '2024-03-01 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000'),
+(14, '2025-12-11 00:15:00.000000', 'Khuyến mãi mùa đông', 20.00, '2024-12-31 23:59:59.000000', 'Winter Warm Up', '2024-12-01 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000'),
+(15, '2025-12-11 00:15:00.000000', 'Thanh lý siêu lớn', 40.00, '2024-12-31 23:59:59.000000', 'Mega Clearance', '2024-01-01 00:00:00.000000', 'ACTIVE', '2025-12-11 00:15:00.000000');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `promotion_products`
+--
+
+CREATE TABLE `promotion_products` (
+  `promotion_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `promotion_products`
+--
+
+INSERT INTO `promotion_products` (`promotion_id`, `product_id`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(2, 6),
+(2, 7),
+(2, 8),
+(3, 1),
+(3, 2),
+(3, 9),
+(4, 11),
+(5, 1),
+(5, 3),
+(5, 9),
+(6, 2),
+(6, 4),
+(7, 1),
+(7, 2),
+(7, 3),
+(7, 4),
+(7, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `returns`
+--
+
+CREATE TABLE `returns` (
+  `id` int(11) NOT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `items` text DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `reason` varchar(255) DEFAULT NULL,
+  `status` enum('CHO_XU_LY','DA_HOAN_TIEN','DA_HUY') NOT NULL,
+  `total_refund` double NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `original_order_id` int(11) NOT NULL,
+  `staff_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `returns`
+--
+
+INSERT INTO `returns` (`id`, `code`, `created_at`, `items`, `note`, `reason`, `status`, `total_refund`, `updated_at`, `customer_id`, `original_order_id`, `staff_id`) VALUES
+(1, 'RET001', '2025-12-11 00:15:00.000000', '[{\"variantId\": 10, \"quantity\": 1, \"price\": 2200000.00}]', 'Khách hàng yêu cầu đổi size', 'Sản phẩm không đúng kích thước', 'CHO_XU_LY', 2200000, '2025-12-11 00:15:00.000000', 6, 4, 3),
+(2, 'RET002', '2025-12-11 00:15:00.000000', '[{\"variantId\": 7, \"quantity\": 1, \"price\": 2800000.00}]', 'Giày bị trầy xước', 'Sản phẩm bị lỗi', 'DA_HOAN_TIEN', 2800000, '2025-12-11 00:15:00.000000', 9, 7, 14),
+(3, 'RET003', '2025-12-11 00:15:00.000000', '[{\"variantId\": 23, \"quantity\": 1, \"price\": 4500000.00}]', 'Size không phù hợp', 'Không vừa', 'CHO_XU_LY', 4500000, '2025-12-11 00:15:00.000000', 11, 9, NULL),
+(4, 'RET004', '2025-12-11 00:15:00.000000', '[{\"variantId\": 22, \"quantity\": 1, \"price\": 2100000.00}]', 'Màu sắc không đúng', 'Sản phẩm không đúng mô tả', 'DA_HOAN_TIEN', 2100000, '2025-12-11 00:15:00.000000', 13, 11, 3),
+(5, 'RET005', '2025-12-11 00:15:00.000000', '[{\"variantId\": 12, \"quantity\": 1, \"price\": 1800000.00}]', 'Chất lượng không như mong đợi', 'Không hài lòng', 'CHO_XU_LY', 1800000, '2025-12-11 00:15:00.000000', 4, 13, 14),
+(6, 'RET006', '2025-12-11 00:15:00.000000', '[{\"variantId\": 20, \"quantity\": 1, \"price\": 3000000.00}]', 'Không muốn mua nữa', 'Đổi ý', 'DA_HUY', 3000000, '2025-12-11 00:15:00.000000', 7, 5, NULL),
+(7, 'RET007', '2025-12-11 00:15:00.000000', '[{\"variantId\": 1, \"quantity\": 1, \"price\": 2500000.00}]', 'Giày bị nứt đế', 'Sản phẩm bị hỏng', 'DA_HOAN_TIEN', 2250000, '2025-12-11 00:15:00.000000', 2, 1, 3),
+(8, 'RET008', '2025-12-11 00:15:00.000000', '[{\"variantId\": 14, \"quantity\": 1, \"price\": 2400000.00}]', 'Size quá nhỏ', 'Không vừa chân', 'CHO_XU_LY', 2400000, '2025-12-11 00:15:00.000000', 10, 8, 14),
+(9, 'RET009', '2025-12-11 00:15:00.000000', '[{\"variantId\": 20, \"quantity\": 1, \"price\": 3000000.00}]', 'Có vết bẩn trên giày', 'Sản phẩm lỗi', 'CHO_XU_LY', 2800000, '2025-12-11 00:15:00.000000', 2, 12, NULL),
+(10, 'RET010', '2025-12-11 00:15:00.000000', '[{\"variantId\": 10, \"quantity\": 1, \"price\": 2200000.00}]', 'Muốn đổi sang màu khác', 'Đổi màu', 'DA_HOAN_TIEN', 2200000, '2025-12-11 00:15:00.000000', 6, 4, 3),
+(11, 'RET011', '2025-12-11 00:15:00.000000', '[{\"variantId\": 8, \"quantity\": 1, \"price\": 2800000.00}]', 'Kiểu dáng không hợp', 'Không phù hợp', 'CHO_XU_LY', 2800000, '2025-12-11 00:15:00.000000', 9, 7, 14),
+(12, 'RET012', '2025-12-11 00:15:00.000000', '[{\"variantId\": 22, \"quantity\": 1, \"price\": 2100000.00}]', 'Đường chỉ bị lỗi', 'Sản phẩm lỗi', 'DA_HOAN_TIEN', 2100000, '2025-12-11 00:15:00.000000', 13, 11, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `sizes`
+--
+
+CREATE TABLE `sizes` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `value` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `sizes`
+--
+
+INSERT INTO `sizes` (`id`, `created_at`, `status`, `updated_at`, `value`) VALUES
+(1, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 35),
+(2, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 36),
+(3, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 37),
+(4, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 38),
+(5, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 39),
+(6, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 40),
+(7, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 41),
+(8, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 42),
+(9, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 43),
+(10, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 44),
+(11, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 45),
+(12, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 46),
+(13, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 47),
+(14, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 48),
+(15, '2025-12-11 00:14:59.000000', 'ACTIVE', '2025-12-11 00:14:59.000000', 49);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `vouchers`
+--
+
+CREATE TABLE `vouchers` (
+  `id` int(11) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `end_date` datetime(6) NOT NULL,
+  `max_discount` decimal(10,2) DEFAULT NULL,
+  `min_order_value` decimal(10,2) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `start_date` datetime(6) NOT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL,
+  `type` enum('PERCENTAGE','FIXED_AMOUNT') NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `used_count` int(11) NOT NULL,
+  `value` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `vouchers`
+--
+
+INSERT INTO `vouchers` (`id`, `code`, `created_at`, `end_date`, `max_discount`, `min_order_value`, `name`, `quantity`, `start_date`, `status`, `type`, `updated_at`, `used_count`, `value`) VALUES
+(1, 'VOUCHER10', '2025-12-11 00:15:00.000000', '2024-12-31 23:59:59.000000', 200000.00, 500000.00, 'Giảm 10%', 100, '2024-01-01 00:00:00.000000', 'ACTIVE', 'PERCENTAGE', '2025-12-11 00:15:00.000000', 5, 10.00),
+(2, 'VOUCHER20', '2025-12-11 00:15:00.000000', '2024-12-31 23:59:59.000000', 500000.00, 1000000.00, 'Giảm 20%', 50, '2024-01-01 00:00:00.000000', 'ACTIVE', 'PERCENTAGE', '2025-12-11 00:15:00.000000', 2, 20.00),
+(3, 'VOUCHER50K', '2025-12-11 00:15:00.000000', '2024-12-31 23:59:59.000000', NULL, 300000.00, 'Giảm 50.000đ', 200, '2024-01-01 00:00:00.000000', 'ACTIVE', 'FIXED_AMOUNT', '2025-12-11 00:15:00.000000', 10, 50000.00),
+(4, 'VOUCHER100K', '2025-12-11 00:15:00.000000', '2024-12-31 23:59:59.000000', NULL, 500000.00, 'Giảm 100.000đ', 100, '2024-01-01 00:00:00.000000', 'ACTIVE', 'FIXED_AMOUNT', '2025-12-11 00:15:00.000000', 3, 100000.00),
+(5, 'VOUCHER200K', '2025-12-11 00:15:00.000000', '2024-12-31 23:59:59.000000', NULL, 1000000.00, 'Giảm 200.000đ', 50, '2024-01-01 00:00:00.000000', 'ACTIVE', 'FIXED_AMOUNT', '2025-12-11 00:15:00.000000', 1, 200000.00),
+(6, 'NEWUSER', '2025-12-11 00:15:00.000000', '2024-12-31 23:59:59.000000', 150000.00, 200000.00, 'Giảm 15% cho khách hàng mới', 500, '2024-01-01 00:00:00.000000', 'ACTIVE', 'PERCENTAGE', '2025-12-11 00:15:00.000000', 25, 15.00),
+(7, 'SUMMER2024', '2025-12-11 00:15:00.000000', '2024-08-31 23:59:59.000000', 400000.00, 800000.00, 'Giảm 25% mùa hè', 30, '2024-06-01 00:00:00.000000', 'ACTIVE', 'PERCENTAGE', '2025-12-11 00:15:00.000000', 0, 25.00),
+(8, 'VIP50K', '2025-12-11 00:15:00.000000', '2024-12-31 23:59:59.000000', NULL, 200000.00, 'Voucher VIP 50K', 100, '2024-01-01 00:00:00.000000', 'ACTIVE', 'FIXED_AMOUNT', '2025-12-11 00:15:00.000000', 5, 50000.00),
+(9, 'VIP100K', '2025-12-11 00:15:00.000000', '2024-12-31 23:59:59.000000', NULL, 500000.00, 'Voucher VIP 100K', 50, '2024-01-01 00:00:00.000000', 'ACTIVE', 'FIXED_AMOUNT', '2025-12-11 00:15:00.000000', 2, 100000.00),
+(10, 'WEEKEND10', '2025-12-11 00:15:00.000000', '2024-12-31 23:59:59.000000', 100000.00, 300000.00, 'Giảm 10% cuối tuần', 200, '2024-01-01 00:00:00.000000', 'ACTIVE', 'PERCENTAGE', '2025-12-11 00:15:00.000000', 15, 10.00),
+(11, 'BIRTHDAY20', '2025-12-11 00:15:00.000000', '2024-12-31 23:59:59.000000', 200000.00, 400000.00, 'Giảm 20% sinh nhật', 1000, '2024-01-01 00:00:00.000000', 'ACTIVE', 'PERCENTAGE', '2025-12-11 00:15:00.000000', 50, 20.00),
+(12, 'FLASH30', '2025-12-11 00:15:00.000000', '2024-12-31 23:59:59.000000', 600000.00, 1500000.00, 'Flash Sale 30%', 20, '2024-01-01 00:00:00.000000', 'ACTIVE', 'PERCENTAGE', '2025-12-11 00:15:00.000000', 0, 30.00),
+(13, 'FREESHIP', '2025-12-11 00:15:00.000000', '2024-12-31 23:59:59.000000', NULL, 200000.00, 'Miễn phí ship', 500, '2024-01-01 00:00:00.000000', 'ACTIVE', 'FIXED_AMOUNT', '2025-12-11 00:15:00.000000', 30, 30000.00),
+(14, 'MEGA50', '2025-12-11 00:15:00.000000', '2024-11-30 23:59:59.000000', 1000000.00, 2000000.00, 'Mega Sale 50%', 10, '2024-11-01 00:00:00.000000', 'ACTIVE', 'PERCENTAGE', '2025-12-11 00:15:00.000000', 0, 50.00),
+(15, 'WELCOME15', '2025-12-11 00:15:00.000000', '2024-12-31 23:59:59.000000', 150000.00, 300000.00, 'Chào mừng 15%', 1000, '2024-01-01 00:00:00.000000', 'ACTIVE', 'PERCENTAGE', '2025-12-11 00:15:00.000000', 100, 15.00);
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `accounts`
+--
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UK_p2jd4db8821l8voctujboa9oh` (`code`);
+
+--
+-- Chỉ mục cho bảng `account_addresses`
+--
+ALTER TABLE `account_addresses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKcnpkm7oht9jx0497sb282y36m` (`account_id`);
+
+--
+-- Chỉ mục cho bảng `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UK_oce3937d2f4mpfqrycbr0l93m` (`name`);
+
+--
+-- Chỉ mục cho bảng `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UK_t8o6pivur7nn124jehx7cygw5` (`name`);
+
+--
+-- Chỉ mục cho bảng `chatbot_configs`
+--
+ALTER TABLE `chatbot_configs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UK_ipl7l2cowcowrboto6pkr3h19` (`config_key`);
+
+--
+-- Chỉ mục cho bảng `chatbot_trainings`
+--
+ALTER TABLE `chatbot_trainings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `chat_histories`
+--
+ALTER TABLE `chat_histories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKpw6krviu4uq0t8xngj6ujtdb6` (`account_id`);
+
+--
+-- Chỉ mục cho bảng `colors`
+--
+ALTER TABLE `colors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `materials`
+--
+ALTER TABLE `materials`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UK_p6b0ef7tpc5wohnygnl60qk4j` (`name`);
+
+--
+-- Chỉ mục cho bảng `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKqye0axqv18a6egslmba3ljtcm` (`account_id`);
+
+--
+-- Chỉ mục cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UK_gt3o4a5bqj59e9y6wakgk926t` (`code`),
+  ADD KEY `FKtf8r4umpuwx9bgm7gxcpwf263` (`customer_id`),
+  ADD KEY `FK4am13nk87535t4xnaj01bbni1` (`staff_id`),
+  ADD KEY `FKdimvsocblb17f45ikjr6xn1wj` (`voucher_id`);
+
+--
+-- Chỉ mục cho bảng `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKbioxgbv59vetrxe0ejfubep1w` (`order_id`),
+  ADD KEY `FKemq71edpbn9wsxnxncfn1algp` (`variant_id`);
+
+--
+-- Chỉ mục cho bảng `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK81gagumt0r8y3rmudcgpbk42l` (`order_id`);
+
+--
+-- Chỉ mục cho bảng `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UK_57ivhy5aj3qfmdvl6vxdfjs4p` (`code`),
+  ADD KEY `FKa3a4mpsfdf4d2y6r8ra3sc8mv` (`brand_id`),
+  ADD KEY `FKog2rp4qthbtt2lfyhfo32lsw9` (`category_id`),
+  ADD KEY `FKj2d4f35svu15l83nru8t5k593` (`material_id`);
+
+--
+-- Chỉ mục cho bảng `product_variants`
+--
+ALTER TABLE `product_variants`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UKhphqojv21cy7l87vdxpi574bt` (`product_id`,`color_id`,`size_id`),
+  ADD KEY `FKnps1p21p470pq59fdj0ddwnrs` (`color_id`),
+  ADD KEY `FKt7j608wes333gojuoh0f8l488` (`size_id`);
+
+--
+-- Chỉ mục cho bảng `product_variant_images`
+--
+ALTER TABLE `product_variant_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK9jwla8t7mpnllbt5gp0le008i` (`variant_id`);
+
+--
+-- Chỉ mục cho bảng `promotions`
+--
+ALTER TABLE `promotions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `promotion_products`
+--
+ALTER TABLE `promotion_products`
+  ADD KEY `FK9rm5m4rnoamh56kxetmoe1kk9` (`product_id`),
+  ADD KEY `FKkn7hllhf1o8jjrolro4rqmxt7` (`promotion_id`);
+
+--
+-- Chỉ mục cho bảng `returns`
+--
+ALTER TABLE `returns`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UK_6e8pns0utjpjxdd17t4mtppvy` (`code`),
+  ADD KEY `FKq2p3e71wrkcwktfnpltn51sn4` (`customer_id`),
+  ADD KEY `FK5fbkvnn3hucvo9qfmefgwt3do` (`original_order_id`),
+  ADD KEY `FKq0t42xwj2kpxccbdse5fvya11` (`staff_id`);
+
+--
+-- Chỉ mục cho bảng `sizes`
+--
+ALTER TABLE `sizes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `vouchers`
+--
+ALTER TABLE `vouchers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UK_30ftp2biebbvpik8e49wlmady` (`code`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `accounts`
+--
+ALTER TABLE `accounts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT cho bảng `account_addresses`
+--
+ALTER TABLE `account_addresses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT cho bảng `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT cho bảng `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT cho bảng `chatbot_configs`
+--
+ALTER TABLE `chatbot_configs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `chatbot_trainings`
+--
+ALTER TABLE `chatbot_trainings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `chat_histories`
+--
+ALTER TABLE `chat_histories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `colors`
+--
+ALTER TABLE `colors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT cho bảng `materials`
+--
+ALTER TABLE `materials`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT cho bảng `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT cho bảng `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT cho bảng `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT cho bảng `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT cho bảng `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT cho bảng `product_variants`
+--
+ALTER TABLE `product_variants`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT cho bảng `product_variant_images`
+--
+ALTER TABLE `product_variant_images`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=412;
+
+--
+-- AUTO_INCREMENT cho bảng `promotions`
+--
+ALTER TABLE `promotions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT cho bảng `returns`
+--
+ALTER TABLE `returns`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT cho bảng `sizes`
+--
+ALTER TABLE `sizes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT cho bảng `vouchers`
+--
+ALTER TABLE `vouchers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `account_addresses`
+--
+ALTER TABLE `account_addresses`
+  ADD CONSTRAINT `FKcnpkm7oht9jx0497sb282y36m` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`);
+
+--
+-- Các ràng buộc cho bảng `chat_histories`
+--
+ALTER TABLE `chat_histories`
+  ADD CONSTRAINT `FKpw6krviu4uq0t8xngj6ujtdb6` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`);
+
+--
+-- Các ràng buộc cho bảng `notifications`
+--
+ALTER TABLE `notifications`
+  ADD CONSTRAINT `FKqye0axqv18a6egslmba3ljtcm` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`);
+
+--
+-- Các ràng buộc cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `FK4am13nk87535t4xnaj01bbni1` FOREIGN KEY (`staff_id`) REFERENCES `accounts` (`id`),
+  ADD CONSTRAINT `FKdimvsocblb17f45ikjr6xn1wj` FOREIGN KEY (`voucher_id`) REFERENCES `vouchers` (`id`),
+  ADD CONSTRAINT `FKtf8r4umpuwx9bgm7gxcpwf263` FOREIGN KEY (`customer_id`) REFERENCES `accounts` (`id`);
+
+--
+-- Các ràng buộc cho bảng `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `FKbioxgbv59vetrxe0ejfubep1w` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+  ADD CONSTRAINT `FKemq71edpbn9wsxnxncfn1algp` FOREIGN KEY (`variant_id`) REFERENCES `product_variants` (`id`);
+
+--
+-- Các ràng buộc cho bảng `payments`
+--
+ALTER TABLE `payments`
+  ADD CONSTRAINT `FK81gagumt0r8y3rmudcgpbk42l` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
+
+--
+-- Các ràng buộc cho bảng `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `FKa3a4mpsfdf4d2y6r8ra3sc8mv` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
+  ADD CONSTRAINT `FKj2d4f35svu15l83nru8t5k593` FOREIGN KEY (`material_id`) REFERENCES `materials` (`id`),
+  ADD CONSTRAINT `FKog2rp4qthbtt2lfyhfo32lsw9` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
+
+--
+-- Các ràng buộc cho bảng `product_variants`
+--
+ALTER TABLE `product_variants`
+  ADD CONSTRAINT `FKnps1p21p470pq59fdj0ddwnrs` FOREIGN KEY (`color_id`) REFERENCES `colors` (`id`),
+  ADD CONSTRAINT `FKosqitn4s405cynmhb87lkvuau` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `FKt7j608wes333gojuoh0f8l488` FOREIGN KEY (`size_id`) REFERENCES `sizes` (`id`);
+
+--
+-- Các ràng buộc cho bảng `product_variant_images`
+--
+ALTER TABLE `product_variant_images`
+  ADD CONSTRAINT `FK9jwla8t7mpnllbt5gp0le008i` FOREIGN KEY (`variant_id`) REFERENCES `product_variants` (`id`);
+
+--
+-- Các ràng buộc cho bảng `promotion_products`
+--
+ALTER TABLE `promotion_products`
+  ADD CONSTRAINT `FK9rm5m4rnoamh56kxetmoe1kk9` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `FKkn7hllhf1o8jjrolro4rqmxt7` FOREIGN KEY (`promotion_id`) REFERENCES `promotions` (`id`);
+
+--
+-- Các ràng buộc cho bảng `returns`
+--
+ALTER TABLE `returns`
+  ADD CONSTRAINT `FK5fbkvnn3hucvo9qfmefgwt3do` FOREIGN KEY (`original_order_id`) REFERENCES `orders` (`id`),
+  ADD CONSTRAINT `FKq0t42xwj2kpxccbdse5fvya11` FOREIGN KEY (`staff_id`) REFERENCES `accounts` (`id`),
+  ADD CONSTRAINT `FKq2p3e71wrkcwktfnpltn51sn4` FOREIGN KEY (`customer_id`) REFERENCES `accounts` (`id`);
+COMMIT;
