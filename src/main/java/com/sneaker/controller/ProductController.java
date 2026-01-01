@@ -28,9 +28,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Tag(name = "Products", description = "Product management APIs")
 public class ProductController {
-    
+
     private final ProductService productService;
-    
+
     @GetMapping
     @Operation(summary = "Get all products", description = "Get paginated list of products with filters")
     public ResponseEntity<ApiResponse<java.util.List<Product>>> getAllProducts(
@@ -45,28 +45,39 @@ public class ProductController {
             @RequestParam(required = false) Product.Status status,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int limit) {
-        
+
         Pageable pageable = PageRequest.of(page - 1, limit);
         Page<Product> productPage = productService.getAllProducts(
-            name, brand, category, material, color, size, minPrice, maxPrice, status, pageable
-        );
-        
+                name, brand, category, material, color, size, minPrice, maxPrice, status, pageable);
+
         return ResponseEntity.ok(
-            ApiResponse.success(
-                "Lấy danh sách sản phẩm thành công",
-                productPage.getContent(),
-                PaginationMeta.fromPage(productPage)
-            )
-        );
+                ApiResponse.success(
+                        "Lấy danh sách sản phẩm thành công",
+                        productPage.getContent(),
+                        PaginationMeta.fromPage(productPage)));
     }
-    
+
     @GetMapping("/filters")
     @Operation(summary = "Get product filters", description = "Get all available filters (brands, categories, colors, sizes, etc.)")
     public ResponseEntity<ApiResponse<Map<String, Object>>> getFilters() {
         Map<String, Object> filters = productService.getProductFilters();
         return ResponseEntity.ok(ApiResponse.success("Lấy bộ lọc thành công", filters));
     }
-    
+
+    @GetMapping("/latest")
+    @Operation(summary = "Get latest products", description = "Get top 4 newest products")
+    public ResponseEntity<ApiResponse<java.util.List<Product>>> getLatestProducts() {
+        java.util.List<Product> products = productService.getLatestProducts();
+        return ResponseEntity.ok(ApiResponse.success("Lấy danh sách sản phẩm mới nhất thành công", products));
+    }
+
+    @GetMapping("/best-sellers")
+    @Operation(summary = "Get best-selling products", description = "Get top 4 best-selling products")
+    public ResponseEntity<ApiResponse<java.util.List<Product>>> getBestSellingProducts() {
+        java.util.List<Product> products = productService.getBestSellingProducts();
+        return ResponseEntity.ok(ApiResponse.success("Lấy danh sách sản phẩm bán chạy thành công", products));
+    }
+
     @GetMapping("/search")
     @Operation(summary = "Search products", description = "Search products by keyword with filters")
     public ResponseEntity<ApiResponse<java.util.List<Product>>> searchProducts(
@@ -80,21 +91,18 @@ public class ProductController {
             @RequestParam(required = false) BigDecimal maxPrice,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int limit) {
-        
+
         Pageable pageable = PageRequest.of(page - 1, limit);
         Page<Product> productPage = productService.searchProducts(
-            keyword, brand, category, material, color, size, minPrice, maxPrice, null, pageable
-        );
-        
+                keyword, brand, category, material, color, size, minPrice, maxPrice, null, pageable);
+
         return ResponseEntity.ok(
-            ApiResponse.success(
-                "Tìm kiếm sản phẩm thành công",
-                productPage.getContent(),
-                PaginationMeta.fromPage(productPage)
-            )
-        );
+                ApiResponse.success(
+                        "Tìm kiếm sản phẩm thành công",
+                        productPage.getContent(),
+                        PaginationMeta.fromPage(productPage)));
     }
-    
+
     @GetMapping("/{id}")
     @Operation(summary = "Get product by ID", description = "Get product details by ID")
     public ResponseEntity<ApiResponse<Product>> getProductById(@PathVariable Integer id) {
@@ -102,7 +110,7 @@ public class ProductController {
                 .map(product -> ResponseEntity.ok(ApiResponse.success("Lấy thông tin sản phẩm thành công", product)))
                 .orElse(ResponseEntity.status(404).body(ApiResponse.error("Không tìm thấy sản phẩm")));
     }
-    
+
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Create product", description = "Create a new product (Admin only)")
@@ -111,18 +119,18 @@ public class ProductController {
         Product created = productService.createProduct(request);
         return ResponseEntity.status(201).body(ApiResponse.created("Tạo sản phẩm thành công", created));
     }
-    
+
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update product", description = "Update product details (Admin only)")
     @SecurityRequirement(name = "bearer-jwt")
     public ResponseEntity<ApiResponse<Product>> updateProduct(
-            @PathVariable Integer id, 
+            @PathVariable Integer id,
             @Valid @RequestBody ProductUpdateRequest request) {
         Product updated = productService.updateProduct(id, request);
         return ResponseEntity.ok(ApiResponse.success("Cập nhật sản phẩm thành công", updated));
     }
-    
+
     @PatchMapping("/{id}/status")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update product status", description = "Update product status (Admin only)")
@@ -134,7 +142,7 @@ public class ProductController {
         Product updated = productService.updateProductStatus(id, status);
         return ResponseEntity.ok(ApiResponse.success("Cập nhật trạng thái sản phẩm thành công", updated));
     }
-    
+
     @PatchMapping("/{id}/stock")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update product stock", description = "Update stock for product variants (Admin only)")
@@ -145,7 +153,7 @@ public class ProductController {
         Product updated = productService.updateProductStock(id, request.getVariantUpdates());
         return ResponseEntity.ok(ApiResponse.success("Cập nhật tồn kho thành công", updated));
     }
-    
+
     @PatchMapping("/{id}/images")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update product images", description = "Update images for a product variant (Admin only)")
@@ -156,7 +164,7 @@ public class ProductController {
         Product updated = productService.updateProductImages(id, request.getVariantId(), request.getImages());
         return ResponseEntity.ok(ApiResponse.success("Cập nhật hình ảnh sản phẩm thành công", updated));
     }
-    
+
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Delete product", description = "Delete a product (Admin only)")
@@ -166,4 +174,3 @@ public class ProductController {
         return ResponseEntity.ok(ApiResponse.success("Xóa sản phẩm thành công", null));
     }
 }
-

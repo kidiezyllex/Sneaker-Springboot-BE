@@ -4,6 +4,12 @@ Các chức năng đã Test
 - Đăng ký [DONE]
 
 2. Module sản phẩm
+- Lấy danh sách sản phẩm [DONE]
+- Tìm kiếm sản phẩm [DONE] 
+- Lọc sản phẩm theo Thương hiệu, danh mục, màu sắc, kích cỡ [DONE]
+- Sort theo giá, mới nhất,... [DONE]
+- Thêm sản phẩm vào giỏ hàng [DONE]
+- Xem chi tiết sản phẩm [DONE]
 
 Các role khách đều có password: Customer123! --> Ví dụ: tranthibinh@gmail.com
 Các role khách đều có password: Admin123! --> Ví dụ: phanvankhanh@gmail.com
