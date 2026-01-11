@@ -105,6 +105,38 @@ public class OrderController {
         return ResponseEntity.ok(ApiResponse.success("Lấy danh sách đơn hàng thành công", response));
     }
 
+    @GetMapping("/user/{userId}")
+    @Operation(summary = "Get orders by user ID", description = "Get orders of a specific user")
+    @SecurityRequirement(name = "bearer-jwt")
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getOrdersByUserId(
+            @PathVariable Integer userId,
+            @RequestParam(required = false) Order.OrderStatus orderStatus,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int limit,
+            @AuthenticationPrincipal SecurityUser user) {
+
+        // Check authorization: only ADMIN or the user themselves can access
+        if (!user.getId().equals(userId) &&
+                user.getAccount().getRole() != Account.Role.ADMIN &&
+                user.getAccount().getRole() != Account.Role.STAFF) {
+            return ResponseEntity.status(403)
+                    .body(ApiResponse.error("Không có quyền truy cập đơn hàng của người dùng này"));
+        }
+
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        Page<Order> orders = orderService.getMyOrders(userId, orderStatus, pageable);
+
+        Map<String, Object> response = Map.of(
+                "orders", orders.getContent(),
+                "pagination", Map.of(
+                        "totalItems", orders.getTotalElements(),
+                        "totalPages", orders.getTotalPages(),
+                        "currentPage", page,
+                        "limit", limit));
+
+        return ResponseEntity.ok(ApiResponse.success("Lấy danh sách đơn hàng thành công", response));
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Get order by ID", description = "Get order details by ID")
     @SecurityRequirement(name = "bearer-jwt")
