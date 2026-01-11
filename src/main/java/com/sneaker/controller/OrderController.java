@@ -15,12 +15,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Map;
 
 @RestController
@@ -61,14 +65,19 @@ public class OrderController {
             @RequestParam(required = false) Integer customer,
             @RequestParam(required = false) Order.OrderStatus orderStatus,
             @RequestParam(required = false) Order.PaymentStatus paymentStatus,
-            @RequestParam(required = false) LocalDateTime startDate,
-            @RequestParam(required = false) LocalDateTime endDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
             @RequestParam(required = false) String search,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int limit) {
 
-        Pageable pageable = PageRequest.of(page - 1, limit);
-        Page<Order> orders = orderService.getOrders(customer, orderStatus, paymentStatus, startDate, endDate, search,
+        Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(Sort.Direction.DESC, "createdAt"));
+
+        LocalDateTime startDateTime = startDate != null ? startDate.atStartOfDay() : null;
+        LocalDateTime endDateTime = endDate != null ? endDate.atTime(LocalTime.MAX) : null;
+
+        Page<Order> orders = orderService.getOrders(customer, orderStatus, paymentStatus, startDateTime, endDateTime,
+                search,
                 pageable);
 
         Map<String, Object> response = Map.of(
@@ -91,7 +100,7 @@ public class OrderController {
             @RequestParam(defaultValue = "10") int limit,
             @AuthenticationPrincipal SecurityUser user) {
 
-        Pageable pageable = PageRequest.of(page - 1, limit);
+        Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(Sort.Direction.DESC, "createdAt"));
         Page<Order> orders = orderService.getMyOrders(user.getId(), orderStatus, pageable);
 
         Map<String, Object> response = Map.of(
@@ -123,7 +132,7 @@ public class OrderController {
                     .body(ApiResponse.error("Không có quyền truy cập đơn hàng của người dùng này"));
         }
 
-        Pageable pageable = PageRequest.of(page - 1, limit);
+        Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(Sort.Direction.DESC, "createdAt"));
         Page<Order> orders = orderService.getMyOrders(userId, orderStatus, pageable);
 
         Map<String, Object> response = Map.of(
