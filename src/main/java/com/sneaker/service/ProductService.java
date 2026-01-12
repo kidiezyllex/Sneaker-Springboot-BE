@@ -133,8 +133,8 @@ public class ProductService {
         // Create product
         Product product = new Product();
         product.setName(request.getName());
-        product.setDescription(request.getDescription());
-        product.setWeight(request.getWeight());
+        product.setDescription(request.getDescription() != null ? request.getDescription() : "");
+        product.setWeight(request.getWeight() != null ? request.getWeight() : new BigDecimal("0.5"));
         product.setBrand(brand);
         product.setCategory(category);
         product.setMaterial(material);

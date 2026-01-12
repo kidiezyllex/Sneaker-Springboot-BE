@@ -20,63 +20,58 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Product {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     @Column(unique = true)
     private String code;
-    
+
     @Column(nullable = false)
     private String name;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brandId", nullable = false)
     private Brand brand;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoryId", nullable = false)
     private Category category;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "materialId", nullable = false)
     private Material material;
-    
-    @Column(nullable = false, columnDefinition = "TEXT")
+
+    @Column(nullable = true, columnDefinition = "TEXT")
     private String description;
-    
+
     @Column(nullable = false, precision = 8, scale = 2)
     private BigDecimal weight;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status = Status.ACTIVE;
-    
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductVariant> variants;
-    
+
     @ManyToMany
-    @JoinTable(
-        name = "promotion_products",
-        joinColumns = @JoinColumn(name = "productId"),
-        inverseJoinColumns = @JoinColumn(name = "promotionId")
-    )
+    @JoinTable(name = "promotion_products", joinColumns = @JoinColumn(name = "productId"), inverseJoinColumns = @JoinColumn(name = "promotionId"))
     @JsonIgnore
     private List<Promotion> promotions;
-    
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
-    
+
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime updatedAt;
-    
+
     public enum Status {
         ACTIVE, INACTIVE
     }
 }
-
