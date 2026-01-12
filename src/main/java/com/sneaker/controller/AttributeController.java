@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import com.sneaker.dto.response.PaginationMeta;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,29 +23,34 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "Attributes", description = "Product Attribute Management APIs")
 public class AttributeController {
-    
+
     private final BrandService brandService;
     private final CategoryService categoryService;
     private final MaterialService materialService;
     private final ColorService colorService;
     private final SizeService sizeService;
-    
+
     // ========== BRAND APIs ==========
     @GetMapping("/brands")
     @Operation(summary = "Get all brands", description = "Get list of all brands")
     public ResponseEntity<ApiResponse<List<Brand>>> getAllBrands(
-            @RequestParam(required = false) String status) {
-        List<Brand> brands = brandService.getAllBrands(status);
-        return ResponseEntity.ok(ApiResponse.success("Lấy danh sách thương hiệu thành công", brands));
+            @RequestParam(required = false) String status,
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "10") Integer limit) {
+        Page<Brand> brandPage = brandService.getAllBrands(status, page, limit);
+        return ResponseEntity.ok(ApiResponse.success(
+                "Lấy danh sách thương hiệu thành công",
+                brandPage.getContent(),
+                PaginationMeta.fromPage(brandPage)));
     }
-    
+
     @GetMapping("/brands/{id}")
     @Operation(summary = "Get brand by ID", description = "Get brand details by ID")
     public ResponseEntity<ApiResponse<Brand>> getBrandById(@PathVariable Integer id) {
         Brand brand = brandService.getBrandById(id);
         return ResponseEntity.ok(ApiResponse.success("Lấy thông tin thương hiệu thành công", brand));
     }
-    
+
     @PostMapping("/brands")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -53,7 +60,7 @@ public class AttributeController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.success("Tạo thương hiệu thành công", brand));
     }
-    
+
     @PutMapping("/brands/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -64,7 +71,7 @@ public class AttributeController {
         Brand brand = brandService.updateBrand(id, request);
         return ResponseEntity.ok(ApiResponse.success("Cập nhật thương hiệu thành công", brand));
     }
-    
+
     @DeleteMapping("/brands/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -73,23 +80,28 @@ public class AttributeController {
         brandService.deleteBrand(id);
         return ResponseEntity.ok(ApiResponse.success("Xóa thương hiệu thành công", null));
     }
-    
+
     // ========== CATEGORY APIs ==========
     @GetMapping("/categories")
     @Operation(summary = "Get all categories", description = "Get list of all categories")
     public ResponseEntity<ApiResponse<List<Category>>> getAllCategories(
-            @RequestParam(required = false) String status) {
-        List<Category> categories = categoryService.getAllCategories(status);
-        return ResponseEntity.ok(ApiResponse.success("Lấy danh sách danh mục thành công", categories));
+            @RequestParam(required = false) String status,
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "10") Integer limit) {
+        Page<Category> categoryPage = categoryService.getAllCategories(status, page, limit);
+        return ResponseEntity.ok(ApiResponse.success(
+                "Lấy danh sách danh mục thành công",
+                categoryPage.getContent(),
+                PaginationMeta.fromPage(categoryPage)));
     }
-    
+
     @GetMapping("/categories/{id}")
     @Operation(summary = "Get category by ID", description = "Get category details by ID")
     public ResponseEntity<ApiResponse<Category>> getCategoryById(@PathVariable Integer id) {
         Category category = categoryService.getCategoryById(id);
         return ResponseEntity.ok(ApiResponse.success("Lấy thông tin danh mục thành công", category));
     }
-    
+
     @PostMapping("/categories")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -99,7 +111,7 @@ public class AttributeController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.success("Tạo danh mục thành công", category));
     }
-    
+
     @PutMapping("/categories/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -110,7 +122,7 @@ public class AttributeController {
         Category category = categoryService.updateCategory(id, request);
         return ResponseEntity.ok(ApiResponse.success("Cập nhật danh mục thành công", category));
     }
-    
+
     @DeleteMapping("/categories/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -119,23 +131,28 @@ public class AttributeController {
         categoryService.deleteCategory(id);
         return ResponseEntity.ok(ApiResponse.success("Xóa danh mục thành công", null));
     }
-    
+
     // ========== MATERIAL APIs ==========
     @GetMapping("/materials")
     @Operation(summary = "Get all materials", description = "Get list of all materials")
     public ResponseEntity<ApiResponse<List<Material>>> getAllMaterials(
-            @RequestParam(required = false) String status) {
-        List<Material> materials = materialService.getAllMaterials(status);
-        return ResponseEntity.ok(ApiResponse.success("Lấy danh sách chất liệu thành công", materials));
+            @RequestParam(required = false) String status,
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "10") Integer limit) {
+        Page<Material> materialPage = materialService.getAllMaterials(status, page, limit);
+        return ResponseEntity.ok(ApiResponse.success(
+                "Lấy danh sách chất liệu thành công",
+                materialPage.getContent(),
+                PaginationMeta.fromPage(materialPage)));
     }
-    
+
     @GetMapping("/materials/{id}")
     @Operation(summary = "Get material by ID", description = "Get material details by ID")
     public ResponseEntity<ApiResponse<Material>> getMaterialById(@PathVariable Integer id) {
         Material material = materialService.getMaterialById(id);
         return ResponseEntity.ok(ApiResponse.success("Lấy thông tin chất liệu thành công", material));
     }
-    
+
     @PostMapping("/materials")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -145,7 +162,7 @@ public class AttributeController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.success("Tạo chất liệu thành công", material));
     }
-    
+
     @PutMapping("/materials/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -156,7 +173,7 @@ public class AttributeController {
         Material material = materialService.updateMaterial(id, request);
         return ResponseEntity.ok(ApiResponse.success("Cập nhật chất liệu thành công", material));
     }
-    
+
     @DeleteMapping("/materials/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -165,23 +182,28 @@ public class AttributeController {
         materialService.deleteMaterial(id);
         return ResponseEntity.ok(ApiResponse.success("Xóa chất liệu thành công", null));
     }
-    
+
     // ========== COLOR APIs ==========
     @GetMapping("/colors")
     @Operation(summary = "Get all colors", description = "Get list of all colors")
     public ResponseEntity<ApiResponse<List<Color>>> getAllColors(
-            @RequestParam(required = false) String status) {
-        List<Color> colors = colorService.getAllColors(status);
-        return ResponseEntity.ok(ApiResponse.success("Lấy danh sách màu sắc thành công", colors));
+            @RequestParam(required = false) String status,
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "10") Integer limit) {
+        Page<Color> colorPage = colorService.getAllColors(status, page, limit);
+        return ResponseEntity.ok(ApiResponse.success(
+                "Lấy danh sách màu sắc thành công",
+                colorPage.getContent(),
+                PaginationMeta.fromPage(colorPage)));
     }
-    
+
     @GetMapping("/colors/{id}")
     @Operation(summary = "Get color by ID", description = "Get color details by ID")
     public ResponseEntity<ApiResponse<Color>> getColorById(@PathVariable Integer id) {
         Color color = colorService.getColorById(id);
         return ResponseEntity.ok(ApiResponse.success("Lấy thông tin màu sắc thành công", color));
     }
-    
+
     @PostMapping("/colors")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -191,7 +213,7 @@ public class AttributeController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.success("Tạo màu sắc thành công", color));
     }
-    
+
     @PutMapping("/colors/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -202,7 +224,7 @@ public class AttributeController {
         Color color = colorService.updateColor(id, request);
         return ResponseEntity.ok(ApiResponse.success("Cập nhật màu sắc thành công", color));
     }
-    
+
     @DeleteMapping("/colors/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -211,23 +233,28 @@ public class AttributeController {
         colorService.deleteColor(id);
         return ResponseEntity.ok(ApiResponse.success("Xóa màu sắc thành công", null));
     }
-    
+
     // ========== SIZE APIs ==========
     @GetMapping("/sizes")
     @Operation(summary = "Get all sizes", description = "Get list of all sizes")
     public ResponseEntity<ApiResponse<List<Size>>> getAllSizes(
-            @RequestParam(required = false) String status) {
-        List<Size> sizes = sizeService.getAllSizes(status);
-        return ResponseEntity.ok(ApiResponse.success("Lấy danh sách kích thước thành công", sizes));
+            @RequestParam(required = false) String status,
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "10") Integer limit) {
+        Page<Size> sizePage = sizeService.getAllSizes(status, page, limit);
+        return ResponseEntity.ok(ApiResponse.success(
+                "Lấy danh sách kích thước thành công",
+                sizePage.getContent(),
+                PaginationMeta.fromPage(sizePage)));
     }
-    
+
     @GetMapping("/sizes/{id}")
     @Operation(summary = "Get size by ID", description = "Get size details by ID")
     public ResponseEntity<ApiResponse<Size>> getSizeById(@PathVariable Integer id) {
         Size size = sizeService.getSizeById(id);
         return ResponseEntity.ok(ApiResponse.success("Lấy thông tin kích thước thành công", size));
     }
-    
+
     @PostMapping("/sizes")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -237,7 +264,7 @@ public class AttributeController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.success("Tạo kích thước thành công", size));
     }
-    
+
     @PutMapping("/sizes/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -248,7 +275,7 @@ public class AttributeController {
         Size size = sizeService.updateSize(id, request);
         return ResponseEntity.ok(ApiResponse.success("Cập nhật kích thước thành công", size));
     }
-    
+
     @DeleteMapping("/sizes/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "bearerAuth")
@@ -258,4 +285,3 @@ public class AttributeController {
         return ResponseEntity.ok(ApiResponse.success("Xóa kích thước thành công", null));
     }
 }
-
