@@ -22,20 +22,20 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class VoucherService {
-    
+
     private final VoucherRepository voucherRepository;
-    
+
     @Transactional
     public Voucher createVoucher(VoucherCreateRequest request) {
         // Check if code already exists
         if (voucherRepository.existsByCode(request.getCode())) {
             throw new RuntimeException("Mã voucher đã tồn tại");
         }
-        
+
         // Validate discount value
         if (request.getDiscountType() == Voucher.VoucherType.PERCENTAGE) {
             if (request.getDiscountValue().compareTo(BigDecimal.ZERO) <= 0 ||
-                request.getDiscountValue().compareTo(new BigDecimal("100")) > 0) {
+                    request.getDiscountValue().compareTo(new BigDecimal("100")) > 0) {
                 throw new RuntimeException("Giá trị phần trăm phải từ 1 đến 100");
             }
         } else if (request.getDiscountType() == Voucher.VoucherType.FIXED_AMOUNT) {
@@ -43,13 +43,13 @@ public class VoucherService {
                 throw new RuntimeException("Giá trị cố định phải lớn hơn 0");
             }
         }
-        
+
         // Validate dates
-        if (request.getStartDate().isAfter(request.getEndDate()) || 
-            request.getStartDate().isEqual(request.getEndDate())) {
+        if (request.getStartDate().isAfter(request.getEndDate()) ||
+                request.getStartDate().isEqual(request.getEndDate())) {
             throw new RuntimeException("Thời gian kết thúc phải sau thời gian bắt đầu");
         }
-        
+
         Voucher voucher = new Voucher();
         voucher.setCode(request.getCode());
         voucher.setName(request.getName());
@@ -61,60 +61,67 @@ public class VoucherService {
         voucher.setMinOrderValue(request.getMinOrderValue() != null ? request.getMinOrderValue() : BigDecimal.ZERO);
         voucher.setMaxDiscount(request.getMaxDiscount());
         voucher.setStatus(request.getStatus() != null ? request.getStatus() : Voucher.Status.ACTIVE);
-        
+
         return voucherRepository.save(voucher);
     }
-    
+
     public Page<Voucher> getVouchers(String code, String name, Voucher.Status status,
-                                     LocalDateTime startDate, LocalDateTime endDate,
-                                     Pageable pageable) {
+            LocalDateTime startDate, LocalDateTime endDate,
+            Pageable pageable) {
         return voucherRepository.findWithFilters(code, name, status, startDate, endDate, pageable);
     }
-    
+
     public Optional<Voucher> getVoucherById(Integer id) {
         return voucherRepository.findById(id);
     }
-    
+
     @Transactional
     public Voucher updateVoucher(Integer id, VoucherUpdateRequest request) {
         Voucher voucher = voucherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy phiếu giảm giá"));
-        
+
         // Validate dates if both provided
         if (request.getStartDate() != null && request.getEndDate() != null) {
             if (request.getStartDate().isAfter(request.getEndDate()) ||
-                request.getStartDate().isEqual(request.getEndDate())) {
+                    request.getStartDate().isEqual(request.getEndDate())) {
                 throw new RuntimeException("Thời gian kết thúc phải sau thời gian bắt đầu");
             }
         }
-        
-        if (request.getName() != null) voucher.setName(request.getName());
-        if (request.getQuantity() != null) voucher.setQuantity(request.getQuantity());
-        if (request.getStartDate() != null) voucher.setStartDate(request.getStartDate());
-        if (request.getEndDate() != null) voucher.setEndDate(request.getEndDate());
-        if (request.getMinOrderValue() != null) voucher.setMinOrderValue(request.getMinOrderValue());
-        if (request.getMaxDiscount() != null) voucher.setMaxDiscount(request.getMaxDiscount());
-        if (request.getStatus() != null) voucher.setStatus(request.getStatus());
-        
+
+        if (request.getName() != null)
+            voucher.setName(request.getName());
+        if (request.getQuantity() != null)
+            voucher.setQuantity(request.getQuantity());
+        if (request.getStartDate() != null)
+            voucher.setStartDate(request.getStartDate());
+        if (request.getEndDate() != null)
+            voucher.setEndDate(request.getEndDate());
+        if (request.getMinOrderValue() != null)
+            voucher.setMinOrderValue(request.getMinOrderValue());
+        if (request.getMaxDiscount() != null)
+            voucher.setMaxDiscount(request.getMaxDiscount());
+        if (request.getStatus() != null)
+            voucher.setStatus(request.getStatus());
+
         return voucherRepository.save(voucher);
     }
-    
+
     @Transactional
     public void deleteVoucher(Integer id) {
         Voucher voucher = voucherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy phiếu giảm giá"));
         voucherRepository.delete(voucher);
     }
-    
+
     public Map<String, Object> validateVoucher(VoucherValidateRequest request) {
         Voucher voucher = voucherRepository.findByCode(request.getCode())
                 .orElseThrow(() -> new RuntimeException("Mã voucher không tồn tại"));
-        
+
         // Check status
         if (voucher.getStatus() != Voucher.Status.ACTIVE) {
             throw new RuntimeException("Voucher không còn hoạt động");
         }
-        
+
         // Check time
         LocalDateTime now = LocalDateTime.now();
         if (now.isBefore(voucher.getStartDate())) {
@@ -123,27 +130,27 @@ public class VoucherService {
         if (now.isAfter(voucher.getEndDate())) {
             throw new RuntimeException("Voucher đã hết hạn");
         }
-        
+
         // Check quantity
         if (voucher.getUsedCount() >= voucher.getQuantity()) {
             throw new RuntimeException("Voucher đã hết lượt sử dụng");
         }
-        
+
         // Check min order value
         if (request.getOrderValue() != null && voucher.getMinOrderValue() != null) {
             if (request.getOrderValue().compareTo(voucher.getMinOrderValue()) < 0) {
-                throw new RuntimeException("Giá trị đơn hàng tối thiểu để sử dụng voucher này là " + 
-                    voucher.getMinOrderValue() + "đ");
+                throw new RuntimeException("Giá trị đơn hàng tối thiểu để sử dụng voucher này là " +
+                        voucher.getMinOrderValue() + "đ");
             }
         }
-        
+
         // Calculate discount amount
         BigDecimal discountAmount = BigDecimal.ZERO;
         if (request.getOrderValue() != null) {
             if (voucher.getType() == Voucher.VoucherType.PERCENTAGE) {
                 discountAmount = request.getOrderValue()
-                    .multiply(voucher.getValue())
-                    .divide(new BigDecimal("100"), 2, java.math.RoundingMode.HALF_UP);
+                        .multiply(voucher.getValue())
+                        .divide(new BigDecimal("100"), 2, java.math.RoundingMode.HALF_UP);
                 if (voucher.getMaxDiscount() != null && discountAmount.compareTo(voucher.getMaxDiscount()) > 0) {
                     discountAmount = voucher.getMaxDiscount();
                 }
@@ -151,45 +158,40 @@ public class VoucherService {
                 discountAmount = voucher.getValue();
             }
         }
-        
+
         return Map.of(
-            "voucher", voucher,
-            "discountAmount", discountAmount
-        );
+                "voucher", voucher,
+                "discountAmount", discountAmount);
     }
-    
+
     @Transactional
     public Voucher incrementVoucherUsage(Integer id) {
         Voucher voucher = voucherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy phiếu giảm giá"));
-        
+
         if (voucher.getUsedCount() >= voucher.getQuantity()) {
             throw new RuntimeException("Voucher đã hết lượt sử dụng");
         }
-        
+
         voucher.setUsedCount(voucher.getUsedCount() + 1);
         return voucherRepository.save(voucher);
     }
-    
+
     @Transactional
     public Map<String, Object> notifyVoucher(Integer id, String title, String message) {
         Voucher voucher = voucherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy phiếu giảm giá"));
-        
-        // Note: Notification feature has been removed
-        // This method now only returns voucher information
-        
+
         return Map.of(
-            "voucherCode", voucher.getCode(),
-            "voucherName", voucher.getName(),
-            "message", "Voucher notification feature has been removed"
-        );
+                "voucherCode", voucher.getCode(),
+                "voucherName", voucher.getName(),
+                "message", "Voucher notification feature has been removed");
     }
-    
+
     public List<Map<String, Object>> getAvailableVouchersForUser(BigDecimal orderValue) {
         LocalDateTime now = LocalDateTime.now();
         Page<Voucher> vouchers = voucherRepository.findAvailableVouchers(now, PageRequest.of(0, 100));
-        
+
         return vouchers.getContent().stream()
                 .filter(voucher -> {
                     if (orderValue != null && voucher.getMinOrderValue() != null) {
@@ -202,16 +204,17 @@ public class VoucherService {
                     if (orderValue != null) {
                         if (voucher.getType() == Voucher.VoucherType.PERCENTAGE) {
                             discountAmount = orderValue
-                                .multiply(voucher.getValue())
-                                .divide(new BigDecimal("100"), 2, java.math.RoundingMode.HALF_UP);
-                            if (voucher.getMaxDiscount() != null && discountAmount.compareTo(voucher.getMaxDiscount()) > 0) {
+                                    .multiply(voucher.getValue())
+                                    .divide(new BigDecimal("100"), 2, java.math.RoundingMode.HALF_UP);
+                            if (voucher.getMaxDiscount() != null
+                                    && discountAmount.compareTo(voucher.getMaxDiscount()) > 0) {
                                 discountAmount = voucher.getMaxDiscount();
                             }
                         } else if (voucher.getType() == Voucher.VoucherType.FIXED_AMOUNT) {
                             discountAmount = voucher.getValue();
                         }
                     }
-                    
+
                     Map<String, Object> result = new java.util.HashMap<>();
                     result.put("id", voucher.getId());
                     result.put("code", voucher.getCode());
@@ -231,4 +234,3 @@ public class VoucherService {
                 .collect(Collectors.toList());
     }
 }
-
