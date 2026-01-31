@@ -24,5 +24,19 @@ public interface ChatHistoryRepository extends JpaRepository<ChatHistory, Intege
     
     @Query("SELECT AVG(ch.rating) FROM ChatHistory ch WHERE ch.rating IS NOT NULL AND ch.createdAt BETWEEN :startDate AND :endDate")
     Double getAverageRatingByDateRange(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+    
+    @Query("SELECT ch FROM ChatHistory ch WHERE " +
+           "(:accountId IS NULL OR ch.account.id = :accountId) AND " +
+           "(:query IS NULL OR ch.userMessage LIKE %:query% OR ch.botResponse LIKE %:query%) AND " +
+           "(:startDate IS NULL OR ch.createdAt >= :startDate) AND " +
+           "(:endDate IS NULL OR ch.createdAt <= :endDate) " +
+           "ORDER BY ch.createdAt DESC")
+    Page<ChatHistory> searchHistory(
+        @Param("accountId") Integer accountId,
+        @Param("query") String query,
+        @Param("startDate") LocalDateTime startDate,
+        @Param("endDate") LocalDateTime endDate,
+        Pageable pageable
+    );
 }
 

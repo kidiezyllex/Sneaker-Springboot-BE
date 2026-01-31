@@ -7,7 +7,7 @@
 
 ACTORS:
 - Khách hàng (Customer)
-- Nhân viên (Staff)  
+- Nhân viên  
 - Quản trị viên (Admin)
 
 QUAN HỆ KẾ THỪA:
@@ -54,7 +54,7 @@ QUAN HỆ KẾ THỪA:
     - Xem lịch sử chat
     - Tiếp tục chat
 ================================================================================
-3. USE CASE NHÂN VIÊN (STAFF)
+3. USE CASE Nhân viên
 ================================================================================
 
 3.1. KẾ THỪA TỪ KHÁCH HÀNG
