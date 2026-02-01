@@ -1,4 +1,4 @@
-1. Nhóm Tư Vấn Sản Phẩm & Tra Cứu Thực Tế (MỚI - Dữ liệu từ Database)
+1. Nhóm Tư Vấn Sản Phẩm & Tra Cứu Thực Tế
 "Shop còn mẫu giày Nike nào đang có sẵn không?"
 "Mình muốn tìm các mẫu giày của thương hiệu Adidas, shop có những đôi nào?"
 "Đôi Nike Air Force 1 hiện tại giá bao nhiêu và còn size 42 không shop?"
