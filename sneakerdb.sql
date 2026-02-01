@@ -49,23 +49,23 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `avatar`, `birthday`, `citizen_id`, `code`, `created_at`, `email`, `full_name`, `gender`, `password`, `phone_number`, `role`, `status`, `updated_at`) VALUES
-(1, NULL, '1990-01-15 00:00:00.000000', '001234567890', 'ACC001', '2025-12-11 00:14:59.000000', 'nguyenvananh@gmail.com', 'Nguyễn Văn Anh', b'1', '$2a$10$l1NcsDjlCaBIsVX4SNg1FeKfUvqWKejOkX3JGYLIYKfF1Li80GZDW', '0901234567', 'ADMIN', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(2, NULL, '1995-05-20 00:00:00.000000', '001234567891', 'ACC002', '2025-12-11 00:14:59.000000', 'tranthibinh@gmail.com', 'Trần Thị Bình', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0901234568', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(3, NULL, '1992-08-10 00:00:00.000000', '001234567892', 'ACC003', '2025-12-11 00:14:59.000000', 'levancuong@gmail.com', 'Lê Văn Cường', b'1', '$2a$10$rx51w6Fzu07iiMqEif2K3u5rzhO05TvaOusM31.Iq6.pajDkgDd7i', '0901234569', 'STAFF', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(4, NULL, '1993-03-12 00:00:00.000000', '001111111111', 'ACC004', '2025-12-11 00:14:59.000000', 'phamquocdung@gmail.com', 'Phạm Quốc Dũng', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0901111111', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(5, NULL, '1994-07-25 00:00:00.000000', '002222222222', 'ACC005', '2025-12-11 00:14:59.000000', 'hoangthigiang@gmail.com', 'Hoàng Thị Giang', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0902222222', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(6, NULL, '1991-11-08 00:00:00.000000', '003333333333', 'ACC006', '2025-12-11 00:14:59.000000', 'vuvanhung@gmail.com', 'Vũ Văn Hùng', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0903333333', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(7, NULL, '1996-02-14 00:00:00.000000', '004444444444', 'ACC007', '2025-12-11 00:14:59.000000', 'dangthilinh@gmail.com', 'Đặng Thị Linh', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0904444444', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(8, NULL, '1990-09-30 00:00:00.000000', '005555555555', 'ACC008', '2025-12-11 00:14:59.000000', 'buivanminh@gmail.com', 'Bùi Văn Minh', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0905555555', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(9, NULL, '1997-04-18 00:00:00.000000', '006666666666', 'ACC009', '2025-12-11 00:14:59.000000', 'ngothingoc@gmail.com', 'Ngô Thị Ngọc', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0906666666', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(10, NULL, '1992-12-05 00:00:00.000000', '007777777777', 'ACC010', '2025-12-11 00:14:59.000000', 'dovanphong@gmail.com', 'Đỗ Văn Phong', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0907777777', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(11, NULL, '1995-06-22 00:00:00.000000', '008888888888', 'ACC011', '2025-12-11 00:14:59.000000', 'hathiquynh@gmail.com', 'Hà Thị Quỳnh', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0908888888', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(12, NULL, '1993-10-15 00:00:00.000000', '009999999999', 'ACC012', '2025-12-11 00:14:59.000000', 'lyvanson@gmail.com', 'Lý Văn Sơn', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0909999999', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(13, NULL, '1994-01-28 00:00:00.000000', '010000000000', 'ACC013', '2025-12-11 00:14:59.000000', 'maithithao@gmail.com', 'Mai Thị Thảo', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0910000000', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(14, NULL, '1991-05-10 00:00:00.000000', '011111111111', 'ACC014', '2025-12-11 00:14:59.000000', 'trinhvantung@gmail.com', 'Trịnh Văn Tùng', b'1', '$2a$10$rx51w6Fzu07iiMqEif2K3u5rzhO05TvaOusM31.Iq6.pajDkgDd7i', '0911111111', 'STAFF', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(15, NULL, '1988-03-20 00:00:00.000000', '012222222222', 'ACC015', '2025-12-11 00:14:59.000000', 'phanvankhanh@gmail.com', 'Phan Văn Khánh', b'1', '$2a$10$l1NcsDjlCaBIsVX4SNg1FeKfUvqWKejOkX3JGYLIYKfF1Li80GZDW', '0912222222', 'ADMIN', 'ACTIVE', '2025-12-11 00:14:59.000000'),
-(16, NULL, NULL, NULL, 'CUS001626', '2026-01-01 02:30:28.000000', 'buitranthienan2222@gmail.com', 'Bùi Trần Thiên Ân', NULL, '$2a$10$rLAlc5W.NWdaeh.0I.IOR.e2qAdsPO45amxcgv5A5Pv7ye92Fp2QW', '0336735283', 'CUSTOMER', 'ACTIVE', '2026-01-01 02:30:28.000000'),
-(17, NULL, NULL, NULL, 'CUS001726', '2026-01-01 02:53:45.000000', 'buitranthienan11212@gmail.com', 'Bùi Trần Thiên Ân', NULL, '$2a$10$ua1HMZcvl8B.LLhWloFlj.3ddEmGjWCs/B6s4qLNQ0DQCRuIVyeeK', '0902000292', 'CUSTOMER', 'ACTIVE', '2026-01-01 02:53:45.000000');
+(1, NULL, '1990-01-15 00:00:00.000000', '001234567890', 'ACC001', '2025-12-11 00:14:59.000000', 'nguyenvananh@gmail.com', 'Nguyễn Hoàng Thiên Bảo', b'1', '$2a$10$l1NcsDjlCaBIsVX4SNg1FeKfUvqWKejOkX3JGYLIYKfF1Li80GZDW', '0901234567', 'ADMIN', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(2, NULL, '1995-05-20 00:00:00.000000', '001234567891', 'ACC002', '2025-12-11 00:14:59.000000', 'tranthibinh@gmail.com', 'Trần Phan Anh Thư', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0901234568', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(3, NULL, '1992-08-10 00:00:00.000000', '001234567892', 'ACC003', '2025-12-11 00:14:59.000000', 'levancuong@gmail.com', 'Lê Nguyễn Minh Khôi', b'1', '$2a$10$rx51w6Fzu07iiMqEif2K3u5rzhO05TvaOusM31.Iq6.pajDkgDd7i', '0901234569', 'STAFF', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(4, NULL, '1993-03-12 00:00:00.000000', '001111111111', 'ACC004', '2025-12-11 00:14:59.000000', 'phamquocdung@gmail.com', 'Phạm Gia Tuấn Kiệt', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0901111111', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(5, NULL, '1994-07-25 00:00:00.000000', '002222222222', 'ACC005', '2025-12-11 00:14:59.000000', 'hoangthigiang@gmail.com', 'Hoàng Nguyễn Diệu Anh', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0902222222', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(6, NULL, '1991-11-08 00:00:00.000000', '003333333333', 'ACC006', '2025-12-11 00:14:59.000000', 'vuvanhung@gmail.com', 'Vũ Hoàng Phương Nam', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0903333333', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(7, NULL, '1996-02-14 00:00:00.000000', '004444444444', 'ACC007', '2025-12-11 00:14:59.000000', 'dangthilinh@gmail.com', 'Đặng Lê Minh Ngọc', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0904444444', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(8, NULL, '1990-09-30 00:00:00.000000', '005555555555', 'ACC008', '2025-12-11 00:14:59.000000', 'buivanminh@gmail.com', 'Bùi Phan Khánh An', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0905555555', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(9, NULL, '1997-04-18 00:00:00.000000', '006666666666', 'ACC009', '2025-12-11 00:14:59.000000', 'ngothingoc@gmail.com', 'Ngô Trần Tuấn Minh', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0906666666', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(10, NULL, '1992-12-05 00:00:00.000000', '007777777777', 'ACC010', '2025-12-11 00:14:59.000000', 'dovanphong@gmail.com', 'Đỗ Hoàng Gia Hân', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0907777777', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(11, NULL, '1995-06-22 00:00:00.000000', '008888888888', 'ACC011', '2025-12-11 00:14:59.000000', 'hathiquynh@gmail.com', 'Hà Phan Thảo Nguyên', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0908888888', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(12, NULL, '1993-10-15 00:00:00.000000', '009999999999', 'ACC012', '2025-12-11 00:14:59.000000', 'lyvanson@gmail.com', 'Lý Nguyễn Trường Giang', b'1', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0909999999', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(13, NULL, '1994-01-28 00:00:00.000000', '010000000000', 'ACC013', '2025-12-11 00:14:59.000000', 'maithithao@gmail.com', 'Mai Trần Thanh Trúc', b'0', '$2a$10$MN9dZLTE8q3ZkpA38yVhOed.EG7yyo9G9TMHsPtw/glCQeLZ9kp8K', '0910000000', 'CUSTOMER', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(14, NULL, '1991-05-10 00:00:00.000000', '011111111111', 'ACC014', '2025-12-11 00:14:59.000000', 'trinhvantung@gmail.com', 'Trịnh Hoàng Nhật Minh', b'1', '$2a$10$rx51w6Fzu07iiMqEif2K3u5rzhO05TvaOusM31.Iq6.pajDkgDd7i', '0911111111', 'STAFF', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(15, NULL, '1988-03-20 00:00:00.000000', '012222222222', 'ACC015', '2025-12-11 00:14:59.000000', 'phanvankhanh@gmail.com', 'Phan Lê Kim Ngân', b'1', '$2a$10$l1NcsDjlCaBIsVX4SNg1FeKfUvqWKejOkX3JGYLIYKfF1Li80GZDW', '0912222222', 'ADMIN', 'ACTIVE', '2025-12-11 00:14:59.000000'),
+(16, NULL, NULL, NULL, 'CUS001626', '2026-01-01 02:30:28.000000', 'buitranthienan2222@gmail.com', 'Nguyễn Trần Bảo Ngọc', NULL, '$2a$10$rLAlc5W.NWdaeh.0I.IOR.e2qAdsPO45amxcgv5A5Pv7ye92Fp2QW', '0336735283', 'CUSTOMER', 'ACTIVE', '2026-01-01 02:30:28.000000'),
+(17, NULL, NULL, NULL, 'CUS001726', '2026-01-01 02:53:45.000000', 'buitranthienan11212@gmail.com', 'Trần Đặng Minh Quân', NULL, '$2a$10$ua1HMZcvl8B.LLhWloFlj.3ddEmGjWCs/B6s4qLNQ0DQCRuIVyeeK', '0902000292', 'CUSTOMER', 'ACTIVE', '2026-01-01 02:53:45.000000');
 
 -- --------------------------------------------------------
 
@@ -93,21 +93,21 @@ CREATE TABLE `account_addresses` (
 --
 
 INSERT INTO `account_addresses` (`id`, `created_at`, `district_id`, `is_default`, `name`, `phone_number`, `province_id`, `specific_address`, `type`, `updated_at`, `ward_id`, `account_id`) VALUES
-(1, '2025-12-11 00:15:00.000000', '760', b'1', 'Nguyen Van A', '0901234568', '79', '123 Đường ABC, Phường XYZ', b'0', '2025-12-11 00:15:00.000000', '26734', 2),
-(2, '2025-12-11 00:15:00.000000', '760', b'0', 'Nguyen Van A', '0901234568', '79', '456 Đường DEF, Phường UVW', b'0', '2025-12-11 00:15:00.000000', '26735', 2),
-(3, '2025-12-11 00:15:00.000000', '760', b'1', 'Nguyen Van A', '0901111111', '79', '789 Đường GHI, Phường RST', b'0', '2025-12-11 00:15:00.000000', '26734', 4),
-(4, '2025-12-11 00:15:00.000000', '001', b'1', 'Tran Thi B', '0902222222', '01', '321 Đường JKL, Phường MNO', b'0', '2025-12-11 00:15:00.000000', '00001', 5),
-(5, '2025-12-11 00:15:00.000000', '490', b'1', 'Le Van C', '0903333333', '48', '654 Đường PQR, Phường STU', b'0', '2025-12-11 00:15:00.000000', '20215', 6),
-(6, '2025-12-11 00:15:00.000000', '760', b'1', 'Pham Thi D', '0904444444', '79', '987 Đường VWX, Phường YZA', b'0', '2025-12-11 00:15:00.000000', '26734', 7),
-(7, '2025-12-11 00:15:00.000000', '213', b'1', 'Hoang Van E', '0905555555', '24', '147 Đường BCD, Phường EFG', b'0', '2025-12-11 00:15:00.000000', '07198', 8),
-(8, '2025-12-11 00:15:00.000000', '760', b'1', 'Vu Thi F', '0906666666', '79', '258 Đường HIJ, Phường KLM', b'0', '2025-12-11 00:15:00.000000', '26735', 9),
-(9, '2025-12-11 00:15:00.000000', '312', b'1', 'Dang Van G', '0907777777', '31', '369 Đường NOP, Phường QRS', b'0', '2025-12-11 00:15:00.000000', '11689', 10),
-(10, '2025-12-11 00:15:00.000000', '760', b'1', 'Bui Thi H', '0908888888', '79', '741 Đường TUV, Phường WXY', b'0', '2025-12-11 00:15:00.000000', '26734', 11),
-(11, '2025-12-11 00:15:00.000000', '916', b'1', 'Do Van I', '0909999999', '92', '852 Đường ZAB, Phường CDE', b'0', '2025-12-11 00:15:00.000000', '31156', 12),
-(12, '2025-12-11 00:15:00.000000', '760', b'1', 'Ngo Thi K', '0910000000', '79', '963 Đường FGH, Phường IJK', b'0', '2025-12-11 00:15:00.000000', '26735', 13),
-(13, '2025-12-11 00:15:00.000000', '001', b'0', 'Nguyen Van A', '0901111111', '01', '159 Đường LMN, Phường OPQ', b'0', '2025-12-11 00:15:00.000000', '00001', 4),
-(14, '2025-12-11 00:15:00.000000', '490', b'0', 'Tran Thi B', '0902222222', '48', '357 Đường RST, Phường UVW', b'0', '2025-12-11 00:15:00.000000', '20215', 5),
-(15, '2025-12-11 00:15:00.000000', '213', b'0', 'Le Van C', '0903333333', '24', '468 Đường XYZ, Phường ABC', b'0', '2025-12-11 00:15:00.000000', '07198', 6);
+(1, '2025-12-11 00:15:00.000000', '760', b'1', 'Trần Phan Anh Thư', '0901234568', '79', '123 Đường ABC, Phường XYZ', b'0', '2025-12-11 00:15:00.000000', '26734', 2),
+(2, '2025-12-11 00:15:00.000000', '760', b'0', 'Trần Phan Anh Thư', '0901234568', '79', '456 Đường DEF, Phường UVW', b'0', '2025-12-11 00:15:00.000000', '26735', 2),
+(3, '2025-12-11 00:15:00.000000', '760', b'1', 'Phạm Gia Tuấn Kiệt', '0901111111', '79', '789 Đường GHI, Phường RST', b'0', '2025-12-11 00:15:00.000000', '26734', 4),
+(4, '2025-12-11 00:15:00.000000', '001', b'1', 'Hoàng Nguyễn Diệu Anh', '0902222222', '01', '321 Đường JKL, Phường MNO', b'0', '2025-12-11 00:15:00.000000', '00001', 5),
+(5, '2025-12-11 00:15:00.000000', '490', b'1', 'Vũ Hoàng Phương Nam', '0903333333', '48', '654 Đường PQR, Phường STU', b'0', '2025-12-11 00:15:00.000000', '20215', 6),
+(6, '2025-12-11 00:15:00.000000', '760', b'1', 'Đặng Lê Minh Ngọc', '0904444444', '79', '987 Đường VWX, Phường YZA', b'0', '2025-12-11 00:15:00.000000', '26734', 7),
+(7, '2025-12-11 00:15:00.000000', '213', b'1', 'Bùi Phan Khánh An', '0905555555', '24', '147 Đường BCD, Phường EFG', b'0', '2025-12-11 00:15:00.000000', '07198', 8),
+(8, '2025-12-11 00:15:00.000000', '760', b'1', 'Ngô Trần Tuấn Minh', '0906666666', '79', '258 Đường HIJ, Phường KLM', b'0', '2025-12-11 00:15:00.000000', '26735', 9),
+(9, '2025-12-11 00:15:00.000000', '312', b'1', 'Đỗ Hoàng Gia Hân', '0907777777', '31', '369 Đường NOP, Phường QRS', b'0', '2025-12-11 00:15:00.000000', '11689', 10),
+(10, '2025-12-11 00:15:00.000000', '760', b'1', 'Hà Phan Thảo Nguyên', '0908888888', '79', '741 Đường TUV, Phường WXY', b'0', '2025-12-11 00:15:00.000000', '26734', 11),
+(11, '2025-12-11 00:15:00.000000', '916', b'1', 'Lý Nguyễn Trường Giang', '0909999999', '92', '852 Đường ZAB, Phường CDE', b'0', '2025-12-11 00:15:00.000000', '31156', 12),
+(12, '2025-12-11 00:15:00.000000', '760', b'1', 'Mai Trần Thanh Trúc', '0910000000', '79', '963 Đường FGH, Phường IJK', b'0', '2025-12-11 00:15:00.000000', '26735', 13),
+(13, '2025-12-11 00:15:00.000000', '001', b'0', 'Phạm Gia Tuấn Kiệt', '0901111111', '01', '159 Đường LMN, Phường OPQ', b'0', '2025-12-11 00:15:00.000000', '00001', 4),
+(14, '2025-12-11 00:15:00.000000', '490', b'0', 'Hoàng Nguyễn Diệu Anh', '0902222222', '48', '357 Đường RST, Phường UVW', b'0', '2025-12-11 00:15:00.000000', '20215', 5),
+(15, '2025-12-11 00:15:00.000000', '213', b'0', 'Vũ Hoàng Phương Nam', '0903333333', '24', '468 Đường XYZ, Phường ABC', b'0', '2025-12-11 00:15:00.000000', '07198', 6);
 
 -- --------------------------------------------------------
 
@@ -366,33 +366,33 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `code`, `created_at`, `discount`, `order_status`, `payment_method`, `payment_status`, `shipping_district_id`, `shipping_name`, `shipping_phone_number`, `shipping_province_id`, `shipping_specific_address`, `shipping_ward_id`, `sub_total`, `total`, `updated_at`, `customer_id`, `staff_id`, `voucher_id`) VALUES
-(1, 'ORD001', '2025-12-11 00:15:00.000000', 250000.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '760', 'Nguyen Van A', '0901234568', '79', '123 Đường ABC, Phường XYZ', '26734', 2500000.00, 2250000.00, '2025-12-11 00:15:00.000000', 2, 3, 1),
-(2, 'ORD002', '2025-12-11 00:15:00.000000', 0.00, 'CHO_GIAO_HANG', 'BANK_TRANSFER', 'PENDING', '760', 'Nguyen Van A', '0901111111', '79', '789 Đường GHI, Phường RST', '26734', 3200000.00, 3200000.00, '2025-12-11 00:15:00.000000', 4, NULL, NULL),
-(3, 'ORD003', '2025-12-11 00:15:00.000000', 50000.00, 'DANG_VAN_CHUYEN', 'COD', 'PENDING', '001', 'Tran Thi B', '0902222222', '01', '321 Đường JKL, Phường MNO', '00001', 1800000.00, 1750000.00, '2025-12-11 00:15:00.000000', 5, 3, 3),
-(4, 'ORD004', '2025-12-11 00:15:00.000000', 0.00, 'DA_GIAO_HANG', 'CASH', 'PAID', '490', 'Le Van C', '0903333333', '48', '654 Đường PQR, Phường STU', '20215', 2200000.00, 2200000.00, '2025-12-11 00:15:00.000000', 6, NULL, NULL),
-(5, 'ORD005', '2025-12-11 00:15:00.000000', 1000000.00, 'HOAN_THANH', 'BANK_TRANSFER', 'PAID', '760', 'Pham Thi D', '0904444444', '79', '987 Đường VWX, Phường YZA', '26734', 5000000.00, 4000000.00, '2025-12-11 00:15:00.000000', 7, 14, 2),
-(6, 'ORD006', '2025-12-11 00:15:00.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '213', 'Hoang Van E', '0905555555', '24', '147 Đường BCD, Phường EFG', '07198', 1500000.00, 1500000.00, '2025-12-11 00:15:00.000000', 8, NULL, NULL),
-(7, 'ORD007', '2025-12-11 00:15:00.000000', 280000.00, 'DA_GIAO_HANG', 'CASH', 'PAID', '760', 'Vu Thi F', '0906666666', '79', '258 Đường HIJ, Phường KLM', '26735', 2800000.00, 2520000.00, '2025-12-11 00:15:00.000000', 9, 3, 1),
-(8, 'ORD008', '2025-12-11 00:15:00.000000', 0.00, 'DANG_VAN_CHUYEN', 'BANK_TRANSFER', 'PARTIAL_PAID', '312', 'Dang Van G', '0907777777', '31', '369 Đường NOP, Phường QRS', '11689', 2400000.00, 2400000.00, '2025-12-11 00:15:00.000000', 10, NULL, NULL),
-(9, 'ORD009', '2025-12-11 00:15:00.000000', 100000.00, 'HOAN_THANH', 'CASH', 'PAID', '760', 'Bui Thi H', '0908888888', '79', '741 Đường TUV, Phường WXY', '26734', 4500000.00, 4400000.00, '2025-12-11 00:15:00.000000', 11, 14, 4),
-(10, 'ORD010', '2025-12-11 00:15:00.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '916', 'Do Van I', '0909999999', '92', '852 Đường ZAB, Phường CDE', '31156', 1600000.00, 1600000.00, '2025-12-11 00:15:00.000000', 12, NULL, NULL),
-(11, 'ORD011', '2025-12-11 00:15:00.000000', 0.00, 'DA_GIAO_HANG', 'BANK_TRANSFER', 'PAID', '760', 'Ngo Thi K', '0910000000', '79', '963 Đường FGH, Phường IJK', '26735', 2100000.00, 2100000.00, '2025-12-11 00:15:00.000000', 13, 3, NULL),
-(12, 'ORD012', '2025-12-11 00:15:00.000000', 200000.00, 'CHO_GIAO_HANG', 'COD', 'PENDING', '760', 'Nguyen Van A', '0901234568', '79', '123 Đường ABC, Phường XYZ', '26734', 3000000.00, 2800000.00, '2025-12-11 00:15:00.000000', 2, NULL, 5),
-(13, 'ORD013', '2025-12-11 00:15:00.000000', 0.00, 'HOAN_THANH', 'CASH', 'PAID', '760', 'Nguyen Van A', '0901111111', '79', '789 Đường GHI, Phường RST', '26734', 1800000.00, 1800000.00, '2025-12-11 00:15:00.000000', 4, 14, NULL),
-(14, 'ORD014', '2025-12-11 00:15:00.000000', 250000.00, 'DANG_VAN_CHUYEN', 'BANK_TRANSFER', 'PARTIAL_PAID', '001', 'Tran Thi B', '0902222222', '01', '321 Đường JKL, Phường MNO', '00001', 2500000.00, 2250000.00, '2025-12-11 00:15:00.000000', 5, NULL, 1),
-(15, 'ORD015', '2025-12-11 00:15:00.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '490', 'Le Van C', '0903333333', '48', '654 Đường PQR, Phường STU', '20215', 3200000.00, 3200000.00, '2025-12-11 00:15:00.000000', 6, 3, NULL),
-(16, 'DH2026071698', '2026-01-09 20:54:32.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '32', 'Trần Thị Bình', '0901234568', '2', '123 Đường ABC, Phường XYZ, Xã Bản Phùng, Huyện Hoàng Su Phì, Tỉnh Hà Giang, Việt Nam', '1036', 8800000.00, 9240000.00, '2026-01-09 20:54:32.000000', 2, NULL, NULL),
-(17, 'DH2026093169', '2026-01-09 20:54:53.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '32', 'Trần Thị Bình', '0901234568', '2', '123 Đường ABC, Phường XYZ, Xã Bản Phùng, Huyện Hoàng Su Phì, Tỉnh Hà Giang, Việt Nam', '1036', 8800000.00, 9240000.00, '2026-01-09 20:54:53.000000', 2, NULL, NULL),
-(18, 'DH2026479017', '2026-01-09 21:01:20.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '32', 'Trần Thị Bình', '0901234568', '2', '123 Đường ABC, Phường XYZ, Xã Bản Phùng, Huyện Hoàng Su Phì, Tỉnh Hà Giang, Việt Nam', '1036', 8800000.00, 9240000.00, '2026-01-09 21:01:20.000000', 2, NULL, NULL),
-(20, 'DH2026491559', '2026-01-09 21:01:31.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '32', 'Trần Thị Bình', '0901234568', '2', '123 Đường ABC, Phường XYZ, Xã Bản Phùng, Huyện Hoàng Su Phì, Tỉnh Hà Giang, Việt Nam', '1036', 8800000.00, 9240000.00, '2026-01-09 21:01:31.000000', 2, NULL, NULL),
-(22, 'DH2026696929', '2026-01-09 21:04:58.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '32', 'Trần Thị Bình', '0901234568', '2', '123 Đường ABC, Phường XYZ, Xã Bản Phùng, Huyện Hoàng Su Phì, Tỉnh Hà Giang, Việt Nam', '1036', 8800000.00, 9240000.00, '2026-01-09 21:04:58.000000', 2, NULL, NULL),
-(23, 'DH2026705609', '2026-01-09 21:05:06.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '32', 'Trần Thị Bình', '0901234568', '2', '123 Đường ABC, Phường XYZ, Xã Bản Phùng, Huyện Hoàng Su Phì, Tỉnh Hà Giang, Việt Nam', '1036', 8800000.00, 9240000.00, '2026-01-09 21:05:06.000000', 2, NULL, NULL),
-(24, 'DH2026902204', '2026-01-09 21:08:22.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '137', 'Trần Thị Bình', '0901234568', '15', '123 Đường ABC, Phường XYZ, Xã Kim Nọi, Huyện Mù Căng Chải, Tỉnh Yên Bái, Việt Nam', '4477', 8800000.00, 9240000.00, '2026-01-09 21:08:22.000000', 2, NULL, NULL),
-(25, 'DH2026027419', '2026-01-09 21:10:27.000000', 0.00, 'CHO_GIAO_HANG', 'COD', 'PENDING', '62', 'Trần Thị Bình', '0901234568', '6', '123 Đường ABC, Phường XYZ, Xã Hiệp Lực, Huyện Ngân Sơn, Tỉnh Bắc Kạn, Việt Nam', '1960', 3200000.00, 3360000.00, '2026-01-11 22:12:54.000000', 2, NULL, NULL),
-(26, 'DH2026650395', '2026-01-11 23:20:52.000000', 200000.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '124', 'Phan Văn Khánh', '0912222222', '14', 'Đường Lê Văn Việt, Phường Hiệp Phú, Xã Chiềng Hặc, Huyện Yên Châu, Tỉnh Sơn La, Việt Nam', '4078', 6000000.00, 6100000.00, '2026-01-11 23:20:52.000000', 15, 15, NULL),
-(27, 'DH2026900922', '2026-01-11 23:25:01.000000', 200000.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '32', 'Phan Văn Khánh', '0912222222', '2', 'Đường Lê Văn Việt, Phường Hiệp Phú, Xã Nàng Đôn, Huyện Hoàng Su Phì, Tỉnh Hà Giang, Việt Nam', '1054', 2500000.00, 2425000.00, '2026-01-11 23:25:01.000000', 15, 15, NULL),
-(28, 'DH2026033550', '2026-01-11 23:27:13.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '27', 'Phan Văn Khánh', '0912222222', '2', 'Đường Lê Văn Việt, Phường Hiệp Phú, Xã Sơn Vĩ, Huyện Mèo Vạc, Tỉnh Hà Giang, Việt Nam', '793', 3200000.00, 3360000.00, '2026-01-11 23:27:13.000000', 15, 15, NULL),
-(29, 'DH2026974355', '2026-01-24 08:39:36.000000', 150000.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '662', 'Trần Thị Bình', '0901234568', '67', '123 Đường ABC, Phường XYZ, Xã Cư Knia, Huyện Cư Jút, Tỉnh Đắk Nông, Việt Nam', '24658', 6900000.00, 7095000.00, '2026-01-24 08:39:36.000000', 2, NULL, NULL);
+(1, 'ORD001', '2025-12-11 00:15:00.000000', 250000.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '760', 'Trần Phan Anh Thư', '0901234568', '79', '123 Đường ABC, Phường XYZ', '26734', 2500000.00, 2250000.00, '2025-12-11 00:15:00.000000', 2, 3, 1),
+(2, 'ORD002', '2025-12-11 00:15:00.000000', 0.00, 'CHO_GIAO_HANG', 'BANK_TRANSFER', 'PENDING', '760', 'Phạm Gia Tuấn Kiệt', '0901111111', '79', '789 Đường GHI, Phường RST', '26734', 3200000.00, 3200000.00, '2025-12-11 00:15:00.000000', 4, NULL, NULL),
+(3, 'ORD003', '2025-12-11 00:15:00.000000', 50000.00, 'DANG_VAN_CHUYEN', 'COD', 'PENDING', '001', 'Hoàng Nguyễn Diệu Anh', '0902222222', '01', '321 Đường JKL, Phường MNO', '00001', 1800000.00, 1750000.00, '2025-12-11 00:15:00.000000', 5, 3, 3),
+(4, 'ORD004', '2025-12-11 00:15:00.000000', 0.00, 'DA_GIAO_HANG', 'CASH', 'PAID', '490', 'Vũ Hoàng Phương Nam', '0903333333', '48', '654 Đường PQR, Phường STU', '20215', 2200000.00, 2200000.00, '2025-12-11 00:15:00.000000', 6, NULL, NULL),
+(5, 'ORD005', '2025-12-11 00:15:00.000000', 1000000.00, 'HOAN_THANH', 'BANK_TRANSFER', 'PAID', '760', 'Đặng Lê Minh Ngọc', '0904444444', '79', '987 Đường VWX, Phường YZA', '26734', 5000000.00, 4000000.00, '2025-12-11 00:15:00.000000', 7, 14, 2),
+(6, 'ORD006', '2025-12-11 00:15:00.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '213', 'Bùi Phan Khánh An', '0905555555', '24', '147 Đường BCD, Phường EFG', '07198', 1500000.00, 1500000.00, '2025-12-11 00:15:00.000000', 8, NULL, NULL),
+(7, 'ORD007', '2025-12-11 00:15:00.000000', 280000.00, 'DA_GIAO_HANG', 'CASH', 'PAID', '760', 'Ngô Trần Tuấn Minh', '0906666666', '79', '258 Đường HIJ, Phường KLM', '26735', 2800000.00, 2520000.00, '2025-12-11 00:15:00.000000', 9, 3, 1),
+(8, 'ORD008', '2025-12-11 00:15:00.000000', 0.00, 'DANG_VAN_CHUYEN', 'BANK_TRANSFER', 'PARTIAL_PAID', '312', 'Đỗ Hoàng Gia Hân', '0907777777', '31', '369 Đường NOP, Phường QRS', '11689', 2400000.00, 2400000.00, '2025-12-11 00:15:00.000000', 10, NULL, NULL),
+(9, 'ORD009', '2025-12-11 00:15:00.000000', 100000.00, 'HOAN_THANH', 'CASH', 'PAID', '760', 'Hà Phan Thảo Nguyên', '0908888888', '79', '741 Đường TUV, Phường WXY', '26734', 4500000.00, 4400000.00, '2025-12-11 00:15:00.000000', 11, 14, 4),
+(10, 'ORD010', '2025-12-11 00:15:00.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '916', 'Lý Nguyễn Trường Giang', '0909999999', '92', '852 Đường ZAB, Phường CDE', '31156', 1600000.00, 1600000.00, '2025-12-11 00:15:00.000000', 12, NULL, NULL),
+(11, 'ORD011', '2025-12-11 00:15:00.000000', 0.00, 'DA_GIAO_HANG', 'BANK_TRANSFER', 'PAID', '760', 'Mai Trần Thanh Trúc', '0910000000', '79', '963 Đường FGH, Phường IJK', '26735', 2100000.00, 2100000.00, '2025-12-11 00:15:00.000000', 13, 3, NULL),
+(12, 'ORD012', '2025-12-11 00:15:00.000000', 200000.00, 'CHO_GIAO_HANG', 'COD', 'PENDING', '760', 'Trần Phan Anh Thư', '0901234568', '79', '123 Đường ABC, Phường XYZ', '26734', 3000000.00, 2800000.00, '2025-12-11 00:15:00.000000', 2, NULL, 5),
+(13, 'ORD013', '2025-12-11 00:15:00.000000', 0.00, 'HOAN_THANH', 'CASH', 'PAID', '760', 'Phạm Gia Tuấn Kiệt', '0901111111', '79', '789 Đường GHI, Phường RST', '26734', 1800000.00, 1800000.00, '2025-12-11 00:15:00.000000', 4, 14, NULL),
+(14, 'ORD014', '2025-12-11 00:15:00.000000', 250000.00, 'DANG_VAN_CHUYEN', 'BANK_TRANSFER', 'PARTIAL_PAID', '001', 'Hoàng Nguyễn Diệu Anh', '0902222222', '01', '321 Đường JKL, Phường MNO', '00001', 2500000.00, 2250000.00, '2025-12-11 00:15:00.000000', 5, NULL, 1),
+(15, 'ORD015', '2025-12-11 00:15:00.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '490', 'Vũ Hoàng Phương Nam', '0903333333', '48', '654 Đường PQR, Phường STU', '20215', 3200000.00, 3200000.00, '2025-12-11 00:15:00.000000', 6, 3, NULL),
+(16, 'DH2026071698', '2026-01-09 20:54:32.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '32', 'Trần Phan Anh Thư', '0901234568', '2', '123 Đường ABC, Phường XYZ, Xã Bản Phùng, Huyện Hoàng Su Phì, Tỉnh Hà Giang, Việt Nam', '1036', 8800000.00, 9240000.00, '2026-01-09 20:54:32.000000', 2, NULL, NULL),
+(17, 'DH2026093169', '2026-01-09 20:54:53.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '32', 'Trần Phan Anh Thư', '0901234568', '2', '123 Đường ABC, Phường XYZ, Xã Bản Phùng, Huyện Hoàng Su Phì, Tỉnh Hà Giang, Việt Nam', '1036', 8800000.00, 9240000.00, '2026-01-09 20:54:53.000000', 2, NULL, NULL),
+(18, 'DH2026479017', '2026-01-09 21:01:20.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '32', 'Trần Phan Anh Thư', '0901234568', '2', '123 Đường ABC, Phường XYZ, Xã Bản Phùng, Huyện Hoàng Su Phì, Tỉnh Hà Giang, Việt Nam', '1036', 8800000.00, 9240000.00, '2026-01-09 21:01:20.000000', 2, NULL, NULL),
+(20, 'DH2026491559', '2026-01-09 21:01:31.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '32', 'Trần Phan Anh Thư', '0901234568', '2', '123 Đường ABC, Phường XYZ, Xã Bản Phùng, Huyện Hoàng Su Phì, Tỉnh Hà Giang, Việt Nam', '1036', 8800000.00, 9240000.00, '2026-01-09 21:01:31.000000', 2, NULL, NULL),
+(22, 'DH2026696929', '2026-01-09 21:04:58.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '32', 'Trần Phan Anh Thư', '0901234568', '2', '123 Đường ABC, Phường XYZ, Xã Bản Phùng, Huyện Hoàng Su Phì, Tỉnh Hà Giang, Việt Nam', '1036', 8800000.00, 9240000.00, '2026-01-09 21:04:58.000000', 2, NULL, NULL),
+(23, 'DH2026705609', '2026-01-09 21:05:06.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '32', 'Trần Phan Anh Thư', '0901234568', '2', '123 Đường ABC, Phường XYZ, Xã Bản Phùng, Huyện Hoàng Su Phì, Tỉnh Hà Giang, Việt Nam', '1036', 8800000.00, 9240000.00, '2026-01-09 21:05:06.000000', 2, NULL, NULL),
+(24, 'DH2026902204', '2026-01-09 21:08:22.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '137', 'Trần Phan Anh Thư', '0901234568', '15', '123 Đường ABC, Phường XYZ, Xã Kim Nọi, Huyện Mù Căng Chải, Tỉnh Yên Bái, Việt Nam', '4477', 8800000.00, 9240000.00, '2026-01-09 21:08:22.000000', 2, NULL, NULL),
+(25, 'DH2026027419', '2026-01-09 21:10:27.000000', 0.00, 'CHO_GIAO_HANG', 'COD', 'PENDING', '62', 'Trần Phan Anh Thư', '0901234568', '6', '123 Đường ABC, Phường XYZ, Xã Hiệp Lực, Huyện Ngân Sơn, Tỉnh Bắc Kạn, Việt Nam', '1960', 3200000.00, 3360000.00, '2026-01-11 22:12:54.000000', 2, NULL, NULL),
+(26, 'DH2026650395', '2026-01-11 23:20:52.000000', 200000.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '124', 'Phan Lê Kim Ngân', '0912222222', '14', 'Đường Lê Văn Việt, Phường Hiệp Phú, Xã Chiềng Hặc, Huyện Yên Châu, Tỉnh Sơn La, Việt Nam', '4078', 6000000.00, 6100000.00, '2026-01-11 23:20:52.000000', 15, 15, NULL),
+(27, 'DH2026900922', '2026-01-11 23:25:01.000000', 200000.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '32', 'Phan Lê Kim Ngân', '0912222222', '2', 'Đường Lê Văn Việt, Phường Hiệp Phú, Xã Nàng Đôn, Huyện Hoàng Su Phì, Tỉnh Hà Giang, Việt Nam', '1054', 2500000.00, 2425000.00, '2026-01-11 23:25:01.000000', 15, 15, NULL),
+(28, 'DH2026033550', '2026-01-11 23:27:13.000000', 0.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '27', 'Phan Lê Kim Ngân', '0912222222', '2', 'Đường Lê Văn Việt, Phường Hiệp Phú, Xã Sơn Vĩ, Huyện Mèo Vạc, Tỉnh Hà Giang, Việt Nam', '793', 3200000.00, 3360000.00, '2026-01-11 23:27:13.000000', 15, 15, NULL),
+(29, 'DH2026974355', '2026-01-24 08:39:36.000000', 150000.00, 'CHO_XAC_NHAN', 'COD', 'PENDING', '662', 'Trần Phan Anh Thư', '0901234568', '67', '123 Đường ABC, Phường XYZ, Xã Cư Knia, Huyện Cư Jút, Tỉnh Đắk Nông, Việt Nam', '24658', 6900000.00, 7095000.00, '2026-01-24 08:39:36.000000', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -512,7 +512,27 @@ INSERT INTO `products` (`id`, `code`, `created_at`, `description`, `name`, `stat
 (8, 'PRD008', '2025-12-11 00:14:59.000000', 'Classic skate shoe with signature side stripe. Durable and comfortable for skating and casual wear.', 'Vans Old Skool A$AP Worldwide Silver Reflective Flames', 'ACTIVE', '2025-12-11 22:00:36.000000', 0.31, 6, 9, 4),
 (11, 'PRD011', '2025-12-11 00:14:59.000000', 'Iconic high-top basketball shoe with Air cushioning. Premium leather construction.', 'Jordan 1 Retro High OG A Ma Maniére', 'ACTIVE', '2025-12-11 22:01:34.000000', 0.42, 9, 2, 1),
 (16, 'PRD000010', '2026-01-12 04:56:30.000000', 'dfdfd', 'fdfd', 'ACTIVE', '2026-01-12 04:56:30.000000', 0.50, 9, 12, 5),
-(17, 'PRD000011', '2026-01-12 05:33:12.000000', 'dfdfd', 'cxcxv', 'ACTIVE', '2026-01-12 05:33:12.000000', 0.50, 1, 12, 9);
+(17, 'PRD000011', '2026-01-12 05:33:12.000000', 'dfdfd', 'cxcxv', 'ACTIVE', '2026-01-12 05:33:12.000000', 0.50, 1, 12, 9),
+(18, 'PRD018', '2025-12-11 00:14:59.000000', 'Unique Nike Air 1/2 Cent in Black colorway.', 'Nike Air 1/2 Cent Black', 'ACTIVE', '2025-12-11 00:14:59.000000', 0.40, 1, 4, 1),
+(19, 'PRD019', '2025-12-11 00:14:59.000000', 'Unique Nike Air 1/2 Cent in Black Green Spark colorway.', 'Nike Air 1/2 Cent Black Green Spark', 'ACTIVE', '2025-12-11 00:14:59.000000', 0.40, 1, 4, 1),
+(20, 'PRD020', '2025-12-11 00:14:59.000000', 'Unique Nike Air 1/2 Cent in Silver colorway.', 'Nike Air 1/2 Cent Silver', 'ACTIVE', '2025-12-11 00:14:59.000000', 0.40, 1, 4, 1),
+(21, 'PRD021', '2025-12-11 00:14:59.000000', 'Unique Nike Air 1/2 Cent in Royal colorway.', 'Nike Air 1/2 Cent Royal', 'ACTIVE', '2025-12-11 00:14:59.000000', 0.40, 1, 4, 1),
+(22, 'PRD022', '2025-12-11 00:14:59.000000', 'Unique Nike Air 1/2 Cent in Cranberry colorway.', 'Nike Air 1/2 Cent Cranberry', 'ACTIVE', '2025-12-11 00:14:59.000000', 0.40, 1, 4, 1),
+(23, 'PRD023', '2025-12-11 00:14:59.000000', 'Nike Air Force 1 Low SP x 1017 ALYX 9SM collaboration in Black.', 'Nike Air Force 1 Low SP 1017 ALYX 9SM Black', 'ACTIVE', '2025-12-11 00:14:59.000000', 0.40, 1, 4, 1),
+(24, 'PRD024', '2025-12-11 00:14:59.000000', 'Nike Air Force 1 Low SP x 1017 ALYX 9SM collaboration in White.', 'Nike Air Force 1 Low SP 1017 ALYX 9SM White', 'ACTIVE', '2025-12-11 00:14:59.000000', 0.40, 1, 4, 1),
+(25, 'PRD025', '2025-12-11 00:14:59.000000', 'Nike Air Force 1 High x 1017 ALYX 9SM collaboration in Black/Red.', 'Nike Air Force 1 High 1017 ALYX 9SM Black Red', 'ACTIVE', '2025-12-11 00:14:59.000000', 0.45, 1, 4, 1),
+(26, 'PRD026', '2025-12-11 00:14:59.000000', 'Nike Air Force 1 High x 1017 ALYX 9SM collaboration in Red/Black.', 'Nike Air Force 1 High 1017 ALYX 9SM Black Red', 'ACTIVE', '2025-12-11 00:14:59.000000', 0.45, 1, 4, 1),
+(27, 'PRD027', '2025-12-11 00:14:59.000000', 'Nike Air Force 1 High x 1017 ALYX 9SM collaboration in White/Grey (2021).', 'Nike Air Force 1 High 1017 ALYX 9SM White Grey (2021)', 'ACTIVE', '2025-12-11 00:14:59.000000', 0.45, 1, 4, 1),
+(28, 'PRD028', '2026-02-01 18:36:32.000000', 'adidas Campus Prince 032c Black. Unique collaboration.', 'adidas Campus Prince 032c Black', 'ACTIVE', '2026-02-01 18:36:32.000000', 0.25, 2, 4, 1),
+(29, 'PRD029', '2026-02-01 18:36:32.000000', 'adidas Campus Prince 032c White. Unique collaboration.', 'adidas Campus Prince 032c White', 'ACTIVE', '2026-02-01 18:36:32.000000', 0.25, 2, 4, 1),
+(30, 'PRD030', '2026-02-01 18:36:32.000000', 'adidas FYW S-97 Salvation 032c. Retro running style.', 'adidas FYW S-97 Salvation 032c', 'ACTIVE', '2026-02-01 18:36:32.000000', 0.30, 2, 10, 3),
+(31, 'PRD031', '2026-02-01 18:36:32.000000', 'adidas GSG Mule 032c Black. Versatile slip-on.', 'adidas GSG Mule 032c Black', 'ACTIVE', '2026-02-01 18:36:32.000000', 0.20, 2, 9, 2),
+(32, 'PRD032', '2026-02-01 18:36:32.000000', 'adidas GSG Mule 032c Savannah. Versatile slip-on.', 'adidas GSG Mule 032c Savannah', 'ACTIVE', '2026-02-01 18:36:32.000000', 0.20, 2, 9, 2),
+(33, 'PRD033', '2026-02-01 18:36:32.000000', 'adidas GSG Mule 032C Grey Silver. Versatile slip-on.', 'adidas GSG Mule 032C Grey Silver', 'ACTIVE', '2026-02-01 18:36:32.000000', 0.20, 2, 9, 2),
+(34, 'PRD034', '2026-02-01 18:36:32.000000', 'adidas GSG TR 032c Hi-Res Yellow. Bold trail design.', 'adidas GSG TR 032c Hi-Res Yellow', 'ACTIVE', '2026-02-01 18:36:32.000000', 0.35, 2, 4, 3),
+(35, 'PRD035', '2026-02-01 18:36:32.000000', 'adidas GSG Trail 032C Grey Silver. Bold trail design.', 'adidas GSG Trail 032C Grey Silver', 'ACTIVE', '2026-02-01 18:36:32.000000', 0.35, 2, 4, 3),
+(36, 'PRD036', '2026-02-01 18:36:32.000000', 'adidas GSG TR 032c Hi-Res Stone Green. Bold trail design.', 'adidas GSG TR 032c Hi-Res Stone Green', 'ACTIVE', '2026-02-01 18:36:32.000000', 0.35, 2, 4, 3),
+(37, 'PRD037', '2026-02-01 18:36:32.000000', '100 Thieves x adidas Adilette Slide. Comfortable slides.', '100 Thieves x adidas Adilette Slide Black Red', 'ACTIVE', '2026-02-01 18:36:32.000000', 0.10, 2, 9, 5);
 
 -- --------------------------------------------------------
 
@@ -650,7 +670,27 @@ INSERT INTO `product_variants` (`id`, `created_at`, `price`, `stock`, `updated_a
 (124, '2026-01-12 05:33:13.000000', 1679000.00, 10, '2026-01-12 05:33:13.000000', 5, 17, 14),
 (125, '2026-01-12 05:33:13.000000', 1679000.00, 10, '2026-01-12 05:33:13.000000', 8, 17, 14),
 (126, '2026-01-12 05:33:13.000000', 1679000.00, 10, '2026-01-12 05:33:13.000000', 10, 17, 14),
-(127, '2026-01-12 05:33:13.000000', 1679000.00, 10, '2026-01-12 05:33:13.000000', 9, 17, 14);
+(127, '2026-01-12 05:33:13.000000', 1679000.00, 10, '2026-01-12 05:33:13.000000', 9, 17, 14),
+(128, '2025-12-11 00:14:59.000000', 4750000.00, 50, '2025-12-11 00:14:59.000000', 1, 18, 7),
+(129, '2025-12-11 00:14:59.000000', 4750000.00, 50, '2025-12-11 00:14:59.000000', 5, 19, 7),
+(130, '2025-12-11 00:14:59.000000', 4750000.00, 50, '2025-12-11 00:14:59.000000', 14, 20, 7),
+(131, '2025-12-11 00:14:59.000000', 4750000.00, 50, '2025-12-11 00:14:59.000000', 4, 21, 7),
+(132, '2025-12-11 00:14:59.000000', 4750000.00, 50, '2025-12-11 00:14:59.000000', 3, 22, 7),
+(133, '2025-12-11 00:14:59.000000', 3875000.00, 50, '2025-12-11 00:14:59.000000', 1, 23, 7),
+(134, '2025-12-11 00:14:59.000000', 3875000.00, 50, '2025-12-11 00:14:59.000000', 2, 24, 7),
+(135, '2025-12-11 00:14:59.000000', 11250000.00, 50, '2025-12-11 00:14:59.000000', 3, 25, 7),
+(136, '2025-12-11 00:14:59.000000', 11250000.00, 50, '2025-12-11 00:14:59.000000', 3, 26, 7),
+(137, '2025-12-11 00:14:59.000000', 11525000.00, 50, '2025-12-11 00:14:59.000000', 7, 27, 7),
+(138, '2026-02-01 18:36:32.000000', 3250000.00, 50, '2026-02-01 18:36:32.000000', 1, 28, 7),
+(139, '2026-02-01 18:36:32.000000', 3250000.00, 50, '2026-02-01 18:36:32.000000', 2, 29, 7),
+(140, '2026-02-01 18:36:32.000000', 5250000.00, 50, '2026-02-01 18:36:32.000000', 5, 30, 7),
+(141, '2026-02-01 18:36:32.000000', 4000000.00, 50, '2026-02-01 18:36:32.000000', 1, 31, 7),
+(142, '2026-02-01 18:36:32.000000', 4000000.00, 50, '2026-02-01 18:36:32.000000', 13, 32, 7),
+(143, '2026-02-01 18:36:32.000000', 4000000.00, 50, '2026-02-01 18:36:32.000000', 14, 33, 7),
+(144, '2026-02-01 18:36:32.000000', 5500000.00, 50, '2026-02-01 18:36:32.000000', 6, 34, 7),
+(145, '2026-02-01 18:36:32.000000', 5500000.00, 50, '2026-02-01 18:36:32.000000', 14, 35, 7),
+(146, '2026-02-01 18:36:32.000000', 5500000.00, 50, '2026-02-01 18:36:32.000000', 5, 36, 7),
+(147, '2026-02-01 18:36:32.000000', 1000000.00, 50, '2026-02-01 18:36:32.000000', 1, 37, 7);
 
 -- --------------------------------------------------------
 
@@ -785,7 +825,27 @@ INSERT INTO `product_variant_images` (`id`, `created_at`, `image_url`, `updated_
 (510, '2026-01-12 05:33:13.000000', 'https://res.cloudinary.com/drqbhj6ft/image/upload/v1768195977/sneaker/15/images/sneaker/15/images/37f51140-56d4-4624-8e75-ecec6ed0dd62.jpg', '2026-01-12 05:33:13.000000', 124),
 (511, '2026-01-12 05:33:13.000000', 'https://res.cloudinary.com/drqbhj6ft/image/upload/v1768195977/sneaker/15/images/sneaker/15/images/37f51140-56d4-4624-8e75-ecec6ed0dd62.jpg', '2026-01-12 05:33:13.000000', 125),
 (512, '2026-01-12 05:33:13.000000', 'https://res.cloudinary.com/drqbhj6ft/image/upload/v1768195977/sneaker/15/images/sneaker/15/images/37f51140-56d4-4624-8e75-ecec6ed0dd62.jpg', '2026-01-12 05:33:13.000000', 126),
-(513, '2026-01-12 05:33:13.000000', 'https://res.cloudinary.com/drqbhj6ft/image/upload/v1768195977/sneaker/15/images/sneaker/15/images/37f51140-56d4-4624-8e75-ecec6ed0dd62.jpg', '2026-01-12 05:33:13.000000', 127);
+(513, '2026-01-12 05:33:13.000000', 'https://res.cloudinary.com/drqbhj6ft/image/upload/v1768195977/sneaker/15/images/sneaker/15/images/37f51140-56d4-4624-8e75-ecec6ed0dd62.jpg', '2026-01-12 05:33:13.000000', 127),
+(514, '2025-12-11 00:14:59.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/000/032/117/original/344646_001.png.png', '2025-12-11 00:14:59.000000', 128),
+(515, '2025-12-11 00:14:59.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/000/032/118/original/344646_002.png.png', '2025-12-11 00:14:59.000000', 129),
+(516, '2025-12-11 00:14:59.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/100/579/287/original/21956_00.png.png', '2025-12-11 00:14:59.000000', 130),
+(517, '2025-12-11 00:14:59.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/098/477/735/original/21878_00.png.png', '2025-12-11 00:14:59.000000', 131),
+(518, '2025-12-11 00:14:59.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/000/032/122/original/344646_600.png.png', '2025-12-11 00:14:59.000000', 132),
+(519, '2025-12-11 00:14:59.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/096/779/934/original/1328101_00.png.png', '2025-12-11 00:14:59.000000', 133),
+(520, '2025-12-11 00:14:59.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/096/910/209/original/1328103_00.png.png', '2025-12-11 00:14:59.000000', 134),
+(521, '2025-12-11 00:14:59.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/089/001/207/original/CQ4018_004.png.png', '2025-12-11 00:14:59.000000', 135),
+(522, '2025-12-11 00:14:59.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/062/778/469/original/CQ4018_601.png.png', '2025-12-11 00:14:59.000000', 136),
+(523, '2025-12-11 00:14:59.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/064/337/111/original/766833_00.png.png', '2025-12-11 00:14:59.000000', 137),
+(524, '2026-02-01 18:36:32.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/045/246/473/original/FX3495.png.png', '2026-02-01 18:36:32.000000', 138),
+(525, '2026-02-01 18:36:32.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/045/246/474/original/FX3496.png.png', '2026-02-01 18:36:32.000000', 139),
+(526, '2026-02-01 18:36:32.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/038/918/761/original/EG5933.png.png', '2026-02-01 18:36:32.000000', 140),
+(527, '2026-02-01 18:36:32.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/062/137/377/original/764365_00.png.png', '2026-02-01 18:36:32.000000', 141),
+(528, '2026-02-01 18:36:32.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/058/628/967/original/764367_00.png.png', '2026-02-01 18:36:32.000000', 142),
+(529, '2026-02-01 18:36:32.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/073/409/788/original/815469_00.png.png', '2026-02-01 18:36:32.000000', 143),
+(530, '2026-02-01 18:36:32.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/076/863/232/original/764368_00.png.png', '2026-02-01 18:36:32.000000', 144),
+(531, '2026-02-01 18:36:32.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/070/626/191/original/815471_00.png.png', '2026-02-01 18:36:32.000000', 145),
+(532, '2026-02-01 18:36:32.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/064/377/205/original/764369_00.png.png', '2026-02-01 18:36:32.000000', 146),
+(533, '2026-02-01 18:36:32.000000', 'https://image.goat.com/750/attachments/product_template_pictures/images/109/968/339/original/JR9152.png.png', '2026-02-01 18:36:32.000000', 147);
 
 -- --------------------------------------------------------
 
@@ -1214,19 +1274,19 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT cho bảng `product_variants`
 --
 ALTER TABLE `product_variants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- AUTO_INCREMENT cho bảng `product_variant_images`
 --
 ALTER TABLE `product_variant_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=514;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=534;
 
 --
 -- AUTO_INCREMENT cho bảng `promotions`

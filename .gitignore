@@ -51,7 +51,7 @@ nbdist/
 spring.log
 spring.log.*
 application-*.properties
-!application.properties
+src/main/resources/application.properties
 application-*.yml
 !application.yml
 
@@ -106,3 +106,4 @@ package-lock.json
 
 .cursorrules
 .agent
+application.properties

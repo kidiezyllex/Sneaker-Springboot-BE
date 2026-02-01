@@ -25,7 +25,7 @@ public class AccountAddress {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accountId", nullable = false)
+    @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
     @Column(nullable = false)

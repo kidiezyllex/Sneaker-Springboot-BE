@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -37,20 +38,24 @@ public class ChatbotService {
     private final ChatbotTrainingRepository trainingRepository;
     private final ChatHistoryRepository chatHistoryRepository;
     private final AccountRepository accountRepository;
+    private final ProductRepository productRepository;
 
     private static final String DEFAULT_SYSTEM_PROMPT = """
             Bạn là một trợ lý AI thân thiện và chuyên nghiệp của cửa hàng giày sneaker.
             Nhiệm vụ của bạn là hỗ trợ khách hàng với:
             1. Tư vấn về sản phẩm giày sneaker (size, màu sắc, chất liệu, phong cách)
             2. Hướng dẫn chọn size giày phù hợp
-            3. Giới thiệu sản phẩm phù hợp với nhu cầu khách hàng
+            3. Giới thiệu sản phẩm phù hợp với nhu cầu khách hàng DỰA TRÊN DANH SÁCH SẢN PHẨM chúng tôi cung cấp.
             4. Hướng dẫn đặt hàng và thanh toán
             5. Tra cứu thông tin đơn hàng
             6. Giải đáp chính sách bảo hành, đổi trả, vận chuyển
             7. Tư vấn về các chương trình khuyến mãi hiện có
 
-            Hãy trả lời một cách thân thiện, chuyên nghiệp và hữu ích. Nếu không biết câu trả lời,
-            hãy đề nghị khách hàng liên hệ bộ phận hỗ trợ.
+            QUY TẮC QUAN TRỌNG:
+            - Khi giới thiệu sản phẩm, hãy ƯU TIÊN các sản phẩm có trong mục "Sản phẩm thực tế" được cung cấp trong context.
+            - Nếu sản phẩm có giá và tình trạng kho (stock), hãy cung cấp thông tin đó cho khách hàng.
+            - Nếu không tìm thấy sản phẩm chính xác, hãy tư vấn dựa trên phong cách chung nhưng nói rõ là shop có những mẫu tương tự.
+            - Luôn trả lời bằng Tiếng Việt, thân thiện và chuyên nghiệp.
             """;
 
     private String getSystemPrompt() {
@@ -83,12 +88,26 @@ public class ChatbotService {
     @Transactional
     public String chat(String userMessage, String sessionId, Integer accountId) {
         try {
+            // Log API configuration for debugging
+            System.out.println("=== Groq API Configuration ===");
+            System.out.println("API URL: " + apiUrl);
+            System.out.println("Model: " + model);
+            System.out.println("API Key exists: " + (apiKey != null && !apiKey.isEmpty()));
+            System.out.println("API Key length: " + (apiKey != null ? apiKey.length() : 0));
+
             // First, try to find matching training data
             String trainingContext = buildTrainingContext(userMessage);
 
+            // Search for real products in database
+            String productContext = buildProductContext(userMessage);
+
             String systemPrompt = getSystemPrompt();
             if (!trainingContext.isEmpty()) {
-                systemPrompt += "\n\nThông tin tham khảo:\n" + trainingContext;
+                systemPrompt += "\n\nThông tin hỏi đáp (FAQ):\n" + trainingContext;
+            }
+
+            if (!productContext.isEmpty()) {
+                systemPrompt += "\n\nSản phẩm thực tế đang có tại cửa hàng:\n" + productContext;
             }
 
             // Build request body for Groq API (OpenAI-compatible format)
@@ -136,6 +155,9 @@ public class ChatbotService {
             Map<String, Object> genConfig = getGenerationConfig();
             requestBody.putAll(genConfig);
 
+            System.out.println("=== Request Body ===");
+            System.out.println(objectMapper.writeValueAsString(requestBody));
+
             WebClient webClient = webClientBuilder.build();
 
             String response = webClient.post()
@@ -144,8 +166,21 @@ public class ChatbotService {
                     .contentType(MediaType.APPLICATION_JSON)
                     .bodyValue(requestBody)
                     .retrieve()
+                    .onStatus(
+                            status -> status.is4xxClientError() || status.is5xxServerError(),
+                            clientResponse -> clientResponse.bodyToMono(String.class)
+                                    .flatMap(errorBody -> {
+                                        System.err.println("=== API Error Response ===");
+                                        System.err.println("Status: " + clientResponse.statusCode());
+                                        System.err.println("Body: " + errorBody);
+                                        return Mono.<Throwable>error(new RuntimeException(
+                                                "API Error: " + clientResponse.statusCode() + " - " + errorBody));
+                                    }))
                     .bodyToMono(String.class)
                     .block();
+
+            System.out.println("=== API Response ===");
+            System.out.println(response);
 
             // Parse response
             String botResponse = parseGroqResponse(response);
@@ -167,8 +202,11 @@ public class ChatbotService {
             return botResponse;
 
         } catch (Exception e) {
+            System.err.println("=== Chat Error ===");
+            System.err.println("Error Type: " + e.getClass().getName());
+            System.err.println("Error Message: " + e.getMessage());
             e.printStackTrace();
-            return "Đã xảy ra lỗi khi xử lý câu hỏi. Vui lòng thử lại sau.";
+            return "Đã xảy ra lỗi khi xử lý câu hỏi. Vui lòng thử lại sau. Chi tiết: " + e.getMessage();
         }
     }
 
@@ -184,6 +222,59 @@ public class ChatbotService {
                 .limit(3)
                 .map(t -> "Q: " + t.getQuestion() + "\nA: " + t.getAnswer())
                 .collect(Collectors.joining("\n\n"));
+    }
+
+    private String buildProductContext(String userMessage) {
+        // Extract keywords from user message for better search
+        String keyword = userMessage.toLowerCase()
+                .replace("giày", "")
+                .replace("shop", "")
+                .replace("tư vấn", "")
+                .replace("mình", "")
+                .replace("tìm", "")
+                .replace("có", "")
+                .replace("không", "")
+                .trim();
+
+        if (keyword.length() < 2)
+            return "";
+
+        Page<Product> productPage = productRepository.searchWithFilters(
+                keyword, null, null, null, Product.Status.ACTIVE,
+                org.springframework.data.domain.PageRequest.of(0, 5));
+
+        List<Product> products = productPage.getContent();
+        if (products.isEmpty())
+            return "";
+
+        StringBuilder sb = new StringBuilder();
+        for (Product p : products) {
+            sb.append("- Tên: ").append(p.getName());
+            sb.append(" (Thương hiệu: ").append(p.getBrand().getName()).append(")");
+
+            if (p.getVariants() != null && !p.getVariants().isEmpty()) {
+                ProductVariant firstVariant = p.getVariants().get(0);
+                sb.append(" | Giá: ").append(String.format("%,.0f VNĐ", firstVariant.getPrice()));
+
+                int totalStock = p.getVariants().stream()
+                        .mapToInt((ProductVariant v) -> v.getStock())
+                        .sum();
+                sb.append(" | Tình trạng: ").append(totalStock > 0 ? "Còn hàng (" + totalStock + ")" : "Hết hàng");
+
+                // Show available sizes
+                String sizes = p.getVariants().stream()
+                        .map((ProductVariant v) -> String.valueOf(v.getSize().getValue()))
+                        .distinct()
+                        .collect(Collectors.joining(", "));
+                sb.append(" | Size sẵn có: ").append(sizes);
+            }
+            sb.append("\n  Mô tả: ").append(p.getDescription() != null && p.getDescription().length() > 100
+                    ? p.getDescription().substring(0, 100) + "..."
+                    : p.getDescription());
+            sb.append("\n");
+        }
+
+        return sb.toString();
     }
 
     private String parseGroqResponse(String response) {

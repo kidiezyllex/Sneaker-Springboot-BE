@@ -18,25 +18,24 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class ProductVariantImage {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "variantId", nullable = false)
+    @JoinColumn(name = "variant_id", nullable = false)
     @JsonIgnore
     private ProductVariant variant;
-    
+
     @Column(nullable = false)
     private String imageUrl;
-    
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
-    
+
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 }
-

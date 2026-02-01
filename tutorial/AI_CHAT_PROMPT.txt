@@ -1,0 +1,37 @@
+1. Nhóm Tư Vấn Sản Phẩm & Tra Cứu Thực Tế (MỚI - Dữ liệu từ Database)
+"Shop còn mẫu giày Nike nào đang có sẵn không?"
+"Mình muốn tìm các mẫu giày của thương hiệu Adidas, shop có những đôi nào?"
+"Đôi Nike Air Force 1 hiện tại giá bao nhiêu và còn size 42 không shop?"
+"Cho mình xem danh sách các mẫu Jordan shop đang có trong kho với."
+"Mẫu giày nào đang còn hàng (In Stock) mà giá dưới 3 triệu không bạn?"
+
+2. Nhóm Tư Vấn Style & Công Nghệ
+"Chào bạn, mình đang tìm một đôi Jordan 1 phối màu trắng đen để mặc đi chơi, shop có gợi ý gì không?"
+"Mẫu giày nào đang là hot trend nhất dành cho nam của shop vậy?"
+"Mình cần tìm một đôi sneaker đế êm để tập gym và chạy bộ nhẹ nhàng, bạn tư vấn giúp mình với."
+"Mẫu Nike Dunk với Nike Air Force 1 khác nhau như thế nào về cảm giác đi?"
+
+3. Nhóm Hướng Dẫn Chọn Size (Sizing Guide)
+"Chân mình dài 25cm thì nên đi size bao nhiêu cho mẫu Adidas Superstar?"
+"Giày của Jordan thường là size chuẩn (True to size) hay phải tăng/giảm size vậy shop?"
+"Mình thường đi size 42 của Nike, nhưng mẫu này mình thấy form hơi ôm, mình có nên lên size 42.5 không?"
+
+4. Nhóm Quy Trình Mua Hàng & Thanh Toán
+"Bên mình có những phương thức thanh toán nào?"
+"Mình muốn mua trả góp thì shop có hỗ trợ không và thủ tục ra sao?"
+"Làm thế nào để áp dụng mã giảm giá khi đặt hàng trên website vậy?"
+
+5. Nhóm Chính Sách & Tra Cứu (Policies)
+"Nếu mình mua về bị rộng hoặc chật thì có được đổi size không?"
+"Thời gian giao hàng từ TP.HCM ra Hà Nội thường mất bao lâu?"
+"Giày của shop là hàng chính hãng 100% chứ? Shop có cam kết gì không?"
+"Bên mình bảo hành giày trong bao lâu và bảo hành những gì?"
+
+6. Nhóm Khuyến Mãi (Promotions)
+"Hiện tại shop có chương trình khuyến mãi nào đặc biệt cho khách hàng mới không?"
+"Sắp tới ngày 2/2 có chương trình sale nào lớn không shop?"
+"Mua 2 đôi cùng lúc có được giảm thêm không bạn?"
+
+7. Nhóm Xử Lý Tình Huống Khó (Edge Cases)
+"Mình nhận được giày nhưng hộp bị móp méo và giày có vết bẩn, mình cần xử lý thế nào?"
+"Mình muốn hủy đơn hàng vừa đặt xong, bạn giúp mình được không?"

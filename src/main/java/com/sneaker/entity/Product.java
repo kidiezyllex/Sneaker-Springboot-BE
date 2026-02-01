@@ -34,15 +34,15 @@ public class Product {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "brandId", nullable = false)
+    @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoryId", nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "materialId", nullable = false)
+    @JoinColumn(name = "material_id", nullable = false)
     private Material material;
 
     @Column(nullable = true, columnDefinition = "TEXT")
@@ -59,7 +59,7 @@ public class Product {
     private List<ProductVariant> variants;
 
     @ManyToMany
-    @JoinTable(name = "promotion_products", joinColumns = @JoinColumn(name = "productId"), inverseJoinColumns = @JoinColumn(name = "promotionId"))
+    @JoinTable(name = "promotion_products", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "promotion_id"))
     @JsonIgnore
     private List<Promotion> promotions;
 

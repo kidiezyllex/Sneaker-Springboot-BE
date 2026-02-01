@@ -132,11 +132,20 @@ public class ReturnService {
                             });
 
                     for (Map<String, Object> item : items) {
-                        Integer variantId = (Integer) item.get("productVariantId");
+                        Integer rawVariantId = (Integer) item.get("productVariantId");
+                        if (rawVariantId == null) {
+                            rawVariantId = (Integer) item.get("variantId");
+                        }
+
+                        if (rawVariantId == null) {
+                            throw new RuntimeException("Thiếu variantId cho sản phẩm trong đơn trả hàng");
+                        }
+
+                        final Integer finalVariantId = rawVariantId;
                         Integer quantity = (Integer) item.get("quantity");
 
-                        ProductVariant variant = productVariantRepository.findById(variantId)
-                                .orElseThrow(() -> new RuntimeException("Không tìm thấy variant: " + variantId));
+                        ProductVariant variant = productVariantRepository.findById(finalVariantId)
+                                .orElseThrow(() -> new RuntimeException("Không tìm thấy variant: " + finalVariantId));
 
                         variant.setStock(variant.getStock() + quantity);
                         productVariantRepository.save(variant);

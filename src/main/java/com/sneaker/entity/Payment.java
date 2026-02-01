@@ -17,45 +17,44 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class Payment {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orderId", nullable = false)
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
-    
+
     @Column(nullable = false)
     private Double amount;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PaymentMethod method;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PaymentStatus status = PaymentStatus.PENDING;
-    
+
     @Column(columnDefinition = "TEXT")
     private String bankTransferInfo; // JSON string
-    
+
     private String note;
-    
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
-    
+
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime updatedAt;
-    
+
     public enum PaymentMethod {
         CASH, BANK_TRANSFER, COD, VNPAY, MOMO
     }
-    
+
     public enum PaymentStatus {
         PENDING, COMPLETED, FAILED, REFUNDED
     }
 }
-

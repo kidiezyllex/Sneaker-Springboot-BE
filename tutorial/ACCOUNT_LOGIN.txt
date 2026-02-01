@@ -1,0 +1,5 @@
+adminsneaker@gmail.com / Admin123! (role admin)
+
+staffsneaker@gmail.com / Staff123! (role staff)
+
+nguyentrongvietanh@gmail.com / Customer123! (role customer)

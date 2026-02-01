@@ -15,51 +15,50 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "product_variants", 
-       uniqueConstraints = @UniqueConstraint(columnNames = {"productId", "colorId", "sizeId"}))
+@Table(name = "product_variants", uniqueConstraints = @UniqueConstraint(columnNames = { "product_id", "color_id",
+        "size_id" }))
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class ProductVariant {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "productId", nullable = false)
+    @JoinColumn(name = "product_id", nullable = false)
     @JsonIgnore
     private Product product;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "colorId", nullable = false)
+    @JoinColumn(name = "color_id", nullable = false)
     private Color color;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sizeId", nullable = false)
+    @JoinColumn(name = "size_id", nullable = false)
     private Size size;
-    
+
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
-    
+
     @Column(nullable = false)
     private Integer stock = 0;
-    
+
     @OneToMany(mappedBy = "variant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductVariantImage> images;
-    
+
     @OneToMany(mappedBy = "variant", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<OrderItem> orderItems;
-    
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
-    
+
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 }
-
