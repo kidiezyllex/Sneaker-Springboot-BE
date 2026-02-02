@@ -58,8 +58,8 @@ public class OrderController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    @Operation(summary = "Get all orders", description = "Get paginated list of orders (Admin only)")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+    @Operation(summary = "Get all orders", description = "Get paginated list of orders (Admin/Staff only)")
     @SecurityRequirement(name = "bearer-jwt")
     public ResponseEntity<ApiResponse<Map<String, Object>>> getOrders(
             @RequestParam(required = false) Integer customer,
@@ -166,8 +166,8 @@ public class OrderController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    @Operation(summary = "Update order", description = "Update order details (Admin only)")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+    @Operation(summary = "Update order", description = "Update order details (Admin/Staff only)")
     @SecurityRequirement(name = "bearer-jwt")
     public ResponseEntity<ApiResponse<Order>> updateOrder(
             @PathVariable Integer id,

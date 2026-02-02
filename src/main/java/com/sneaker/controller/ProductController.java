@@ -112,7 +112,7 @@ public class ProductController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     @Operation(summary = "Create product", description = "Create a new product (Admin only)")
     @SecurityRequirement(name = "bearer-jwt")
     public ResponseEntity<ApiResponse<Product>> createProduct(@Valid @RequestBody ProductCreateRequest request) {
@@ -121,7 +121,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     @Operation(summary = "Update product", description = "Update product details (Admin only)")
     @SecurityRequirement(name = "bearer-jwt")
     public ResponseEntity<ApiResponse<Product>> updateProduct(
@@ -132,7 +132,7 @@ public class ProductController {
     }
 
     @PatchMapping("/{id}/status")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     @Operation(summary = "Update product status", description = "Update product status (Admin only)")
     @SecurityRequirement(name = "bearer-jwt")
     public ResponseEntity<ApiResponse<Product>> updateProductStatus(
@@ -144,7 +144,7 @@ public class ProductController {
     }
 
     @PatchMapping("/{id}/stock")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     @Operation(summary = "Update product stock", description = "Update stock for product variants (Admin only)")
     @SecurityRequirement(name = "bearer-jwt")
     public ResponseEntity<ApiResponse<Product>> updateProductStock(
@@ -155,7 +155,7 @@ public class ProductController {
     }
 
     @PatchMapping("/{id}/images")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     @Operation(summary = "Update product images", description = "Update images for a product variant (Admin only)")
     @SecurityRequirement(name = "bearer-jwt")
     public ResponseEntity<ApiResponse<Product>> updateProductImages(
@@ -166,7 +166,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     @Operation(summary = "Delete product", description = "Delete a product (Admin only)")
     @SecurityRequirement(name = "bearer-jwt")
     public ResponseEntity<ApiResponse<Object>> deleteProduct(@PathVariable Integer id) {

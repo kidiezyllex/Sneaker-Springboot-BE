@@ -107,3 +107,6 @@ package-lock.json
 .cursorrules
 .agent
 application.properties
+structure.txt
+erd.puml
+diagram.dbml
