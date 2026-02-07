@@ -1,0 +1,16 @@
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+.idea/
+.vscode/
+.git/
+.env
+*.sql
+*.txt
+*.md
+help.md
+.agent/
+tutorial/
