@@ -1,0 +1,23 @@
+Bảng 2.1: Bảng các chức năng của tác nhân 
+Bảng 2.2: Bảng Scenario chức năng đăng ký 
+Bảng 2.3: Bảng Scenario chức năng đăng nhập 
+Bảng 2.4: Bảng Scenario chức năng Quản lý mã giảm giá 
+Bảng 2.5: Bảng Scenario chức năng Quản lý đơn hàng 
+Bảng 2.6: Bảng Scenario chức năng Quản lý trả hàng 
+Bảng 2.7: Bảng Scenario chức năng Chat với AI Chatbot (Trong nội dung chi tiết)
+Bảng 2.8: Bảng Scenario chức năng Quản lý giỏ hàng 
+Bảng 2.9: Bảng Scenario chức năng Lọc sản phẩm 
+Bảng 2.10: Bảng Scenario chức năng Quản lý đơn hàng (POS) (Trong nội dung chi tiết)
+Bảng 2.11: Bảng Scenario chức năng Quản lý thanh toán (Trong nội dung chi tiết)
+Bảng 2.12: Bảng Scenario chức năng Quản lý trả hàng (Dành cho nhân viên)
+Bảng 2.13: Bảng Scenario chức năng Quản lý trả hàng 
+Bảng 2.14: Bảng Accounts (Tài khoản) 
+Bảng 2.15: Bảng Account_Addresses (Địa chỉ tài khoản) 
+Bảng 2.16: Bảng Products (Sản phẩm) 
+Bảng 2.17: Bảng Product_Variants (Biến thể sản phẩm) 
+Bảng 2.18: Bảng Colors (Màu sắc) (Trong danh mục thuộc tính)
+Bảng 2.19: Bảng Sizes (Kích cỡ) (Trong danh mục thuộc tính)
+Bảng 2.20: Bảng Vouchers (Mã giảm giá) 
+Bảng 2.21: Bảng Thuộc tính sản phẩm (Brands, Categories, Colors, Sizes, Materials)
+Bảng 2.22: Bảng Payments (Thanh toán)
+Bảng 2.23: Bảng Returns (Đổi trả)
