@@ -11,7 +11,7 @@ FROM eclipse-temurin:17-jre-focal
 WORKDIR /app
 
 # Copy the JAR from the build stage
-COPY --from=build /app/target/sneaker-be-1.0.0.jar app.jar
+COPY --from=build /app/target/sneaker-be.jar app.jar
 
 # Expose the port
 EXPOSE 8080
