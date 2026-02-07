@@ -20,8 +20,6 @@ public class VoucherUpdateRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try {
-            log.info("Checking for expired but ACTIVE vouchers...");
-
             LocalDateTime now = LocalDateTime.now();
             List<Voucher> vouchers = voucherRepository.findAll();
 
@@ -36,9 +34,6 @@ public class VoucherUpdateRunner implements CommandLineRunner {
 
             if (updatedCount > 0) {
                 voucherRepository.saveAll(vouchers);
-                log.info("Successfully updated {} expired vouchers to be valid until end of 2026.", updatedCount);
-            } else {
-                log.info("No expired ACTIVE vouchers found.");
             }
         } catch (Exception e) {
             log.warn(
