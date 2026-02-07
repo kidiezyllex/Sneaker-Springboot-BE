@@ -15,8 +15,8 @@ FROM eclipse-temurin:17-jre-focal
 WORKDIR /app
 
 # Copy the JAR from the build stage
-# Note: Artifact name and version prefix from pom.xml (sneaker-be-1.0.0.jar)
-COPY --from=build /app/target/sneaker-be-*.jar app.jar
+# Note: Using a more specific pattern to avoid .jar.original files
+COPY --from=build /app/target/sneaker-be-1.0.0.jar app.jar
 
 # Expose the port (Render will override this with the PORT env var)
 EXPOSE 8080
