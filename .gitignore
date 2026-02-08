@@ -50,8 +50,7 @@ nbdist/
 *.log.*
 spring.log
 spring.log.*
-application-*.properties
-src/main/resources/application.properties
+
 application-*.yml
 !application.yml
 
