@@ -15,7 +15,7 @@ public class OrderCreateRequest {
     
     private Integer customerId;
     
-    private String customer; // For POS cases like "Khách lẻ"
+    private Object customer; // For POS cases like "Khách lẻ" (String) or 7 (Integer/ID)
     
     private Order.OrderStatus orderStatus; // For setting status directly (e.g. POS)
     

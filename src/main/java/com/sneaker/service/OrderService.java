@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,14 +35,15 @@ public class OrderService {
         if (request.getCustomerId() != null) {
             customer = accountRepository.findById(request.getCustomerId())
                     .orElseThrow(() -> new RuntimeException("Không tìm thấy khách hàng với ID: " + request.getCustomerId()));
+        } else if (request.getCustomer() instanceof Number) {
+            Integer custId = ((Number) request.getCustomer()).intValue();
+            customer = accountRepository.findById(custId)
+                    .orElseThrow(() -> new RuntimeException("Không tìm thấy khách hàng với ID: " + custId));
         } else {
-            // Try to find by name "Khách lẻ" or default account
-            String customerName = request.getCustomer() != null ? request.getCustomer() : "Khách lẻ";
+            String customerName = (request.getCustomer() instanceof String) ? (String) request.getCustomer() : "Khách lẻ";
             customer = accountRepository.findWithFilters(Account.Role.CUSTOMER, null, customerName, PageRequest.of(0, 1))
                     .getContent().stream().findFirst()
                     .orElseGet(() -> {
-                        // If not found, look for ANY customer or create one? 
-                        // For safety, let's find by code if possible or just use the first available CUSTOMER
                         return accountRepository.findWithFilters(Account.Role.CUSTOMER, null, null, PageRequest.of(0, 1))
                                 .getContent().stream().findFirst()
                                 .orElseThrow(() -> new RuntimeException("Không tìm thấy khách hàng mặc định. Vui lòng tạo tài khoản khách hàng."));
