@@ -173,14 +173,16 @@ public class OrderService {
         }
 
         order = orderRepository.save(order);
-
-        // Save order items
+        
+        // Save order items and add to order list
+        List<OrderItem> savedItems = new ArrayList<>();
         for (OrderItem orderItem : orderItems) {
             orderItem.setOrder(order);
-            orderItemRepository.save(orderItem);
+            savedItems.add(orderItemRepository.save(orderItem));
         }
+        order.setItems(savedItems);
 
-        return orderRepository.findById(order.getId()).orElse(order);
+        return order;
     }
 
     public Page<Order> getOrders(Integer customerId, Order.OrderStatus orderStatus,
