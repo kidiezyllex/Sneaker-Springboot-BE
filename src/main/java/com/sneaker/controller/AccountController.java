@@ -30,8 +30,8 @@ public class AccountController {
     private final AccountService accountService;
     
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    @Operation(summary = "Get all accounts", description = "Get paginated list of accounts (Admin only)")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+    @Operation(summary = "Get all accounts", description = "Get paginated list of accounts (Admin and Staff)")
     public ResponseEntity<ApiResponse<Page<Account>>> getAllAccounts(
             @RequestParam(required = false) String role,
             @RequestParam(required = false) String status,
@@ -48,8 +48,8 @@ public class AccountController {
     }
     
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    @Operation(summary = "Get account by ID", description = "Get account details by ID (Admin only)")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+    @Operation(summary = "Get account by ID", description = "Get account details by ID (Admin and Staff)")
     public ResponseEntity<ApiResponse<Account>> getAccountById(@PathVariable Integer id) {
         Account account = accountService.getAccountById(id);
         return ResponseEntity.ok(ApiResponse.success("Lấy thông tin tài khoản thành công", account));
