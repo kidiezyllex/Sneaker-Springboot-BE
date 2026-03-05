@@ -13,4 +13,5 @@ public interface BrandRepository extends JpaRepository<Brand, Integer> {
     Page<Brand> findByStatus(Brand.Status status, Pageable pageable);
 
     boolean existsByName(String name);
+    java.util.Optional<Brand> findByName(String name);
 }

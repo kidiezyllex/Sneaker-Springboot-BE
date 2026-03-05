@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface ColorRepository extends JpaRepository<Color, Integer> {
     Page<Color> findByStatus(Color.Status status, Pageable pageable);
+    java.util.Optional<Color> findByName(String name);
 }

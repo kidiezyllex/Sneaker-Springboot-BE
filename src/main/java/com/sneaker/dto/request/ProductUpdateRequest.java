@@ -8,9 +8,9 @@ import java.util.List;
 @Data
 public class ProductUpdateRequest {
     private String name;
-    private Integer brand;
-    private Integer category;
-    private Integer material;
+    private Object brand;    // Can be Integer (ID) or String (Name)
+    private Object category; // Can be Integer (ID) or String (Name)
+    private Object material; // Can be Integer (ID) or String (Name)
     private String description;
     private BigDecimal weight;
     private String status;
@@ -18,8 +18,8 @@ public class ProductUpdateRequest {
     
     @Data
     public static class VariantRequest {
-        private Integer colorId;
-        private Integer sizeId;
+        private Object colorId;
+        private Object sizeId;
         private BigDecimal price;
         private Integer quantity;
         private Integer stock;

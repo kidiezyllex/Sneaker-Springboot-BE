@@ -12,15 +12,15 @@ public class ProductCreateRequest {
 
     @NotBlank(message = "Tên sản phẩm không được để trống")
     private String name;
-
+    
     @NotNull(message = "Thương hiệu không được để trống")
-    private Integer brand;
+    private Object brand;    // Can be Integer (ID) or String (Name)
 
     @NotNull(message = "Danh mục không được để trống")
-    private Integer category;
+    private Object category; // Can be Integer (ID) or String (Name)
 
     @NotNull(message = "Chất liệu không được để trống")
-    private Integer material;
+    private Object material; // Can be Integer (ID) or String (Name)
 
     private String description;
 
@@ -34,10 +34,10 @@ public class ProductCreateRequest {
     @Data
     public static class VariantRequest {
         @NotNull(message = "colorId không được để trống")
-        private Integer colorId;
+        private Object colorId;
 
         @NotNull(message = "sizeId không được để trống")
-        private Integer sizeId;
+        private Object sizeId;
 
         @NotNull(message = "Giá không được để trống")
         @DecimalMin(value = "0.01", message = "Giá phải lớn hơn 0")

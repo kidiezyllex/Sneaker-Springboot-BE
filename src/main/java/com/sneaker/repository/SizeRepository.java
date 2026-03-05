@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SizeRepository extends JpaRepository<Size, Integer> {
     Page<Size> findByStatus(Size.Status status, Pageable pageable);
+    java.util.Optional<Size> findByValue(Integer value);
 }

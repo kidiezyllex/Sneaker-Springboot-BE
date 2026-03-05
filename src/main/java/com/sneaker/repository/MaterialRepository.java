@@ -13,4 +13,5 @@ public interface MaterialRepository extends JpaRepository<Material, Integer> {
     Page<Material> findByStatus(Material.Status status, Pageable pageable);
 
     boolean existsByName(String name);
+    java.util.Optional<Material> findByName(String name);
 }

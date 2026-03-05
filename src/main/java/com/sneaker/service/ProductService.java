@@ -108,7 +108,6 @@ public class ProductService {
     }
 
     public List<Product> getBestSellingProducts() {
-        // Currently using random products as placeholder for best sellers
         return productRepository.findRandomTop4ByStatus(Product.Status.ACTIVE.name());
     }
 
@@ -123,12 +122,32 @@ public class ProductService {
     @Transactional
     public Product createProduct(com.sneaker.dto.request.ProductCreateRequest request) {
         // Find brand, category, material
-        Brand brand = brandRepository.findById(request.getBrand())
-                .orElseThrow(() -> new RuntimeException("Thương hiệu không tồn tại"));
-        Category category = categoryRepository.findById(request.getCategory())
-                .orElseThrow(() -> new RuntimeException("Danh mục không tồn tại"));
-        Material material = materialRepository.findById(request.getMaterial())
-                .orElseThrow(() -> new RuntimeException("Chất liệu không tồn tại"));
+        Brand brand = null;
+        if (request.getBrand() instanceof Number) {
+            brand = brandRepository.findById(((Number) request.getBrand()).intValue())
+                    .orElseThrow(() -> new RuntimeException("Thương hiệu không tồn tại với ID: " + request.getBrand()));
+        } else if (request.getBrand() instanceof String) {
+            brand = brandRepository.findByName((String) request.getBrand())
+                    .orElseThrow(() -> new RuntimeException("Thương hiệu không tồn tại với tên: " + request.getBrand()));
+        }
+
+        Category category = null;
+        if (request.getCategory() instanceof Number) {
+            category = categoryRepository.findById(((Number) request.getCategory()).intValue())
+                    .orElseThrow(() -> new RuntimeException("Danh mục không tồn tại với ID: " + request.getCategory()));
+        } else if (request.getCategory() instanceof String) {
+            category = categoryRepository.findByName((String) request.getCategory())
+                    .orElseThrow(() -> new RuntimeException("Danh mục không tồn tại với tên: " + request.getCategory()));
+        }
+
+        Material material = null;
+        if (request.getMaterial() instanceof Number) {
+            material = materialRepository.findById(((Number) request.getMaterial()).intValue())
+                    .orElseThrow(() -> new RuntimeException("Chất liệu không tồn tại với ID: " + request.getMaterial()));
+        } else if (request.getMaterial() instanceof String) {
+            material = materialRepository.findByName((String) request.getMaterial())
+                    .orElseThrow(() -> new RuntimeException("Chất liệu không tồn tại với tên: " + request.getMaterial()));
+        }
 
         // Create product
         Product product = new Product();
@@ -145,12 +164,28 @@ public class ProductService {
 
         // Create variants
         for (com.sneaker.dto.request.ProductCreateRequest.VariantRequest variantReq : request.getVariants()) {
-            Color color = colorRepository.findById(variantReq.getColorId())
-                    .orElseThrow(
-                            () -> new RuntimeException("Không tìm thấy màu sắc với ID: " + variantReq.getColorId()));
-            Size size = sizeRepository.findById(variantReq.getSizeId())
-                    .orElseThrow(
-                            () -> new RuntimeException("Không tìm thấy kích cỡ với ID: " + variantReq.getSizeId()));
+            Color color = null;
+            if (variantReq.getColorId() instanceof Number) {
+                color = colorRepository.findById(((Number) variantReq.getColorId()).intValue())
+                        .orElseThrow(() -> new RuntimeException("Không tìm thấy màu sắc với ID: " + variantReq.getColorId()));
+            } else if (variantReq.getColorId() instanceof String) {
+                color = colorRepository.findByName((String) variantReq.getColorId())
+                        .orElseThrow(() -> new RuntimeException("Không tìm thấy màu sắc với tên: " + variantReq.getColorId()));
+            }
+
+            Size size = null;
+            if (variantReq.getSizeId() instanceof Number) {
+                size = sizeRepository.findById(((Number) variantReq.getSizeId()).intValue())
+                        .orElseThrow(() -> new RuntimeException("Không tìm thấy kích cỡ với ID: " + variantReq.getSizeId()));
+            } else if (variantReq.getSizeId() instanceof String) {
+                try {
+                    Integer sizeVal = Integer.parseInt((String) variantReq.getSizeId());
+                    size = sizeRepository.findByValue(sizeVal)
+                            .orElseThrow(() -> new RuntimeException("Không tìm thấy kích cỡ với giá trị: " + variantReq.getSizeId()));
+                } catch (NumberFormatException e) {
+                    throw new RuntimeException("Giá trị kích cỡ không hợp lệ: " + variantReq.getSizeId());
+                }
+            }
 
             ProductVariant variant = new ProductVariant();
             variant.setProduct(product);
@@ -194,18 +229,36 @@ public class ProductService {
 
         // Update brand, category, material
         if (request.getBrand() != null) {
-            Brand brand = brandRepository.findById(request.getBrand())
-                    .orElseThrow(() -> new RuntimeException("Thương hiệu không tồn tại"));
+            Brand brand = null;
+            if (request.getBrand() instanceof Number) {
+                brand = brandRepository.findById(((Number) request.getBrand()).intValue())
+                        .orElseThrow(() -> new RuntimeException("Thương hiệu không tồn tại với ID: " + request.getBrand()));
+            } else if (request.getBrand() instanceof String) {
+                brand = brandRepository.findByName((String) request.getBrand())
+                        .orElseThrow(() -> new RuntimeException("Thương hiệu không tồn tại với tên: " + request.getBrand()));
+            }
             product.setBrand(brand);
         }
         if (request.getCategory() != null) {
-            Category category = categoryRepository.findById(request.getCategory())
-                    .orElseThrow(() -> new RuntimeException("Danh mục không tồn tại"));
+            Category category = null;
+            if (request.getCategory() instanceof Number) {
+                category = categoryRepository.findById(((Number) request.getCategory()).intValue())
+                        .orElseThrow(() -> new RuntimeException("Danh mục không tồn tại với ID: " + request.getCategory()));
+            } else if (request.getCategory() instanceof String) {
+                category = categoryRepository.findByName((String) request.getCategory())
+                        .orElseThrow(() -> new RuntimeException("Danh mục không tồn tại với tên: " + request.getCategory()));
+            }
             product.setCategory(category);
         }
         if (request.getMaterial() != null) {
-            Material material = materialRepository.findById(request.getMaterial())
-                    .orElseThrow(() -> new RuntimeException("Chất liệu không tồn tại"));
+            Material material = null;
+            if (request.getMaterial() instanceof Number) {
+                material = materialRepository.findById(((Number) request.getMaterial()).intValue())
+                        .orElseThrow(() -> new RuntimeException("Chất liệu không tồn tại với ID: " + request.getMaterial()));
+            } else if (request.getMaterial() instanceof String) {
+                material = materialRepository.findByName((String) request.getMaterial())
+                        .orElseThrow(() -> new RuntimeException("Chất liệu không tồn tại với tên: " + request.getMaterial()));
+            }
             product.setMaterial(material);
         }
 
@@ -218,10 +271,28 @@ public class ProductService {
 
             // Create new variants
             for (com.sneaker.dto.request.ProductUpdateRequest.VariantRequest variantReq : request.getVariants()) {
-                Color color = colorRepository.findById(variantReq.getColorId())
-                        .orElseThrow(() -> new RuntimeException("Không tìm thấy màu sắc"));
-                Size size = sizeRepository.findById(variantReq.getSizeId())
-                        .orElseThrow(() -> new RuntimeException("Không tìm thấy kích cỡ"));
+                Color color = null;
+                if (variantReq.getColorId() instanceof Number) {
+                    color = colorRepository.findById(((Number) variantReq.getColorId()).intValue())
+                            .orElseThrow(() -> new RuntimeException("Không tìm thấy màu sắc với ID: " + variantReq.getColorId()));
+                } else if (variantReq.getColorId() instanceof String) {
+                    color = colorRepository.findByName((String) variantReq.getColorId())
+                            .orElseThrow(() -> new RuntimeException("Không tìm thấy màu sắc với tên: " + variantReq.getColorId()));
+                }
+
+                Size size = null;
+                if (variantReq.getSizeId() instanceof Number) {
+                    size = sizeRepository.findById(((Number) variantReq.getSizeId()).intValue())
+                            .orElseThrow(() -> new RuntimeException("Không tìm thấy kích cỡ với ID: " + variantReq.getSizeId()));
+                } else if (variantReq.getSizeId() instanceof String) {
+                    try {
+                        Integer sizeVal = Integer.parseInt((String) variantReq.getSizeId());
+                        size = sizeRepository.findByValue(sizeVal)
+                                .orElseThrow(() -> new RuntimeException("Không tìm thấy kích cỡ với giá trị: " + variantReq.getSizeId()));
+                    } catch (NumberFormatException e) {
+                        throw new RuntimeException("Giá trị kích cỡ không hợp lệ: " + variantReq.getSizeId());
+                    }
+                }
 
                 ProductVariant variant = new ProductVariant();
                 variant.setProduct(product);
