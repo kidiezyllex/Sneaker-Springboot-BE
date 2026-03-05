@@ -100,10 +100,12 @@ public class OrderService {
                      throw new RuntimeException("colorId và sizeId là bắt buộc trong variant của item[" + itemIndex + "]");
                 }
 
+                final Integer finalColorId = colorId;
+                final Integer finalSizeId = sizeId;
                 variant = productVariantRepository.findByProductIdAndColorIdAndSizeId(productId, colorId, sizeId)
                         .orElseThrow(() -> new RuntimeException("Không tìm thấy biến thể sản phẩm cho sản phẩm \"" +
-                                product.getName() + "\" với colorId: " + colorId +
-                                ", sizeId: " + sizeId + " trong item[" + itemIndex + "]"));
+                                product.getName() + "\" với colorId: " + finalColorId +
+                                ", sizeId: " + finalSizeId + " trong item[" + itemIndex + "]"));
             }
 
             if (variant == null) {

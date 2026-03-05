@@ -65,13 +65,10 @@ public class CloudinaryConfig {
     }
 
     private String getProperty(String envKey, String defaultValue) {
-        // Thử đọc từ Spring Environment trước
         String value = environment.getProperty(envKey);
         if (value == null || value.isEmpty()) {
-            // Nếu không có, thử đọc từ System environment
             value = System.getenv(envKey);
         }
-        // Nếu vẫn không có, sử dụng defaultValue từ @Value
         return (value != null && !value.isEmpty()) ? value : defaultValue;
     }
 }
