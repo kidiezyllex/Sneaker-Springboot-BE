@@ -13,8 +13,11 @@ public class OrderCreateRequest {
     
     private String orderId; // Optional custom order code
     
-    @NotNull(message = "customerId là bắt buộc")
     private Integer customerId;
+    
+    private String customer; // For POS cases like "Khách lẻ"
+    
+    private Order.OrderStatus orderStatus; // For setting status directly (e.g. POS)
     
     @NotEmpty(message = "items là bắt buộc và phải là mảng không rỗng")
     @Valid
@@ -44,7 +47,7 @@ public class OrderCreateRequest {
     @Data
     public static class OrderItemRequest {
         private Integer productId;
-        private Integer product; // Alternative field name
+        private Object product; // Allow Object to handle String or Integer from JSON
         
         @NotNull(message = "quantity phải là số nguyên dương")
         @Min(value = 1, message = "quantity phải lớn hơn 0")
@@ -61,11 +64,10 @@ public class OrderCreateRequest {
         
         @Data
         public static class VariantRequest {
-            @NotNull(message = "variant.colorId phải là số nguyên dương")
-            private Integer colorId;
+            private Object colorId;
             
             @NotNull(message = "variant.sizeId phải là số nguyên dương")
-            private Integer sizeId;
+            private Object sizeId;
         }
     }
     

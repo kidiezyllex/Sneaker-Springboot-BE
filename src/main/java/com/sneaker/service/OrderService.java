@@ -32,9 +32,23 @@ public class OrderService {
     @Transactional
     public Order createOrder(OrderCreateRequest request, SecurityUser user) {
         // Validate customer
-        Account customer = accountRepository.findById(request.getCustomerId())
-                .orElseThrow(
-                        () -> new RuntimeException("Không tìm thấy khách hàng với ID: " + request.getCustomerId()));
+        Account customer = null;
+        if (request.getCustomerId() != null) {
+            customer = accountRepository.findById(request.getCustomerId())
+                    .orElseThrow(() -> new RuntimeException("Không tìm thấy khách hàng với ID: " + request.getCustomerId()));
+        } else {
+            // Try to find by name "Khách lẻ" or default account
+            String customerName = request.getCustomer() != null ? request.getCustomer() : "Khách lẻ";
+            customer = accountRepository.findWithFilters(Account.Role.CUSTOMER, null, customerName, PageRequest.of(0, 1))
+                    .getContent().stream().findFirst()
+                    .orElseGet(() -> {
+                        // If not found, look for ANY customer or create one? 
+                        // For safety, let's find by code if possible or just use the first available CUSTOMER
+                        return accountRepository.findWithFilters(Account.Role.CUSTOMER, null, null, PageRequest.of(0, 1))
+                                .getContent().stream().findFirst()
+                                .orElseThrow(() -> new RuntimeException("Không tìm thấy khách hàng mặc định. Vui lòng tạo tài khoản khách hàng."));
+                    });
+        }
 
         // Validate voucher if provided
         Voucher voucher = null;
@@ -48,7 +62,17 @@ public class OrderService {
         for (int i = 0; i < request.getItems().size(); i++) {
             final int itemIndex = i;
             OrderCreateRequest.OrderItemRequest itemReq = request.getItems().get(i);
-            Integer productId = itemReq.getProductId() != null ? itemReq.getProductId() : itemReq.getProduct();
+            
+            Integer productId;
+            if (itemReq.getProductId() != null) {
+                productId = itemReq.getProductId();
+            } else if (itemReq.getProduct() instanceof String) {
+                productId = Integer.valueOf((String) itemReq.getProduct());
+            } else if (itemReq.getProduct() instanceof Number) {
+                productId = ((Number) itemReq.getProduct()).intValue();
+            } else {
+                throw new RuntimeException("productId là bắt buộc trong item[" + itemIndex + "]");
+            }
 
             Product product = productRepository.findById(productId)
                     .orElseThrow(() -> new RuntimeException(
@@ -60,11 +84,25 @@ public class OrderService {
                         .filter(v -> v.getProduct().getId().equals(productId))
                         .orElseThrow(() -> new RuntimeException("Không tìm thấy biến thể sản phẩm"));
             } else if (itemReq.getVariant() != null) {
-                variant = productVariantRepository.findByProductIdAndColorIdAndSizeId(
-                        productId, itemReq.getVariant().getColorId(), itemReq.getVariant().getSizeId())
+                Integer colorId = null;
+                Integer sizeId = null;
+                
+                Object rawColorId = itemReq.getVariant().getColorId();
+                if (rawColorId instanceof String) colorId = Integer.valueOf((String) rawColorId);
+                else if (rawColorId instanceof Number) colorId = ((Number) rawColorId).intValue();
+                
+                Object rawSizeId = itemReq.getVariant().getSizeId();
+                if (rawSizeId instanceof String) sizeId = Integer.valueOf((String) rawSizeId);
+                else if (rawSizeId instanceof Number) sizeId = ((Number) rawSizeId).intValue();
+
+                if (colorId == null || sizeId == null) {
+                     throw new RuntimeException("colorId và sizeId là bắt buộc trong variant của item[" + itemIndex + "]");
+                }
+
+                variant = productVariantRepository.findByProductIdAndColorIdAndSizeId(productId, colorId, sizeId)
                         .orElseThrow(() -> new RuntimeException("Không tìm thấy biến thể sản phẩm cho sản phẩm \"" +
-                                product.getName() + "\" với colorId: " + itemReq.getVariant().getColorId() +
-                                ", sizeId: " + itemReq.getVariant().getSizeId() + " trong item[" + itemIndex + "]"));
+                                product.getName() + "\" với colorId: " + colorId +
+                                ", sizeId: " + sizeId + " trong item[" + itemIndex + "]"));
             }
 
             if (variant == null) {
@@ -124,7 +162,12 @@ public class OrderService {
         order.setShippingSpecificAddress(request.getShippingAddress().getSpecificAddress());
         order.setPaymentMethod(request.getPaymentMethod());
         order.setPaymentStatus(paymentStatus);
-        order.setOrderStatus(Order.OrderStatus.CHO_XAC_NHAN);
+        
+        if (request.getOrderStatus() != null) {
+            order.setOrderStatus(request.getOrderStatus());
+        } else {
+            order.setOrderStatus(Order.OrderStatus.CHO_XAC_NHAN);
+        }
 
         order = orderRepository.save(order);
 
