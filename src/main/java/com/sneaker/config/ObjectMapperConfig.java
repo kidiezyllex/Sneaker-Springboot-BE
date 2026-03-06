@@ -1,5 +1,6 @@
 package com.sneaker.config;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -15,7 +16,8 @@ public class ObjectMapperConfig {
         return new ObjectMapper()
                 .registerModule(new JavaTimeModule()) // support java.time (LocalDateTime, etc.)
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+                .configure(JsonParser.Feature.ALLOW_TRAILING_COMMA, true);
     }
 }
 
