@@ -4,6 +4,7 @@ import com.sneaker.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -23,6 +24,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -57,15 +59,16 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/products/**").permitAll()
                         .requestMatchers("/api/attributes/**").permitAll()
-                        .requestMatchers("/api/promotions", "/api/promotions/**").permitAll()
+                        .requestMatchers("/api/promotions/**").permitAll()
                         .requestMatchers("/api/vouchers/validate").permitAll()
                         .requestMatchers("/api/vouchers/user/**").authenticated()
-                        .requestMatchers("/api/chatbot/chat").permitAll()
-                        .requestMatchers("/api/chatbot/session/**").permitAll()
-                        .requestMatchers("/api/chatbot/**").authenticated()
+                        .requestMatchers("/api/chatbot/chat").permitAll() // Allow public chatbot access
+                        .requestMatchers("/api/chatbot/session/**").permitAll() // Allow loading sessions publicly
+                        .requestMatchers("/api/chatbot/**").authenticated() // Other chatbot endpoints require auth
                         .requestMatchers("/swagger-ui/**", "/api-docs/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/orders/**").authenticated()
@@ -83,18 +86,17 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-
-        // Hỗ trợ nhiều môi trường: localhost, domain thật, v.v.
         configuration.setAllowedOriginPatterns(Arrays.asList(
-                "http://localhost:*",
-                "http://127.0.0.1:*",
-                "https://*" // Thêm patterns cần thiết ở đây
-        ));
-
+                "http://localhost:[*]",
+                "http://127.0.0.1:[*]",
+                "http://localhost:3000",
+                "http://localhost:5173",
+                "http://localhost:8080",
+                "https://*.onrender.com"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
-        configuration.setAllowedHeaders(
-                Arrays.asList("Authorization", "Content-Type", "X-Requested-With", "Accept", "Origin"));
-        configuration.setExposedHeaders(Arrays.asList("Authorization"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setExposedHeaders(Arrays.asList("Authorization", "Content-Type", "Access-Control-Allow-Origin",
+                "Access-Control-Allow-Credentials"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
 
