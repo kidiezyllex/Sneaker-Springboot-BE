@@ -1,5 +1,6 @@
 package com.sneaker.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -14,12 +15,15 @@ public class ProductCreateRequest {
     private String name;
     
     @NotNull(message = "Thương hiệu không được để trống")
+    @JsonAlias("brandId")
     private Object brand;    // Can be Integer (ID) or String (Name)
 
     @NotNull(message = "Danh mục không được để trống")
+    @JsonAlias("categoryId")
     private Object category; // Can be Integer (ID) or String (Name)
 
     @NotNull(message = "Chất liệu không được để trống")
+    @JsonAlias("materialId")
     private Object material; // Can be Integer (ID) or String (Name)
 
     private String description;
