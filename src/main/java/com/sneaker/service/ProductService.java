@@ -177,12 +177,12 @@ public class ProductService {
         String str = value.toString();
         try {
             Integer id = Integer.parseInt(str);
-            return brandRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Thương hiệu không tồn tại với ID: " + id));
-        } catch (NumberFormatException e) {
-            return brandRepository.findByName(str)
-                    .orElseThrow(() -> new RuntimeException("Thương hiệu không tồn tại với tên: " + str));
-        }
+            Optional<Brand> brand = brandRepository.findById(id);
+            if (brand.isPresent()) return brand.get();
+        } catch (NumberFormatException ignored) {}
+
+        return brandRepository.findByName(str)
+                .orElseThrow(() -> new RuntimeException("Thương hiệu không tồn tại với ID hoặc tên: " + str));
     }
 
     private Category resolveCategory(Object value) {
@@ -194,12 +194,12 @@ public class ProductService {
         String str = value.toString();
         try {
             Integer id = Integer.parseInt(str);
-            return categoryRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Danh mục không tồn tại với ID: " + id));
-        } catch (NumberFormatException e) {
-            return categoryRepository.findByName(str)
-                    .orElseThrow(() -> new RuntimeException("Danh mục không tồn tại với tên: " + str));
-        }
+            Optional<Category> category = categoryRepository.findById(id);
+            if (category.isPresent()) return category.get();
+        } catch (NumberFormatException ignored) {}
+
+        return categoryRepository.findByName(str)
+                .orElseThrow(() -> new RuntimeException("Danh mục không tồn tại với ID hoặc tên: " + str));
     }
 
     private Material resolveMaterial(Object value) {
@@ -211,12 +211,12 @@ public class ProductService {
         String str = value.toString();
         try {
             Integer id = Integer.parseInt(str);
-            return materialRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Chất liệu không tồn tại với ID: " + id));
-        } catch (NumberFormatException e) {
-            return materialRepository.findByName(str)
-                    .orElseThrow(() -> new RuntimeException("Chất liệu không tồn tại với tên: " + str));
-        }
+            Optional<Material> material = materialRepository.findById(id);
+            if (material.isPresent()) return material.get();
+        } catch (NumberFormatException ignored) {}
+
+        return materialRepository.findByName(str)
+                .orElseThrow(() -> new RuntimeException("Chất liệu không tồn tại với ID hoặc tên: " + str));
     }
 
     private Color resolveColor(Object value) {
@@ -228,34 +228,35 @@ public class ProductService {
         String str = value.toString();
         try {
             Integer id = Integer.parseInt(str);
-            return colorRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Không tìm thấy màu sắc với ID: " + id));
-        } catch (NumberFormatException e) {
-            return colorRepository.findByName(str)
-                    .orElseThrow(() -> new RuntimeException("Không tìm thấy màu sắc với tên: " + str));
-        }
+            Optional<Color> color = colorRepository.findById(id);
+            if (color.isPresent()) return color.get();
+        } catch (NumberFormatException ignored) {}
+
+        return colorRepository.findByName(str)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy màu sắc với ID hoặc tên: " + str));
     }
 
     private Size resolveSize(Object value) {
         if (value == null) return null;
         if (value instanceof Number) {
-            return sizeRepository.findById(((Number) value).intValue())
-                    .orElseThrow(() -> new RuntimeException("Không tìm thấy kích cỡ với ID: " + value));
+            Integer id = ((Number) value).intValue();
+            Optional<Size> size = sizeRepository.findById(id);
+            if (size.isPresent()) return size.get();
+            return sizeRepository.findByValue(id)
+                    .orElseThrow(() -> new RuntimeException("Không tìm thấy kích cỡ với ID hoặc giá trị: " + id));
         }
         String str = value.toString();
         try {
-            Integer id = Integer.parseInt(str);
-            return sizeRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Không tìm thấy kích cỡ với ID: " + id));
+            Integer val = Integer.parseInt(str);
+            Optional<Size> sizeById = sizeRepository.findById(val);
+            if (sizeById.isPresent()) return sizeById.get();
+            
+            Optional<Size> sizeByValue = sizeRepository.findByValue(val);
+            if (sizeByValue.isPresent()) return sizeByValue.get();
+            
+            throw new RuntimeException("Không tìm thấy kích cỡ với ID hoặc giá trị: " + val);
         } catch (NumberFormatException e) {
-            try {
-                // If it's not a numeric ID, maybe it's a value (like size 42) represented as a string
-                Integer sizeVal = Integer.parseInt(str);
-                return sizeRepository.findByValue(sizeVal)
-                        .orElseThrow(() -> new RuntimeException("Không tìm thấy kích cỡ với giá trị: " + str));
-            } catch (NumberFormatException e2) {
-                throw new RuntimeException("Giá trị kích cỡ không hợp lệ: " + str);
-            }
+            throw new RuntimeException("Giá trị kích cỡ không hợp lệ (phải là số): " + str);
         }
     }
 
