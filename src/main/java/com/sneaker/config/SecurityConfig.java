@@ -86,18 +86,16 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList(
-            "http://localhost:[*]",
-            "http://127.0.0.1:[*]",
-            "http://localhost:3000",
-            "http://localhost:5173",
-            "http://localhost:8080",
-            "https://*.onrender.com"
-        ));
+        // Cho phép tất cả các nguồn (Origins)
+        configuration.setAllowedOriginPatterns(List.of("*"));
+        // Cho phép tất cả các phương thức (Methods)
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setExposedHeaders(Arrays.asList("Authorization", "Content-Type", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
+        // Cho phép tất cả các headers
+        configuration.setAllowedHeaders(List.of("*"));
+        // Cho phép gửi credentials (cookies, auth headers)
         configuration.setAllowCredentials(true);
+        // Expose các headers quan trọng
+        configuration.setExposedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
