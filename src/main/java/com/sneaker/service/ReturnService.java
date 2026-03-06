@@ -231,11 +231,16 @@ public class ReturnService {
         BigDecimal totalRefund = BigDecimal.ZERO;
         for (ReturnRequestRequest.ReturnItemSimpleRequest item : request.getItems()) {
             OrderItem orderItem = originalOrder.getItems().stream()
-                    .filter(oi -> oi.getVariant().getProduct().getId().equals(item.getProductId()) &&
-                            oi.getVariant().getId().equals(item.getProductVariantId()))
+                    .filter(oi -> {
+                        boolean variantMatches = oi.getVariant().getId().equals(item.getProductVariantId());
+                        if (item.getProductId() != null) {
+                            return variantMatches && oi.getVariant().getProduct().getId().equals(item.getProductId());
+                        }
+                        return variantMatches;
+                    })
                     .findFirst()
                     .orElseThrow(() -> new RuntimeException(
-                            "Sản phẩm không tồn tại trong đơn hàng: " + item.getProductId()));
+                            "Sản phẩm không tồn tại trong đơn hàng (variantId: " + item.getProductVariantId() + ")"));
 
             if (item.getQuantity() > orderItem.getQuantity()) {
                 throw new RuntimeException("Số lượng trả vượt quá số lượng đã mua");

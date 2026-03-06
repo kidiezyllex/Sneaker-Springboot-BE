@@ -1,0 +1,122 @@
+================================================================
+   API TRẢ HÀNG (RETURNS) - DÀNH CHO CUSTOMER
+   Base URL: /api/returns
+   Authentication: Bearer Token (bắt buộc)
+================================================================
+
+----------------------------------------------------------------
+1. LẤY DANH SÁCH ĐƠN HÀNG CÓ THỂ TRẢ
+----------------------------------------------------------------
+Method   : GET
+Endpoint : /api/returns/returnable-orders
+Auth     : Bearer Token (Customer)
+
+Query Params:
+  - page  (integer, default: 1)   - Số trang
+  - limit (integer, default: 10)  - Số item mỗi trang
+
+Response: Danh sách đơn hàng có trạng thái HOAN_THANH,
+          được tạo trong vòng 30 ngày gần nhất.
+
+----------------------------------------------------------------
+2. GỬI YÊU CẦU TRẢ HÀNG
+----------------------------------------------------------------
+Method   : POST
+Endpoint : /api/returns/request
+Auth     : Bearer Token (Customer)
+
+Request Body (JSON):
+{
+    "originalOrderId": 1,              // (required) ID đơn hàng gốc
+    "reason": "Sản phẩm bị lỗi",      // (required) Lý do trả hàng
+    "items": [
+        {
+            "productId": 10,           // (optional) ID sản phẩm - có thể bỏ qua
+            "productVariantId": 25,    // (required) ID biến thể (màu/size)
+            "quantity": 1              // (required) Số lượng trả
+        }
+    ]
+}
+
+Business Rules:
+  - Chỉ trả được đơn hàng có trạng thái HOAN_THANH.
+  - Đơn hàng phải được tạo trong vòng 30 ngày gần nhất.
+  - Số lượng trả không được vượt quá số lượng đã mua.
+  - Đơn hàng phải thuộc về chính khách hàng đang đăng nhập.
+
+Response: Thông tin đơn trả hàng vừa được tạo
+          (trạng thái mặc định: CHO_XU_LY).
+
+----------------------------------------------------------------
+3. XEM DANH SÁCH YÊU CẦU TRẢ HÀNG CỦA BẢN THÂN
+----------------------------------------------------------------
+Method   : GET
+Endpoint : /api/returns/my
+Auth     : Bearer Token (Customer)
+
+Query Params:
+  - status (string, optional)    - Lọc theo trạng thái:
+                                    CHO_XU_LY | DA_HOAN_TIEN | DA_HUY
+  - page   (integer, default: 1) - Số trang
+  - limit  (integer, default: 10)- Số item mỗi trang
+
+Response: Danh sách đơn trả hàng của customer đang đăng nhập.
+
+----------------------------------------------------------------
+4. XEM CHI TIẾT MỘT YÊU CẦU TRẢ HÀNG
+----------------------------------------------------------------
+Method   : GET
+Endpoint : /api/returns/my/{id}
+Auth     : Bearer Token (Customer)
+
+Path Params:
+  - id (integer, required) - ID của đơn trả hàng
+
+Business Rules:
+  - Chỉ xem được đơn trả hàng thuộc về chính mình.
+
+Response: Thông tin chi tiết của đơn trả hàng.
+
+----------------------------------------------------------------
+5. HỦY YÊU CẦU TRẢ HÀNG
+----------------------------------------------------------------
+Method   : PUT
+Endpoint : /api/returns/my/{id}/cancel
+Auth     : Bearer Token (Customer)
+
+Path Params:
+  - id (integer, required) - ID của đơn trả hàng cần hủy
+
+Business Rules:
+  - Chỉ hủy được khi đơn đang ở trạng thái CHO_XU_LY.
+
+Response: Thông báo hủy thành công.
+
+================================================================
+   TRẠNG THÁI ĐƠN TRẢ HÀNG (ReturnStatus)
+================================================================
+
+  CHO_XU_LY   - Yêu cầu vừa được gửi, chờ Admin/Staff duyệt.
+  DA_HOAN_TIEN- Admin đã duyệt và hoàn tiền. Kho hàng tự động
+                được cộng lại số lượng tương ứng.
+  DA_HUY      - Đơn trả hàng đã bị hủy (bởi Customer hoặc Admin).
+
+================================================================
+   GHI CHÚ
+================================================================
+
+  - Tất cả response đều theo chuẩn ApiResponse:
+    {
+        "statusCode": 200,
+        "message": "...",
+        "data": { ... },
+        "meta": { "timestamp": "...", "apiVersion": "v1.2" }
+    }
+
+  - Để lấy Bearer Token, đăng nhập qua:
+    POST /api/auth/login
+
+  - Tài liệu Swagger đầy đủ tại:
+    http://localhost:8080/swagger-ui.html
+
+================================================================
