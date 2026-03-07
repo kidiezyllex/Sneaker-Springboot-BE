@@ -135,6 +135,14 @@ public class ChatbotController {
         return ResponseEntity.ok(ApiResponse.success("Xóa dữ liệu huấn luyện thành công", null));
     }
 
+    @PostMapping("/training/sync-products")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Sync products to training data", description = "Automatically generate training data from all current products (Admin only)")
+    public ResponseEntity<ApiResponse<Map<String, Object>>> syncProducts() {
+        Map<String, Object> result = chatbotService.syncProductsToTrainingData();
+        return ResponseEntity.ok(ApiResponse.success("Đồng bộ dữ liệu sản phẩm thành công", result));
+    }
+
     // ========== Chat History ==========
 
     @GetMapping("/history")

@@ -378,6 +378,64 @@ public class ChatbotService {
         trainingRepository.delete(training);
     }
 
+    @Transactional
+    public Map<String, Object> syncProductsToTrainingData() {
+        // 1. Delete old product-related training data to avoid duplicates
+        trainingRepository.deleteByCategory(ChatbotTraining.Category.PRODUCT_INFO.name());
+
+        List<Product> products = productRepository.findAll();
+        int count = 0;
+
+        for (Product p : products) {
+            String brandName = p.getBrand().getName();
+            String categoryName = p.getCategory().getName();
+
+            // Generate basic info Q&A
+            ChatbotTraining info = new ChatbotTraining();
+            info.setCategory(ChatbotTraining.Category.PRODUCT_INFO.name());
+            info.setQuestion("Thông tin về giày " + p.getName());
+
+            StringBuilder answer = new StringBuilder();
+            answer.append(p.getName()).append(" là mẫu giày thuộc thương hiệu ").append(brandName);
+            answer.append(", nằm trong danh mục ").append(categoryName).append(".");
+            if (p.getDescription() != null && !p.getDescription().isEmpty()) {
+                answer.append("\n\nMô tả: ").append(p.getDescription());
+            }
+
+            if (p.getVariants() != null && !p.getVariants().isEmpty()) {
+                ProductVariant first = p.getVariants().get(0);
+                answer.append("\n\nGiá bán: ").append(String.format("%,.0f VNĐ", first.getPrice()));
+
+                String sizes = p.getVariants().stream()
+                        .map(v -> String.valueOf(v.getSize().getValue()))
+                        .distinct()
+                        .collect(Collectors.joining(", "));
+                answer.append("\nCác size hiện có: ").append(sizes);
+            }
+
+            info.setAnswer(answer.toString());
+            trainingRepository.save(info);
+            count++;
+
+            // Generate price-specific Q&A
+            ChatbotTraining price = new ChatbotTraining();
+            price.setCategory(ChatbotTraining.Category.PRODUCT_INFO.name());
+            price.setQuestion("Giày " + p.getName() + " giá bao nhiêu?");
+            if (p.getVariants() != null && !p.getVariants().isEmpty()) {
+                price.setAnswer("Mẫu " + p.getName() + " hiện có giá là " +
+                        String.format("%,.0f VNĐ", p.getVariants().get(0).getPrice()) + " tại shop.");
+                trainingRepository.save(price);
+                count++;
+            }
+        }
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("syncedProducts", products.size());
+        result.put("createdTrainings", count);
+        result.put("timestamp", LocalDateTime.now());
+        return result;
+    }
+
     // ========== Chat History Management ==========
 
     public Page<ChatHistory> getChatHistory(Integer accountId, Pageable pageable) {

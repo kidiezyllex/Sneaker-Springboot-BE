@@ -169,7 +169,8 @@ public class ProductService {
     }
 
     private Brand resolveBrand(Object value) {
-        if (value == null) return null;
+        if (value == null)
+            return null;
         if (value instanceof Number) {
             return brandRepository.findById(((Number) value).intValue())
                     .orElseThrow(() -> new RuntimeException("Thương hiệu không tồn tại với ID: " + value));
@@ -178,15 +179,18 @@ public class ProductService {
         try {
             Integer id = Integer.parseInt(str);
             Optional<Brand> brand = brandRepository.findById(id);
-            if (brand.isPresent()) return brand.get();
-        } catch (NumberFormatException ignored) {}
+            if (brand.isPresent())
+                return brand.get();
+        } catch (NumberFormatException ignored) {
+        }
 
         return brandRepository.findByName(str)
                 .orElseThrow(() -> new RuntimeException("Thương hiệu không tồn tại với ID hoặc tên: " + str));
     }
 
     private Category resolveCategory(Object value) {
-        if (value == null) return null;
+        if (value == null)
+            return null;
         if (value instanceof Number) {
             return categoryRepository.findById(((Number) value).intValue())
                     .orElseThrow(() -> new RuntimeException("Danh mục không tồn tại với ID: " + value));
@@ -195,15 +199,18 @@ public class ProductService {
         try {
             Integer id = Integer.parseInt(str);
             Optional<Category> category = categoryRepository.findById(id);
-            if (category.isPresent()) return category.get();
-        } catch (NumberFormatException ignored) {}
+            if (category.isPresent())
+                return category.get();
+        } catch (NumberFormatException ignored) {
+        }
 
         return categoryRepository.findByName(str)
                 .orElseThrow(() -> new RuntimeException("Danh mục không tồn tại với ID hoặc tên: " + str));
     }
 
     private Material resolveMaterial(Object value) {
-        if (value == null) return null;
+        if (value == null)
+            return null;
         if (value instanceof Number) {
             return materialRepository.findById(((Number) value).intValue())
                     .orElseThrow(() -> new RuntimeException("Chất liệu không tồn tại với ID: " + value));
@@ -212,15 +219,18 @@ public class ProductService {
         try {
             Integer id = Integer.parseInt(str);
             Optional<Material> material = materialRepository.findById(id);
-            if (material.isPresent()) return material.get();
-        } catch (NumberFormatException ignored) {}
+            if (material.isPresent())
+                return material.get();
+        } catch (NumberFormatException ignored) {
+        }
 
         return materialRepository.findByName(str)
                 .orElseThrow(() -> new RuntimeException("Chất liệu không tồn tại với ID hoặc tên: " + str));
     }
 
     private Color resolveColor(Object value) {
-        if (value == null) return null;
+        if (value == null)
+            return null;
         if (value instanceof Number) {
             return colorRepository.findById(((Number) value).intValue())
                     .orElseThrow(() -> new RuntimeException("Không tìm thấy màu sắc với ID: " + value));
@@ -229,19 +239,23 @@ public class ProductService {
         try {
             Integer id = Integer.parseInt(str);
             Optional<Color> color = colorRepository.findById(id);
-            if (color.isPresent()) return color.get();
-        } catch (NumberFormatException ignored) {}
+            if (color.isPresent())
+                return color.get();
+        } catch (NumberFormatException ignored) {
+        }
 
         return colorRepository.findByName(str)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy màu sắc với ID hoặc tên: " + str));
     }
 
     private Size resolveSize(Object value) {
-        if (value == null) return null;
+        if (value == null)
+            return null;
         if (value instanceof Number) {
             Integer id = ((Number) value).intValue();
             Optional<Size> size = sizeRepository.findById(id);
-            if (size.isPresent()) return size.get();
+            if (size.isPresent())
+                return size.get();
             return sizeRepository.findByValue(id)
                     .orElseThrow(() -> new RuntimeException("Không tìm thấy kích cỡ với ID hoặc giá trị: " + id));
         }
@@ -249,11 +263,13 @@ public class ProductService {
         try {
             Integer val = Integer.parseInt(str);
             Optional<Size> sizeById = sizeRepository.findById(val);
-            if (sizeById.isPresent()) return sizeById.get();
-            
+            if (sizeById.isPresent())
+                return sizeById.get();
+
             Optional<Size> sizeByValue = sizeRepository.findByValue(val);
-            if (sizeByValue.isPresent()) return sizeByValue.get();
-            
+            if (sizeByValue.isPresent())
+                return sizeByValue.get();
+
             throw new RuntimeException("Không tìm thấy kích cỡ với ID hoặc giá trị: " + val);
         } catch (NumberFormatException e) {
             throw new RuntimeException("Giá trị kích cỡ không hợp lệ (phải là số): " + str);
@@ -396,6 +412,35 @@ public class ProductService {
         productRepository.flush();
         return productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found after update"));
+    }
+
+    @Transactional(readOnly = true)
+    public List<Map<String, Object>> getAllProductsForTraining() {
+        List<Product> products = productRepository.findAll();
+        List<Map<String, Object>> trainingData = new ArrayList<>();
+
+        for (Product p : products) {
+            Map<String, Object> item = new HashMap<>();
+            item.put("productName", p.getName());
+            item.put("brand", p.getBrand().getName());
+            item.put("category", p.getCategory().getName());
+            item.put("material", p.getMaterial().getName());
+            item.put("description", p.getDescription());
+            item.put("code", p.getCode());
+
+            List<Map<String, Object>> variantList = new ArrayList<>();
+            for (ProductVariant v : p.getVariants()) {
+                Map<String, Object> vMap = new HashMap<>();
+                vMap.put("size", v.getSize().getValue());
+                vMap.put("color", v.getColor().getName());
+                vMap.put("price", v.getPrice());
+                vMap.put("stock", v.getStock());
+                variantList.add(vMap);
+            }
+            item.put("variants", variantList);
+            trainingData.add(item);
+        }
+        return trainingData;
     }
 
     @Transactional

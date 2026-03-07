@@ -13,11 +13,13 @@ import java.util.List;
 @Repository
 public interface ChatbotTrainingRepository extends JpaRepository<ChatbotTraining, Integer> {
     Page<ChatbotTraining> findByStatus(ChatbotTraining.Status status, Pageable pageable);
+
     Page<ChatbotTraining> findByCategoryAndStatus(String category, ChatbotTraining.Status status, Pageable pageable);
-    
+
     @Query("SELECT ct FROM ChatbotTraining ct WHERE ct.status = :status ORDER BY ct.priority DESC, ct.createdAt DESC")
     List<ChatbotTraining> findActiveTrainingsOrderedByPriority(@Param("status") ChatbotTraining.Status status);
-    
-    List<ChatbotTraining> findByCategory(String category);
-}
 
+    List<ChatbotTraining> findByCategory(String category);
+
+    void deleteByCategory(String category);
+}

@@ -165,6 +165,13 @@ public class ProductController {
         return ResponseEntity.ok(ApiResponse.success("Cập nhật hình ảnh sản phẩm thành công", updated));
     }
 
+    @GetMapping("/export-training")
+    @Operation(summary = "Export product data for chatbot", description = "Get all products in a structured format for AI training or RAG")
+    public ResponseEntity<ApiResponse<java.util.List<Map<String, Object>>>> exportProductsForTraining() {
+        return ResponseEntity
+                .ok(ApiResponse.success("Lấy dữ liệu training thành công", productService.getAllProductsForTraining()));
+    }
+
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     @Operation(summary = "Delete product", description = "Delete a product (Admin only)")
