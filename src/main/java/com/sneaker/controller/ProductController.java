@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -45,13 +46,21 @@ public class ProductController {
             @RequestParam(required = false) BigDecimal minPrice,
             @RequestParam(required = false) BigDecimal maxPrice,
             @RequestParam(required = false) Product.Status status,
+            @RequestParam(defaultValue = "createdAt") String sortBy,
+            @RequestParam(defaultValue = "desc") String sortOrder,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int limit) {
 
         Integer finalBrand = brand != null ? brand : brands;
         Integer finalCategory = category != null ? category : categories;
 
-        Pageable pageable = PageRequest.of(page - 1, limit);
+        Sort sort = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        if (sortBy.equals("price")) {
+            sort = sortOrder.equalsIgnoreCase("asc") ? Sort.by("variants.price").ascending()
+                    : Sort.by("variants.price").descending();
+        }
+
+        Pageable pageable = PageRequest.of(page - 1, limit, sort);
         Page<Product> productPage = productService.getAllProducts(
                 name, finalBrand, finalCategory, material, color, size, minPrice, maxPrice, status, pageable);
 
@@ -94,10 +103,18 @@ public class ProductController {
             @RequestParam(required = false) Integer size,
             @RequestParam(required = false) BigDecimal minPrice,
             @RequestParam(required = false) BigDecimal maxPrice,
+            @RequestParam(defaultValue = "createdAt") String sortBy,
+            @RequestParam(defaultValue = "desc") String sortOrder,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int limit) {
 
-        Pageable pageable = PageRequest.of(page - 1, limit);
+        Sort sort = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        if (sortBy.equals("price")) {
+            sort = sortOrder.equalsIgnoreCase("asc") ? Sort.by("variants.price").ascending()
+                    : Sort.by("variants.price").descending();
+        }
+
+        Pageable pageable = PageRequest.of(page - 1, limit, sort);
         Page<Product> productPage = productService.searchProducts(
                 keyword, brand, category, material, color, size, minPrice, maxPrice, null, pageable);
 
