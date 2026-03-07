@@ -261,7 +261,7 @@ public class ChatbotService {
             if (kw.length() < 2)
                 continue;
             Page<Product> productPage = productRepository.searchWithFilters(
-                    kw, null, null, null, Product.Status.ACTIVE,
+                    kw, null, null, null, null, null, null, null, Product.Status.ACTIVE,
                     org.springframework.data.domain.PageRequest.of(0, 5));
             foundProducts.addAll(productPage.getContent());
         }
@@ -269,7 +269,7 @@ public class ChatbotService {
         // Nếu vẫn ít kết quả, thử tìm theo nguyên câu
         if (foundProducts.size() < 3) {
             Page<Product> fallbackPage = productRepository.searchWithFilters(
-                    cleanMessage, null, null, null, Product.Status.ACTIVE,
+                    cleanMessage, null, null, null, null, null, null, null, Product.Status.ACTIVE,
                     org.springframework.data.domain.PageRequest.of(0, 10));
             foundProducts.addAll(fallbackPage.getContent());
         }
