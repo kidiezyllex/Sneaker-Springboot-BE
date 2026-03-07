@@ -41,21 +41,16 @@ public class ChatbotService {
     private final ProductRepository productRepository;
 
     private static final String DEFAULT_SYSTEM_PROMPT = """
-            Bạn là một trợ lý AI thân thiện và chuyên nghiệp của cửa hàng giày sneaker.
-            Nhiệm vụ của bạn là hỗ trợ khách hàng với:
-            1. Tư vấn về sản phẩm giày sneaker (size, màu sắc, chất liệu, phong cách)
-            2. Hướng dẫn chọn size giày phù hợp
-            3. Giới thiệu sản phẩm phù hợp với nhu cầu khách hàng DỰA TRÊN DANH SÁCH SẢN PHẨM chúng tôi cung cấp.
-            4. Hướng dẫn đặt hàng và thanh toán
-            5. Tra cứu thông tin đơn hàng
-            6. Giải đáp chính sách bảo hành, đổi trả, vận chuyển
-            7. Tư vấn về các chương trình khuyến mãi hiện có
+            Bạn là một trợ lý AI chuyên nghiệp và trung thực của cửa hàng StreetSneaker.
 
-            QUY TẮC QUAN TRỌNG:
-            - Khi giới thiệu sản phẩm, hãy ƯU TIÊN các sản phẩm có trong mục "Sản phẩm thực tế" được cung cấp trong context.
-            - Nếu sản phẩm có giá và tình trạng kho (stock), hãy cung cấp thông tin đó cho khách hàng.
-            - Nếu không tìm thấy sản phẩm chính xác, hãy tư vấn dựa trên phong cách chung nhưng nói rõ là shop có những mẫu tương tự.
-            - Luôn trả lời bằng Tiếng Việt, thân thiện và chuyên nghiệp.
+            QUY TẮC CỐT LÕI (PHẢI TUÂN THỦ):
+            1. CHỈ TRẢ LỜI dựa trên thông tin trong mục "FAQ" hoặc "Sản phẩm thực tế" được cung cấp bên dưới.
+            2. TUYỆT ĐỐI KHÔNG tự bịa ra sản phẩm, giá cả, hoặc thông số kỹ thuật nếu không có trong dữ liệu.
+            3. Nếu khách hỏi về sản phẩm KHÔNG CÓ trong danh sách, hãy nói: "Hiện tại shop chưa có mẫu này, bạn tham khảo các mẫu tương tự khác nhé."
+            4. Luôn báo GIÁ CHÍNH XÁC và TÌNH TRẠNG KHO từ dữ liệu.
+            5. Nếu không biết chắc chắn, hãy hướng dẫn khách liên hệ Hotline/Zalo của shop (012345678) để được tư vấn kĩ hơn.
+
+            Phong thái: Thân thiện, chuyên nghiệp, hỗ trợ nhiệt tình. Luôn trả lời bằng Tiếng Việt.
             """;
 
     private String getSystemPrompt() {
@@ -103,11 +98,11 @@ public class ChatbotService {
 
             String systemPrompt = getSystemPrompt();
             if (!trainingContext.isEmpty()) {
-                systemPrompt += "\n\nThông tin hỏi đáp (FAQ):\n" + trainingContext;
+                systemPrompt += "\n\n[HÀNH TRANG KIẾN THỨC - FAQ]:\n" + trainingContext;
             }
 
             if (!productContext.isEmpty()) {
-                systemPrompt += "\n\nSản phẩm thực tế đang có tại cửa hàng:\n" + productContext;
+                systemPrompt += "\n\n[DANH SÁCH SẢN PHẨM THỰC TẾ TRONG KHO]:\n" + productContext;
             }
 
             // Build request body for Groq API (OpenAI-compatible format)
@@ -214,30 +209,41 @@ public class ChatbotService {
         List<ChatbotTraining> trainings = trainingRepository
                 .findActiveTrainingsOrderedByPriority(ChatbotTraining.Status.ACTIVE);
 
-        // Simple keyword matching (can be enhanced with NLP)
         String lowerMessage = userMessage.toLowerCase();
+
+        // Use a simple score-based matching instead of strict "contains"
         return trainings.stream()
-                .filter(t -> lowerMessage.contains(t.getQuestion().toLowerCase()) ||
-                        t.getQuestion().toLowerCase().contains(lowerMessage))
-                .limit(3)
-                .map(t -> "Q: " + t.getQuestion() + "\nA: " + t.getAnswer())
+                .map(t -> {
+                    double score = calculateRelevance(lowerMessage, t.getQuestion().toLowerCase());
+                    return new AbstractMap.SimpleEntry<>(t, score);
+                })
+                .filter(e -> e.getValue() > 0.3) // Relevancy threshold
+                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                .limit(5)
+                .map(e -> "Q: " + e.getKey().getQuestion() + "\nA: " + e.getKey().getAnswer())
                 .collect(Collectors.joining("\n\n"));
     }
 
+    private double calculateRelevance(String message, String question) {
+        if (message.contains(question) || question.contains(message))
+            return 1.0;
+
+        Set<String> messageWords = new HashSet<>(Arrays.asList(message.split("\\s+")));
+        Set<String> questionWords = new HashSet<>(Arrays.asList(question.split("\\s+")));
+
+        long intersect = messageWords.stream().filter(questionWords::contains).count();
+        return (double) intersect / Math.max(messageWords.size(), questionWords.size());
+    }
+
     private String buildProductContext(String userMessage) {
-        // Extract keywords from user message for better search
+        // Clean up message to find products effectively
         String keyword = userMessage.toLowerCase()
-                .replace("giày", "")
-                .replace("shop", "")
-                .replace("tư vấn", "")
-                .replace("mình", "")
-                .replace("tìm", "")
-                .replace("có", "")
-                .replace("không", "")
+                .replaceAll("\\b(giày|shop|bán|có|không|tìm|muốn|mua|tư|vấn|cho|hỏi|mẫu|loại|đôi|nào)\\b", "")
+                .replaceAll("\\s+", " ")
                 .trim();
 
-        if (keyword.length() < 2)
-            return "";
+        if (keyword.isEmpty() || keyword.length() < 2)
+            keyword = userMessage; // Failback
 
         Page<Product> productPage = productRepository.searchWithFilters(
                 keyword, null, null, null, Product.Status.ACTIVE,
