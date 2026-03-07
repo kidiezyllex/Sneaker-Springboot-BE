@@ -103,6 +103,12 @@ public class ChatbotService {
 
             if (!productContext.isEmpty()) {
                 systemPrompt += "\n\n[DANH SÁCH SẢN PHẨM THỰC TẾ TRONG KHO]:\n" + productContext;
+            } else {
+                // Thêm một chút sản phẩm gợi ý nếu không tìm thấy đúng mẫu khách hỏi
+                String latestProducts = buildLatestProductsContext();
+                if (!latestProducts.isEmpty()) {
+                    systemPrompt += "\n\n[CÁC MẪU GIÀY MỚI NHẤT TẠI SHOP (THAM KHẢO)]:\n" + latestProducts;
+                }
             }
 
             // Build request body for Groq API (OpenAI-compatible format)
@@ -236,50 +242,65 @@ public class ChatbotService {
     }
 
     private String buildProductContext(String userMessage) {
-        // Clean up message to find products effectively
-        String keyword = userMessage.toLowerCase()
-                .replaceAll("\\b(giày|shop|bán|có|không|tìm|muốn|mua|tư|vấn|cho|hỏi|mẫu|loại|đôi|nào)\\b", "")
+        String cleanMessage = userMessage.toLowerCase()
+                .replaceAll(
+                        "\\b(giày|shop|bán|có|không|tìm|muốn|mua|tư|vấn|cho|hỏi|mẫu|loại|đôi|nào|giá|bao|nhiêu|ở|đâu)\\b",
+                        "")
                 .replaceAll("\\s+", " ")
                 .trim();
 
-        if (keyword.isEmpty() || keyword.length() < 2)
-            keyword = userMessage; // Failback
-
-        Page<Product> productPage = productRepository.searchWithFilters(
-                keyword, null, null, null, Product.Status.ACTIVE,
-                org.springframework.data.domain.PageRequest.of(0, 5));
-
-        List<Product> products = productPage.getContent();
-        if (products.isEmpty())
+        if (cleanMessage.isEmpty())
             return "";
 
-        StringBuilder sb = new StringBuilder();
-        for (Product p : products) {
-            sb.append("- Tên: ").append(p.getName());
-            sb.append(" (Thương hiệu: ").append(p.getBrand().getName()).append(")");
+        // Tách từ để tìm kiếm linh hoạt hơn (ví dụ: "NIKE AIR MAX" -> tìm cả "NIKE",
+        // "AIR", "MAX")
+        String[] keywords = cleanMessage.split("\\s+");
+        Set<Product> foundProducts = new LinkedHashSet<>();
 
-            if (p.getVariants() != null && !p.getVariants().isEmpty()) {
-                ProductVariant firstVariant = p.getVariants().get(0);
-                sb.append(" | Giá: ").append(String.format("%,.0f VNĐ", firstVariant.getPrice()));
-
-                int totalStock = p.getVariants().stream()
-                        .mapToInt((ProductVariant v) -> v.getStock())
-                        .sum();
-                sb.append(" | Tình trạng: ").append(totalStock > 0 ? "Còn hàng (" + totalStock + ")" : "Hết hàng");
-
-                // Show available sizes
-                String sizes = p.getVariants().stream()
-                        .map((ProductVariant v) -> String.valueOf(v.getSize().getValue()))
-                        .distinct()
-                        .collect(Collectors.joining(", "));
-                sb.append(" | Size sẵn có: ").append(sizes);
-            }
-            sb.append("\n  Mô tả: ").append(p.getDescription() != null && p.getDescription().length() > 100
-                    ? p.getDescription().substring(0, 100) + "..."
-                    : p.getDescription());
-            sb.append("\n");
+        for (String kw : keywords) {
+            if (kw.length() < 2)
+                continue;
+            Page<Product> productPage = productRepository.searchWithFilters(
+                    kw, null, null, null, Product.Status.ACTIVE,
+                    org.springframework.data.domain.PageRequest.of(0, 5));
+            foundProducts.addAll(productPage.getContent());
         }
 
+        // Nếu vẫn ít kết quả, thử tìm theo nguyên câu
+        if (foundProducts.size() < 3) {
+            Page<Product> fallbackPage = productRepository.searchWithFilters(
+                    cleanMessage, null, null, null, Product.Status.ACTIVE,
+                    org.springframework.data.domain.PageRequest.of(0, 10));
+            foundProducts.addAll(fallbackPage.getContent());
+        }
+
+        if (foundProducts.isEmpty())
+            return "";
+
+        return formatProductsForContext(new ArrayList<>(foundProducts).stream().limit(15).collect(Collectors.toList()));
+    }
+
+    private String buildLatestProductsContext() {
+        List<Product> latest = productRepository.findTop4ByStatusOrderByCreatedAtDesc(Product.Status.ACTIVE);
+        return formatProductsForContext(latest);
+    }
+
+    private String formatProductsForContext(List<Product> products) {
+        StringBuilder sb = new StringBuilder();
+        for (Product p : products) {
+            sb.append("- ").append(p.getName());
+            if (p.getVariants() != null && !p.getVariants().isEmpty()) {
+                sb.append(" | Giá: ").append(String.format("%,.0f VNĐ", p.getVariants().get(0).getPrice()));
+
+                String sizes = p.getVariants().stream()
+                        .map(v -> String.valueOf(v.getSize().getValue()))
+                        .distinct()
+                        .collect(Collectors.joining(", "));
+                sb.append(" | Size: ").append(sizes);
+            }
+            sb.append(" | Hãng: ").append(p.getBrand().getName());
+            sb.append("\n");
+        }
         return sb.toString();
     }
 

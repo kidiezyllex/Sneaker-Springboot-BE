@@ -35,17 +35,16 @@ public class ProductService {
             Integer material, Integer color, Integer size,
             BigDecimal minPrice, BigDecimal maxPrice,
             Product.Status status, Pageable pageable) {
-        return productRepository.findWithFilters(name, brand, category, material, status, pageable);
+        return productRepository.findWithFilters(name, brand, category, material, color, size, minPrice, maxPrice,
+                status, pageable);
     }
 
     public Page<Product> searchProducts(String keyword, Integer brand, Integer category,
             Integer material, Integer color, Integer size,
             BigDecimal minPrice, BigDecimal maxPrice,
             Product.Status status, Pageable pageable) {
-        Page<Product> products = productRepository.searchWithFilters(
-                keyword, brand, category, material, status, pageable);
-
-        return products;
+        return productRepository.searchWithFilters(keyword, brand, category, material, color, size, minPrice, maxPrice,
+                status, pageable);
     }
 
     public Map<String, Object> getProductFilters() {

@@ -36,7 +36,9 @@ public class ProductController {
     public ResponseEntity<ApiResponse<java.util.List<Product>>> getAllProducts(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Integer brand,
+            @RequestParam(required = false) Integer brands,
             @RequestParam(required = false) Integer category,
+            @RequestParam(required = false) Integer categories,
             @RequestParam(required = false) Integer material,
             @RequestParam(required = false) Integer color,
             @RequestParam(required = false) Integer size,
@@ -46,9 +48,12 @@ public class ProductController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int limit) {
 
+        Integer finalBrand = brand != null ? brand : brands;
+        Integer finalCategory = category != null ? category : categories;
+
         Pageable pageable = PageRequest.of(page - 1, limit);
         Page<Product> productPage = productService.getAllProducts(
-                name, brand, category, material, color, size, minPrice, maxPrice, status, pageable);
+                name, finalBrand, finalCategory, material, color, size, minPrice, maxPrice, status, pageable);
 
         return ResponseEntity.ok(
                 ApiResponse.success(
