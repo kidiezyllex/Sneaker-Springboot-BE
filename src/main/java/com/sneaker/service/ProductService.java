@@ -51,42 +51,34 @@ public class ProductService {
     public Map<String, Object> getProductFilters() {
         Map<String, Object> filters = new HashMap<>();
 
-        // Basic filters
-        filters.put("brands", productRepository.findAll().stream()
-                .map(p -> p.getBrand())
-                .distinct()
+        // Get active brands
+        filters.put("brands", brandRepository.findAll().stream()
                 .filter(b -> b.getStatus() == com.sneaker.entity.Brand.Status.ACTIVE)
                 .toList());
 
-        filters.put("categories", productRepository.findAll().stream()
-                .map(p -> p.getCategory())
-                .distinct()
+        // Get active categories
+        filters.put("categories", categoryRepository.findAll().stream()
                 .filter(c -> c.getStatus() == com.sneaker.entity.Category.Status.ACTIVE)
                 .toList());
 
-        filters.put("materials", productRepository.findAll().stream()
-                .map(p -> p.getMaterial())
-                .distinct()
+        // Get active materials
+        filters.put("materials", materialRepository.findAll().stream()
                 .filter(m -> m.getStatus() == com.sneaker.entity.Material.Status.ACTIVE)
                 .toList());
 
-        // Variant filters
-        List<ProductVariant> allVariants = productVariantRepository.findAll();
-
-        filters.put("colors", allVariants.stream()
-                .map(v -> v.getColor())
-                .distinct()
+        // Get active colors
+        filters.put("colors", colorRepository.findAll().stream()
                 .filter(c -> c.getStatus() == com.sneaker.entity.Color.Status.ACTIVE)
                 .toList());
 
-        filters.put("sizes", allVariants.stream()
-                .map(v -> v.getSize())
-                .distinct()
+        // Get active sizes
+        filters.put("sizes", sizeRepository.findAll().stream()
                 .filter(s -> s.getStatus() == com.sneaker.entity.Size.Status.ACTIVE)
                 .sorted(Comparator.comparing(com.sneaker.entity.Size::getValue))
                 .toList());
 
-        // Price range
+        // Get price range from all active variants
+        List<ProductVariant> allVariants = productVariantRepository.findAll();
         Optional<BigDecimal> minPrice = allVariants.stream()
                 .map(ProductVariant::getPrice)
                 .min(BigDecimal::compareTo);
