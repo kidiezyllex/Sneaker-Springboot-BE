@@ -56,8 +56,8 @@ public class ProductController {
 
         Sort sort = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         if (sortBy.equals("price")) {
-            sort = sortOrder.equalsIgnoreCase("asc") ? Sort.by("variants.price").ascending()
-                    : Sort.by("variants.price").descending();
+            sort = sortOrder.equalsIgnoreCase("asc") ? Sort.by("minPrice").ascending()
+                    : Sort.by("maxPrice").descending();
         }
 
         Pageable pageable = PageRequest.of(page - 1, limit, sort);
@@ -110,8 +110,8 @@ public class ProductController {
 
         Sort sort = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         if (sortBy.equals("price")) {
-            sort = sortOrder.equalsIgnoreCase("asc") ? Sort.by("variants.price").ascending()
-                    : Sort.by("variants.price").descending();
+            sort = sortOrder.equalsIgnoreCase("asc") ? Sort.by("minPrice").ascending()
+                    : Sort.by("maxPrice").descending();
         }
 
         Pageable pageable = PageRequest.of(page - 1, limit, sort);
